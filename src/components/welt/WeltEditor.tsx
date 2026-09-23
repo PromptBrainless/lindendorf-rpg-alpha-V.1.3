@@ -124,13 +124,19 @@ export function WeltEditor({
       aria-labelledby="welt-titel"
     >
       <div className="mx-auto max-w-5xl px-4 py-4 sm:px-5 sm:py-5">
-        <div className="mb-4 flex items-start justify-between gap-3">
+        <div className="sticky top-0 z-20 -mx-4 mb-4 border-b border-border bg-bg/95 px-4 py-3 backdrop-blur sm:-mx-5 sm:px-5">
+          <div className="flex items-start justify-between gap-3">
           <div>
-            <h1 id="welt-titel" className="font-display text-2xl font-semibold">Welt</h1>
-            <p className="text-xs text-muted-fg">
-              {nichtHeld ? "Ansicht · nicht der Held" : werk.stand === "auflage" ? "Auflage" : "Kanon"}
-              {merkt && werk.stand === "kanon" ? " · gemerkt" : ""}
-            </p>
+            <div className="flex flex-wrap items-center gap-2">
+              <h1 id="welt-titel" className="font-display text-2xl font-semibold">Welt</h1>
+              <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-fg">
+                {nichtHeld ? "Fremde Szene" : werk.stand === "auflage" ? "Auflage" : "Kanon"}
+              </span>
+              {merkt && werk.stand === "kanon" ? (
+                <span className="rounded-full bg-accent px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-accent-fg">Gemerkt</span>
+              ) : null}
+            </div>
+            <p className="mt-0.5 text-xs text-muted-fg">{sicht?.title ?? "Keine Szene ausgewählt"}</p>
             {vorschau ? <p className="mt-1 text-xs text-accent">{vorschau}</p> : null}
           </div>
           <div className="flex shrink-0 gap-2">
@@ -144,6 +150,7 @@ export function WeltEditor({
                 Schließen
               </Button>
             ) : null}
+          </div>
           </div>
         </div>
         {nichtHeld ? (
@@ -162,7 +169,7 @@ export function WeltEditor({
             </Button>
           </div>
         ) : null}
-        <div className="mb-4 flex gap-1 overflow-x-auto rounded-md border border-border bg-surface/40 p-1">
+        <div className="mb-4 flex gap-1 overflow-x-auto rounded-md border border-border bg-surface/40 p-1" role="tablist" aria-label="Weltwerkzeuge">
           {(
             [
               ["karte", "Karte", MapPinned],
@@ -178,17 +185,21 @@ export function WeltEditor({
             <button
               key={id}
               type="button"
+              id={`welt-fach-${id}`}
+              role="tab"
+              aria-selected={fach === id}
+              aria-controls="welt-fach-inhalt"
               className={`inline-flex h-11 shrink-0 items-center gap-1.5 whitespace-nowrap rounded-sm px-3 text-sm transition-colors duration-[var(--motion-quick)] ${
                 fach === id ? "bg-surface-2 text-fg" : "text-muted-fg hover:text-fg"
               }`}
               onClick={() => setFach(id)}
-              aria-current={fach === id}
             >
               <Symbol className="size-4" aria-hidden />
               {titel}
             </button>
           ))}
         </div>
+        <div id="welt-fach-inhalt" role="tabpanel" aria-labelledby={`welt-fach-${fach}`}>
         {fach === "karte" ? (
           sicht ? (
             <WeltKarte
@@ -234,6 +245,7 @@ export function WeltEditor({
             seite
           />
         ) : null}
+        </div>
       </div>
     </aside>
   );
