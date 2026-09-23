@@ -31,6 +31,7 @@ import {
 } from "@/game/welt";
 import { wissenTafeln } from "@/game/wissen-tafeln";
 import { kartenFokus, neueKarten, neueQuest, neuesWissen, questGeschichte, wissenFokus, type FokusEintrag } from "@/game/fokus";
+import type { KnowledgeKey } from "@/game/knowledge";
 import { loadFilePack } from "@/game/text-pack";
 import { introAlsSzene } from "@/game/content";
 import { CreateHero } from "./CreateHero";
@@ -38,7 +39,7 @@ import { Fokus } from "./Fokus";
 import { RulesScreen } from "./RulesScreen";
 import { SceneStage } from "./SceneStage";
 import { TitleScreen } from "./TitleScreen";
-import { leiterFrei } from "@/game/leiter-login";
+import { leiterFrei, schliesseLeiterSitzung } from "@/game/leiter-login";
 import { LeiterLogin } from "./LeiterLogin";
 import { Systemsteuerung } from "./Systemsteuerung";
 import { leseEinstellungen, setzeEinstellung, wendeEinstellungenAn } from "@/game/einstellungen";
@@ -68,6 +69,7 @@ export function GameApp() {
   const [debug] = useState(
     () => typeof window !== "undefined" && new URLSearchParams(window.location.search).has("debug"),
   );
+  const [leiterAn, setLeiterAn] = useState(false);
   const [leiterOpen, setLeiterOpen] = useState(false);
   const [leiterLogin, setLeiterLogin] = useState(false);
   const [systemOffen, setSystemOffen] = useState(false);
@@ -79,7 +81,14 @@ export function GameApp() {
   const runtimeRef = useRef<Runtime | null>(null);
   const liveRef = useRef<Held | null>(null);
   const kartenFortRef = useRef<EffektId[]>([]);
-  const fokusStand = useRef<{ bereit: boolean; src?: string; held?: Held | null }>({ bereit: false });
+  const fokusStand = useRef<{
+    bereit: boolean;
+    src?: string;
+    id?: string;
+    held?: Held | null;
+    wartenWissen: KnowledgeKey[];
+    wartenKarten: string[];
+  }>({ bereit: false, wartenWissen: [], wartenKarten: [] });
 
   const refreshSaves = useCallback(() => {
     setSlots(listSavedGames());
@@ -149,7 +158,7 @@ export function GameApp() {
 
   useEffect(() => {
     if (mode !== "play") {
-      fokusStand.current = { bereit: false };
+      fokusStand.current = { bereit: false, wartenWissen: [], wartenKarten: [] };
       setFokus([]);
     }
   }, [mode]);
@@ -158,27 +167,47 @@ export function GameApp() {
     if (mode !== "play" || !view) return;
     const src = artSrcFor(view.art, view.artSrc, view.id);
     const stand = fokusStand.current;
+    const heldJetzt = view.held ? cloneHeld(view.held) : null;
     if (!stand.bereit) {
-      fokusStand.current = { bereit: true, src, held: view.held ? cloneHeld(view.held) : null };
+      fokusStand.current = {
+        bereit: true,
+        src,
+        id: view.id,
+        held: heldJetzt,
+        wartenWissen: heldJetzt ? neuesWissen(null, heldJetzt) : [],
+        wartenKarten: heldJetzt ? neueKarten(null, heldJetzt) : [],
+      };
       setFokus([{ art: "bild", src, titel: view.title }]);
       return;
     }
     if (leiterOpen) {
-      fokusStand.current = { bereit: true, src, held: view.held ? cloneHeld(view.held) : null };
+      fokusStand.current = { ...stand, bereit: true, src, id: view.id, held: heldJetzt };
       return;
     }
+    const verlassen = stand.id !== view.id;
     const queue: FokusEintrag[] = [];
+    if (verlassen) {
+      queue.push(...wissenFokus(stand.wartenWissen));
+      queue.push(...kartenFokus(stand.wartenKarten));
+    }
     if (src !== stand.src) queue.push({ art: "bild", src, titel: view.title });
-    if (view.held) {
-      queue.push(...wissenFokus(neuesWissen(stand.held, view.held)));
-      queue.push(...kartenFokus(neueKarten(stand.held, view.held)));
-      const quest = neueQuest(stand.held, view.held);
+    const neuWissen = heldJetzt ? neuesWissen(stand.held, heldJetzt) : [];
+    const neuKarten = heldJetzt ? neueKarten(stand.held, heldJetzt) : [];
+    if (heldJetzt) {
+      const quest = neueQuest(stand.held, heldJetzt);
       if (quest) {
         const geschichte = questGeschichte(quest.quest, quest.wert);
         if (geschichte) queue.push(geschichte);
       }
     }
-    fokusStand.current = { bereit: true, src, held: view.held ? cloneHeld(view.held) : null };
+    fokusStand.current = {
+      bereit: true,
+      src,
+      id: view.id,
+      held: heldJetzt,
+      wartenWissen: verlassen ? neuWissen : [...stand.wartenWissen, ...neuWissen],
+      wartenKarten: verlassen ? neuKarten : [...stand.wartenKarten, ...neuKarten],
+    };
     if (queue.length) {
       if (queue.some((item) => item.art === "wissen")) spieleKlang("oeffnen");
       if (queue.some((item) => item.art === "quest")) spieleKlang("ende");
@@ -195,6 +224,7 @@ export function GameApp() {
     }
     if (leiterFrei()) {
       setzeWeltAktiv(true);
+      setLeiterAn(true);
       setLeiterOpen(true);
     } else {
       setLeiterLogin(true);
@@ -266,7 +296,8 @@ export function GameApp() {
       setSaveMessage(null);
       setKnowledgeOpen(false);
       setLageIndex(null);
-      setLeiterOpen(weltAktiv() && leiterFrei());
+      setLeiterAn(weltAktiv() && leiterFrei());
+      setLeiterOpen(false);
       setMode("play");
       const runtime = new Runtime(setView, setHeld);
       runtimeRef.current = runtime;
@@ -422,15 +453,20 @@ export function GameApp() {
   }, [patch.effekte, patch.effekteFort, view?.textKey]);
 
   function requestLeiter() {
-    setLeiterOpen((open) => {
-      if (open) return false;
-      if (leiterFrei()) {
-        setzeWeltAktiv(true);
-        return true;
-      }
+    if (!leiterFrei()) {
       setLeiterLogin(true);
-      return false;
-    });
+      return;
+    }
+    setzeWeltAktiv(true);
+    setLeiterAn(true);
+    setLeiterOpen((open) => !open);
+  }
+
+  function schalteSlAus() {
+    schliesseLeiterSitzung();
+    setzeWeltAktiv(false);
+    setLeiterAn(false);
+    setLeiterOpen(false);
   }
 
   const rawSicht = view ? (view.held ? view : held ? { ...view, held } : view) : introAlsSzene();
@@ -448,6 +484,7 @@ export function GameApp() {
           onChange={onPatch}
           onReset={onResetKarte}
           onClose={() => setLeiterOpen(false)}
+          onAus={schalteSlAus}
           onEffekt={onEffekt}
           onLage={onLageVorlegen}
           onRueckgaengig={onRueckgaengig}
@@ -471,6 +508,7 @@ export function GameApp() {
       onOk={() => {
         setzeWeltAktiv(true);
         setLeiterLogin(false);
+        setLeiterAn(true);
         setLeiterOpen(true);
       }}
       onClose={() => setLeiterLogin(false)}
@@ -566,7 +604,7 @@ export function GameApp() {
         onPatch={onPatch}
         onResetKarte={onResetKarte}
         onRueckgaengig={onRueckgaengig}
-        authorMode={leiterOpen}
+        authorMode={leiterAn}
         wissenAnzahl={shown.held ? wissenTafeln(shown.held).filter((t) => !t.offen).length : 0}
         weltAnzahl={anzahlAuflagen()}
         weltPunkt={!auflageLeer(kartenPatch)}

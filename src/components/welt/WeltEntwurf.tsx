@@ -6,6 +6,7 @@ import { auflageLeer, type WeltAuflage } from "@/game/welt";
 import { vorschauGmCommand } from "@/game/gm/gmCommand";
 import { formuliereText, legeKiSzeneAb } from "@/game/werkstatt.functions";
 import { loreFuerSzene } from "@/game/lore";
+import { weltbildZeile } from "@/game/weltbild";
 import { StimmeFeld } from "./StimmeFeld";
 
 export function WeltEntwurf({
@@ -28,6 +29,7 @@ export function WeltEntwurf({
   const [meldung, setMeldung] = useState<string | null>(null);
   const stand = auflage && !auflageLeer(auflage) ? "Auflage" : "Kanon";
   const fakten = loreFuerSzene(szene?.id);
+  const ort = weltbildZeile(szene?.id);
 
   useEffect(() => {
     if (!szene) return;
@@ -124,6 +126,7 @@ export function WeltEntwurf({
         }}
       />
       <p className="text-sm text-muted-fg">Grok schreibt die Szene weiter. Legen speichert als Auflage. Den gesprochenen Text nimmst du selbst auf.</p>
+      {ort ? <p className="text-xs text-muted-fg">{ort}</p> : null}
       {fakten.length ? (
         <ul className="grid gap-1 text-xs text-muted-fg">
           {fakten.map((fakt) => (

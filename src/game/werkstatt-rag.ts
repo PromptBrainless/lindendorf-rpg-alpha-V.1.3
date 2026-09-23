@@ -1,6 +1,7 @@
 import { fundFuerSzene, QUESTS } from "./json/baum";
 import type { SzeneJson } from "./json/schema";
 import { loreZeilen } from "./lore";
+import { weltbildZeile } from "./weltbild";
 
 export const KANON_NAMEN = [
   "Holm",
@@ -117,6 +118,8 @@ export function grokFassung(data: RagEingabe) {
     );
   }
   const lore = loreZeilen(data.id || fund?.szene.id);
+  const ort = weltbildZeile(data.id || fund?.szene.id);
+  if (ort) teile.push("", `Ort dieser Seite, nicht ausweiten: ${ort}`);
   if (lore.length) {
     teile.push(
       "",

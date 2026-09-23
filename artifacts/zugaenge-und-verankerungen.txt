@@ -1,0 +1,192 @@
+Lindendorf — Zugänge und Verankerungen
+Stand: Code in lindendorf-rpg-alpha-V.1.1
+Keine Schlüsselwerte. Nur Namen, Orte im Programm und woran sie hängen.
+Der Server liest .env selbst (Node). Kein Python, kein python-dotenv, kein VITE_-Prefix für diese Schlüssel.
+
+================================================================================
+1. Modellzugänge (nur Server, Datei .env, Vorlage .env.example)
+================================================================================
+Leer oder TEXT_ANBIETER=auto: erster gesetzter Schlüssel, Reihenfolge xAI, Gemini, Groq, OpenRouter.
+Sonst genau einer: xai | gemini | groq | openrouter
+Code: src/game/modelle.ts
+
+Name                  Anbieter      Adresse                                                         Modell, wenn X_*_MODEL leer
+XAI_API_KEY           xAI           https://api.x.ai/v1/chat/completions                            grok-4.5
+GEMINI_API_KEY        Gemini        https://generativelanguage.googleapis.com/v1beta/openai/...     gemini-2.0-flash
+GROQ_API_KEY          Groq          https://api.groq.com/openai/v1/chat/completions                 llama-3.3-70b-versatile
+OPENROUTER_API_KEY    OpenRouter    https://openrouter.ai/api/v1/chat/completions                   meta-llama/llama-3.3-70b-instruct
+
+Optional dazu:
+TEXT_ANBIETER
+XAI_MODEL
+GEMINI_MODEL
+GROQ_MODEL
+OPENROUTER_MODEL
+
+Wer sie ruft (nur Spielleiter, nie der Held):
+formuliereText       Szene weiterformulieren
+entwerfeSzene        Szenen-JSON
+Beide hängen die Zeile aus weltbild.ts und die Lore der offenen Seite an. Nichts davon geht in die Heldensicht.
+
+================================================================================
+2. Spielleiter-Zugang
+================================================================================
+LEITER_PASSWORT      Server, .env. Wenn leer, gilt der Fallback in src/game/leiter.functions.ts.
+Sitzung              sessionStorage  lindendorf.leiter.frei          nur dieser Tab, nach Passwort
+Wunsch vom Editor    sessionStorage  lindendorf.leiter.wunsch        /editor setzt ihn, Spiel öffnet dann das Menü
+SL an                localStorage    lindendorf.welt.an
+                     localStorage    lindendorf.spielleiter.an       alter Name, wird mitgelesen
+SL aus               löscht die beiden Flags und lindendorf-author-v1 und die Sitzung
+
+Routen:
+/                    Spiel
+/editor              setzt nur den Wunsch und schickt zurück auf /
+
+Taste: Alt+S öffnet oder schließt das Menü. Escape schließt das Menü, lässt den Stift an.
+SL aus im Menü macht Stift und Menü aus.
+
+================================================================================
+3. Weitere Server-Zugänge
+================================================================================
+legeKiSzeneAb        KI-Text als Auflage auf die Karte, lokal
+legeWissenAb         Wissenstafel nach src/game/json/wissen/<id>.json
+loescheWissenAb      dieselbe Datei löschen
+legeTonAb            Ton auf die Karte
+legeStimmeAb         Sprache auf die Karte
+legeKanonAufGithub   Auflage nach GitHub
+                     Besitzer PromptBrainless
+                     Repo     lindendorf-rpg-alpha-V.1.1
+                     Pfad     docs/kanon-auflagen/<schluessel>.json
+                     Zugang   GitHub-Connector, kein eigener Token in .env
+getConnectorReadiness  Plattform, ob der Connector-Token da ist
+
+Plattform, nicht Lindendorf-Kanon. Nur gelesen, wenn die Hülle sie setzt:
+DATABASE_URL
+GROK_PROJECT_ID
+GROK_GATE_ORIGIN
+GROK_CONNECTORS_URL
+GROK_CONNECTOR_ACCESS_TOKEN
+VITE_AUTH_ENABLED
+VITE_PUBLIC_HOSTNAME
+
+================================================================================
+4. Browser-Speicher (dieser Rechner, kein Konto)
+================================================================================
+lindendorf-saves-v2              Partien
+lindendorf-save-v1               alter einzelner Stand
+lindendorf-save-last-name        letzter Name
+lindendorf.einstellungen.v1      Ton, Ziffernwahl, Autospeichern
+lindendorf.welt.v2               Auflagen und Lagen-Patches
+lindendorf.welt.v2.migrated      Umzug aus dem alten Speicher erledigt
+lindendorf.spielleiter.karten.v1 alter Auflagen-Speicher
+lindendorf-text-pack-v1          alter Textpack
+grok-auth.bearer-token         sessionStorage, nur die Plattform-Anmeldung, nicht das Spiel
+
+================================================================================
+5. Wissensanker (21) — abgeleitet, nicht gespeichert
+================================================================================
+Quelle: src/game/knowledge.ts  Funktion deriveKnowledge
+Die Tafel erscheint erst beim Verlassen der Seite, die den Anker neu setzt.
+
+Anker                  Art              Satz                                              Hängt an
+dorf_ankunft           ort              Du bist in Lindendorf angekommen.                 intro-ankunft, dorf-platz, intro-lindendorf, oder Holm/Mühle/Gasse/Auftrag
+artefakt_gesehen       übernatürlich    Ein silbernes Kirchenzeichen am Weg.              intro-fremder-am-weg, Artefakt behalten oder verloren, oder Ankunft
+artefakt_erhalten      material         Das silberne Artefakt liegt bei dir.              artefaktErhalten
+holm_besucht           sozial           Du warst im Rathaus bei Holm.                     holmBesucht
+auftrag_erhalten       sozial           Holm hat dir den Auftrag gegeben.                 auftragErhalten
+banditen_bekannt       ort              Banditen sitzen im Steinbruch.                    Holm, Auftrag, wald, lager-hub, Lager gelöst
+rotes_siegel_gesehen   material         Rotes Wachs, ein gebrochenes Siegel.              Holm besucht, Siegel gefunden oder verschwiegen
+hang_hinweis           ort              Der Hang über dem Dorf trägt eine Spur.           Artefakt, Holm-Siegel oder Mehlsack
+glockenweg_bekannt     ort              Der alte Glockenweg ist kein Gerücht mehr.        glockenweg, sanna-die-botin, jorren-im-geroell, die-kapellenglocke, Sanna, Salz, Glocke
+glocke_vorteil         material         Die Glocke am Hang bleibt still.                  glockeGestoppt
+banditen_gewarnt       sozial           Die Banditen wissen, dass jemand kommt.           banditenGewarnt
+muehle_stillstand      material         Die Mühle liefert kein Mehl.                      Holm oder Mühle besucht
+renniks_druck          sozial           Jemand presst die Mühle vom Ufer her.             Müller vertraut, Renniks Beweis, Lösungsweg Mühle
+fluechtlinge_muehle    sozial           In der Kornkammer versteckt Bertok Menschen.      fluechtlingeEntdeckt
+wasser_truebung        material         Das Brunnenwasser ist trüb.                       Trübung bestätigt oder Spur am Brunnen
+grovin_zisterne        ort              Grovin leitet Wasser in eine Zisterne.            Grovin genannt, Grovins Grund, Lösungsweg Brunnen
+dennek_schuld          sozial           Dennek hat Grovin nie bezahlt.                    dennekEntlarvt
+versorgung_muster      sozial           Mehl und Wasser werden dem Tal gleich genommen.   Mühle und Brunnen beide berührt
+gasse_leer             ort              Hinter der Gerberei liegt eine leere Gasse.       Gasse besucht oder Lösungsweg Gasse
+kesseljahr             sozial           Im Kesseljahr wurde die Gasse abgeriegelt.        Geschichte gehört oder Vahls Großvater
+ilses_liste            material         Ilse Brandtner hat die Toten unter der Kirche.    ilsesAufzeichnungenGefunden
+ungerufener_name       sozial           Jemand wurde fortgeschafft. Der Name fehlt.       Faden, ungerufener Name, Köhler, letzter Knoten
+
+ungerufener_name liegt außerhalb der 71 Seiten.
+
+================================================================================
+6. Weltbild — öffentliche Ortsgrenze, eine Zeile pro Seite
+================================================================================
+Quelle: src/game/weltbild.ts
+Stimme und Menü. Nicht der Held. Private Schuld steht hier nicht.
+
+Ort                 Seiten
+Tal und Weg         intro-weg, intro-tal, intro-rauch-graben, intro-hang, intro-lindendorf, intro-ankunft
+Fremder am Weg      intro-fremder-am-weg
+Dorfplatz           dorf-platz
+Rathaus             rathaus
+Zum letzten Fass    zum-letzten-fass
+Schmiede            beim-schmied, schmiede-apotheke
+Brunnen             brunnen-krug, brunnen-hub, brunnenschacht, ablaufgraben, mehlsack-am-brunnen, ratsherr-dennek, bei-witwe-kern, bei-witwe-kern-dorf
+Zisterne            an-der-zisterne, grovins-zisterne
+Brunnen, Ausgang    wasser-mit-einem-riss, klares-wasser, zwei-brunnen-ein-dorf
+Mühle               muehle-stumm, wasserrad, uferpfad, morscher-steg
+Mühle, innen        bertok-am-mahlwerk, kornkammer, lene-in-der-kornkammer, hinter-der-nische, lagerhaus-am-fluss, renniks-kontor, sicheres-mehl-leere-blicke, mehl-mit-rauen-haenden, stilles-mehl
+Verschwundene Gasse gasse-hub, gerbereigasse, fenn, fenn-an-der-kirchmauer, gretes-kate, grete
+Kirche              gasse-kirche, kirchengewoelbe, unter-der-kirche, im-gewoelbe, hinter-dem-stein
+Vahls Stube         vahls-stube, ratsherr-vahl, vahls-stube-abend, was-die-liste-wiegt, ein-zweites-schweigen, was-ausgegraben-bleibt, ein-name-unter-vielen, stille-rechnung
+Kapelle am Hang     die-kapellenglocke
+Alter Glockenweg    glockenweg, wald, jorren-im-geroell
+Steinbruch          lager-hub, lager-schleich, lager-reden, lager-kampf, lager-tor
+Ende                ende
+
+Seiten ohne Zeile bleiben leer. Die Grenze wird nicht erfunden.
+
+================================================================================
+7. Lore-Fakten — nur an diesen Szenen wahr
+================================================================================
+Quelle: src/game/lore.ts
+42 Fakten. Die Stimme darf sie nur ausführen, wenn der Ausgangstext sie schon berührt.
+
+weg-allein                 intro-weg
+fremder-silber             intro-fremder-am-weg
+fremder-ausgang            intro-fremder-am-weg
+tal-rauch                  intro-tal, intro-hang, intro-rauch-graben
+ankunft-platz              intro-lindendorf, intro-ankunft, dorf-platz
+amt-nennt-nur-banditen     dorf-platz, rathaus
+holm-auftrag               rathaus
+mara-pfad                  zum-letzten-fass, lager-schleich
+schmied-rand               beim-schmied, schmiede-apotheke
+kern-dorf                  bei-witwe-kern-dorf
+mehlsack-falsch            mehlsack-am-brunnen, lene-in-der-kornkammer
+brunnen-not                brunnen-krug, brunnen-hub
+kern-befund                bei-witwe-kern
+dennek-grovin              ratsherr-dennek
+schacht-fuge               brunnenschacht, ablaufgraben
+zisterne-gelegt            ablaufgraben, an-der-zisterne, grovins-zisterne
+grovin-rechnung            grovins-zisterne
+brunnen-enden              zwei-brunnen-ein-dorf, wasser-mit-einem-riss, klares-wasser
+muehle-still               muehle-stumm, bertok-am-mahlwerk
+bertok-rennik              bertok-am-mahlwerk
+lene-nische                lene-in-der-kornkammer, hinter-der-nische, kornkammer
+rad-spur                   wasserrad
+steg-waechter              uferpfad, morscher-steg, lagerhaus-am-fluss
+rennik-schein              renniks-kontor
+muehle-enden               sicheres-mehl-leere-blicke, mehl-mit-rauen-haenden, stilles-mehl, renniks-kontor
+gasse-gemieden             gasse-hub, gerbereigasse
+fenn-kesseljahr            fenn, fenn-an-der-kirchmauer, gasse-kirche
+gasse-spuren               gerbereigasse
+vahl-ring                  vahls-stube, ratsherr-vahl
+grete-ilse                 grete, gretes-kate
+gewoelbe-zugang            kirchengewoelbe, unter-der-kirche
+ilse-liste                 im-gewoelbe, hinter-dem-stein
+liste-ausgang              vahls-stube-abend, was-die-liste-wiegt, ein-zweites-schweigen, was-ausgegraben-bleibt, ein-name-unter-vielen, stille-rechnung
+glockenweg-nutzung         glockenweg, wald
+sanna-siegel               sanna-die-botin, glockenweg
+jorren-salz                jorren-im-geroell
+glocke-vorwarnung          die-kapellenglocke, lager-hub
+pakt-grube                 die-kapellenglocke
+lager-kiste                lager-hub, lager-schleich, lager-kampf
+lager-wege                 lager-hub, lager-schleich, lager-reden, lager-kampf, lager-tor
+lager-nachspiel            lager-hub, lager-tor
+muster                     ende

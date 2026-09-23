@@ -34,6 +34,7 @@ export function Hud({
   onLeiter,
   onSystem,
   leiterOpen,
+  leiterAn = false,
   wissenAnzahl = 0,
   weltAnzahl = 0,
   weltPunkt = false,
@@ -48,6 +49,7 @@ export function Hud({
   onLeiter: () => void;
   onSystem?: () => void;
   leiterOpen: boolean;
+  leiterAn?: boolean;
   wissenAnzahl?: number;
   weltAnzahl?: number;
   weltPunkt?: boolean;
@@ -167,27 +169,24 @@ export function Hud({
         ) : null}
         <Button
           type="button"
-          variant={leiterOpen ? "default" : "secondary"}
+          variant={leiterAn ? "default" : "secondary"}
           className="pointer-events-auto h-11 shrink-0 px-1.5 text-xs sm:px-3"
           onClick={onLeiter}
-          title="Weltwerkzeug (Alt+S)"
-          aria-pressed={leiterOpen}
-          aria-label={
-            weltPunkt
-              ? `Welt, diese Karte weicht ab, ${weltAnzahl} Auflagen`
-              : weltAnzahl
-                ? `Welt, ${weltAnzahl} Auflagen`
-                : "Welt"
+          title={
+            leiterAn
+              ? leiterOpen
+                ? "Menü schließen. Anfassen bleibt an."
+                : `Menü öffnen. Anfassen bleibt an.${weltAnzahl ? ` ${weltAnzahl} Auflagen.` : ""}`
+              : "Spielleiter einschalten"
           }
+          aria-pressed={leiterAn}
+          aria-label={leiterAn ? "Spielleiter an" : "Spielleiter aus"}
         >
           <ScrollText className="size-3.5" aria-hidden />
-          <span className="tabular-nums sm:hidden">
-            {weltPunkt ? "●" : ""}
-            {weltAnzahl || ""}
-          </span>
+          <span className="sm:hidden">{leiterAn ? "an" : "SL"}</span>
           <span className="hidden sm:inline">
-            Welt{weltPunkt ? " ●" : ""}
-            {weltAnzahl ? ` ${weltAnzahl}` : ""}
+            {leiterAn ? "SL an" : "SL aus"}
+            {weltPunkt ? " ●" : ""}
           </span>
         </Button>
       </div>

@@ -87,7 +87,7 @@ export function SceneStage({
     choices: original.choices,
   };
   const { spiel } = useEinstellungen();
-  const an = authorMode && leiterOpen;
+  const an = authorMode;
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -129,6 +129,7 @@ export function SceneStage({
           onLeiter={onLeiter}
           onSystem={onSystem}
           leiterOpen={leiterOpen}
+          leiterAn={authorMode}
           wissenAnzahl={wissenAnzahl}
           weltAnzahl={weltAnzahl}
           weltPunkt={weltPunkt}
@@ -189,7 +190,7 @@ export function SceneStage({
             {an ? (
               <div className="mb-3 flex flex-wrap items-center gap-2 text-xs text-muted-fg">
                 <PenLine className="size-3.5 text-accent" aria-hidden />
-                Welt offen. Stift greift die Bühne, merkt Auflage.
+                Spielleiter an. Stift greift die Bühne, auch bei geschlossenem Menü.
                 {schluessel ? <span className="text-fg/80">· {schluessel}</span> : null}
                 <Button type="button" variant="ghost" className="h-8 px-2 text-xs" onClick={onRueckgaengig}>
                   <Undo2 className="size-3.5" aria-hidden />

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { goldNieNegativ, klemme, zustandFifo } from "./herkunft-fifo.ts";
 import { urteilAusrichtung } from "./herkunft-urteil.ts";
+import { grundwerteAusSaat } from "./herkunft-wurf.ts";
 import { zieheMitSaat } from "./intro-zug.ts";
 
 const LAGE_IDS = [
@@ -16,6 +17,16 @@ const LAGE_IDS = [
   "burg",
   "ausweg",
 ];
+
+test("Grundwerte sind 2W6−2 und bleiben an der Saat", () => {
+  const a = grundwerteAusSaat(42);
+  const b = grundwerteAusSaat(42);
+  assert.deepEqual(a, b);
+  for (const wert of [a.staerke, a.geschick, a.charisma]) {
+    assert.ok(wert >= 0 && wert <= 10, String(wert));
+  }
+  assert.notDeepEqual(grundwerteAusSaat(1), grundwerteAusSaat(2));
+});
 
 test("FIFO: der vierte Zustand nimmt den ältesten", () => {
   assert.deepEqual(zustandFifo(["a", "b", "c"], ["d"]), ["b", "c", "d"]);

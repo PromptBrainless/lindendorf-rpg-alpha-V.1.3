@@ -18,6 +18,7 @@ import {
 import { zustandFifo, klemme, goldNieNegativ } from "./herkunft-fifo";
 import { urteilAusrichtung, type HerkunftArt } from "./herkunft-urteil";
 import { neueIntroSaat, zieheMitSaat } from "./intro-zug";
+import { grundwerteAusSaat } from "./herkunft-wurf";
 import { leereBeutel } from "./gegenstaende";
 import lagenStimme from "./json/lagen-stimme.json";
 
@@ -515,7 +516,8 @@ export function baueHeldAusHerkunft(
   fragen: HerkunftFrage[] = HERKUNFT_FRAGEN,
   saat = 0,
 ): Held {
-  const held = createHeld(name, 10, 10, 10);
+  const grund = grundwerteAusSaat(saat);
+  const held = createHeld(name, grund.staerke, grund.geschick, grund.charisma);
   held.lagenZug = fragen.map((frage) => frage.id);
   held.lagenSaat = saat;
   const male: string[] = [];

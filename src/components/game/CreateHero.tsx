@@ -46,6 +46,7 @@ export function CreateHero({
   const frage = schritt >= 0 && schritt < fragen.length && !rueck ? fragen[schritt] : undefined;
   const fertig = fragen.length === LAGE_ZUG_ANZAHL && antworten.length >= fragen.length && !rueck;
   const standHeld = antworten.length ? baueHeldAusHerkunft(name, antworten, fragen, saat) : null;
+  const grundHeld = schritt >= 0 ? baueHeldAusHerkunft(name, [], fragen, saat) : null;
   const held = fertig ? standHeld : null;
   const vorhandenerStand = useMemo(() => peekSaveForName(name), [name]);
   const hintergrund = fertig ? ART.village : frage ? lageBild(frage.id) || ART.road : ART.road;
@@ -147,6 +148,9 @@ export function CreateHero({
             <>
               <p className="mt-1 text-xs text-muted-fg">
                 Lage {schritt + 1} von {fragen.length}
+                {grundHeld
+                  ? ` · Grundwerte 2W6−2: Stärke ${grundHeld.staerke}, Geschick ${grundHeld.geschick}, Charisma ${grundHeld.charisma}`
+                  : ""}
               </p>
               {lageBild(frage.id) ? (
                 <figure className="mt-3 overflow-hidden rounded-md border border-border">
@@ -232,13 +236,14 @@ function StandBlock({
   for (const art of arten) zaehl[art] += 1;
   const namen = held.effekte.map((id) => EFFEKTE[id]?.name ?? id);
   const probe = [
-    werte.staerke !== 10 ? `Stärke ${werte.staerke - 10 > 0 ? "+" : ""}${werte.staerke - 10}` : null,
-    werte.geschick !== 10 ? `Geschick ${werte.geschick - 10 > 0 ? "+" : ""}${werte.geschick - 10}` : null,
-    werte.charisma !== 10 ? `Charisma ${werte.charisma - 10 > 0 ? "+" : ""}${werte.charisma - 10}` : null,
+    werte.staerke !== held.staerke ? `Stärke ${werte.staerke - held.staerke > 0 ? "+" : ""}${werte.staerke - held.staerke}` : null,
+    werte.geschick !== held.geschick ? `Geschick ${werte.geschick - held.geschick > 0 ? "+" : ""}${werte.geschick - held.geschick}` : null,
+    werte.charisma !== held.charisma ? `Charisma ${werte.charisma - held.charisma > 0 ? "+" : ""}${werte.charisma - held.charisma}` : null,
   ].filter(Boolean);
   return (
     <pre className="mt-4 overflow-x-auto rounded-md border border-border bg-surface/70 px-3 py-2 font-mono text-xs leading-relaxed text-fg">
 {`Stand nach Lage ${lage}
+Grundwerte 2W6−2: Stärke ${held.staerke} · Geschick ${held.geschick} · Charisma ${held.charisma}
 LP: ${held.lp}/10   Gold: ${held.gold}   Beutel: ${held.inventar.length ? held.inventar.join(", ") : "leer"}
 Zustände (alt → neu): ${namen.length ? namen.join(" · ") : "—"}
 Aktive Proben: ${probe.length ? probe.join(" · ") : "keine"}
@@ -273,7 +278,7 @@ function Blatt({
         <Stat label="Geschick" value={werte.geschick} basis={held.geschick} />
         <Stat label="Charisma" value={werte.charisma} basis={held.charisma} />
       </div>
-      <p className="mt-3 text-xs text-muted-fg">Grundwerte bleiben 10. Die Zahl oben ist die Probe.</p>
+      <p className="mt-3 text-xs text-muted-fg">Grundwerte sind 2W6−2. Die Zahl oben ist die Probe, Zustände liegen darauf.</p>
       <p className="mt-3 text-sm">
         LP {held.lp}/10 · Gold {held.gold} · Beutel {held.inventar.length ? held.inventar.join(", ") : "leer"}
       </p>

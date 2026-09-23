@@ -33,6 +33,7 @@ export function WeltEditor({
   onChange,
   onReset,
   onClose,
+  onAus,
   onEffekt,
   onLage,
   onRueckgaengig,
@@ -48,6 +49,7 @@ export function WeltEditor({
   onChange: (next: WeltAuflage) => void;
   onReset: () => void;
   onClose?: () => void;
+  onAus?: () => void;
   onEffekt: (id: EffektId, an: boolean) => void;
   onLage: (frageIndex: number) => void;
   onRueckgaengig: () => void;
@@ -116,7 +118,7 @@ export function WeltEditor({
   return (
     <aside
       ref={fang}
-      className="safe-bottom fixed inset-x-0 bottom-0 z-40 max-h-[58vh] overflow-y-auto border-t border-border bg-bg text-fg sm:inset-y-0 sm:left-auto sm:right-0 sm:max-h-none sm:w-[min(28rem,100vw)] sm:border-l sm:border-t-0"
+      className="safe-bottom fixed inset-0 z-40 overflow-y-auto bg-bg text-fg"
       role="dialog"
       aria-modal="true"
       aria-labelledby="welt-titel"
@@ -131,11 +133,18 @@ export function WeltEditor({
             </p>
             {vorschau ? <p className="mt-1 text-xs text-accent">{vorschau}</p> : null}
           </div>
-          {onClose ? (
-            <Button type="button" variant="ghost" className="h-11 px-3 text-sm" onClick={onClose}>
-              Schließen
-            </Button>
-          ) : null}
+          <div className="flex shrink-0 gap-2">
+            {onAus ? (
+              <Button type="button" variant="secondary" className="h-11 px-3 text-sm" onClick={onAus}>
+                SL aus
+              </Button>
+            ) : null}
+            {onClose ? (
+              <Button type="button" variant="ghost" className="h-11 px-3 text-sm" onClick={onClose}>
+                Schließen
+              </Button>
+            ) : null}
+          </div>
         </div>
         {nichtHeld ? (
           <div className="mb-3 flex items-center justify-between gap-2 rounded-sm border border-border px-3 py-2 text-sm">

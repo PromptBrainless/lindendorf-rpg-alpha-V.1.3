@@ -8,6 +8,8 @@ import { grokFassung, type RagEingabe } from "./werkstatt-rag";
 import { ART_SICHT, GROK_STIMME, GROK_SZENE } from "./werkstatt-vertrag";
 import { KANON_NAMEN } from "./werkstatt-rag";
 import { loreZeilen } from "./lore";
+import { sprich } from "./modelle";
+import { weltbildZeile } from "./weltbild";
 
 const ART = new Set([
   "title",
@@ -89,52 +91,32 @@ export const formuliereText = createServerFn({ method: "POST" })
   })
   .handler(async ({ data }) => {
     if (!data.text.trim()) return { ok: false as const, error: "Kein Text." };
-    const apiKey = process.env.XAI_API_KEY;
-    if (!apiKey) return { ok: false as const, error: "Kein xAI-Schlüssel auf dem Server." };
     const sicht = ART_SICHT[data.art] ?? "";
     const erlaubt = KANON_NAMEN.filter((name) => data.text.includes(name) || data.title.includes(name.split(" ")[0]));
     const lore = loreZeilen(data.id);
+    const ort = weltbildZeile(data.id);
+    const antwort = await sprich(
+      GROK_STIMME,
+      [
+        "Nur diese Seite. Nichts anderes.",
+        data.title && `Titel dieser Seite: ${data.title}`,
+        sicht && `Licht und Ort dieser Karte, nur wenn der Text ihn braucht: ${sicht}`,
+        erlaubt.length ? `Namen, die hier vorkommen dürfen: ${erlaubt.join(", ")}` : "Keine Eigennamen erfinden.",
+        ort ? `Ort dieser Seite, nicht ausweiten: ${ort}` : "",
+        lore.length
+          ? `Wahr an dieser Seite, nur ausführen wenn der Ausgangstext es schon berührt:\n${lore.map((zeile) => `- ${zeile}`).join("\n")}`
+          : "",
+        data.hinweis && `Hinweis der Spielleitung, gilt nur für diese Seite: ${data.hinweis}`,
+        "Länger als die Eingabe, aber auf demselben Fleck. Keine anderen Orte.",
+        "Ausgangstext dieser Seite:",
+        data.text,
+      ]
+        .filter(Boolean)
+        .join("\n\n"),
+    );
+    if (!antwort.ok) return antwort;
     try {
-      const res = await fetch("https://api.x.ai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: "grok-4.5",
-          temperature: 0.65,
-          max_tokens: 8000,
-          response_format: { type: "json_object" },
-          messages: [
-            { role: "system", content: GROK_STIMME },
-            {
-              role: "user",
-              content: [
-                "Nur diese Seite. Nichts anderes.",
-                data.title && `Titel dieser Seite: ${data.title}`,
-                sicht && `Licht und Ort dieser Karte, nur wenn der Text ihn braucht: ${sicht}`,
-                erlaubt.length ? `Namen, die hier vorkommen dürfen: ${erlaubt.join(", ")}` : "Keine Eigennamen erfinden.",
-                lore.length
-                  ? `Wahr an dieser Seite, nur ausführen wenn der Ausgangstext es schon berührt:\n${lore.map((zeile) => `- ${zeile}`).join("\n")}`
-                  : "",
-                data.hinweis && `Hinweis der Spielleitung, gilt nur für diese Seite: ${data.hinweis}`,
-                "Länger als die Eingabe, aber auf demselben Fleck. Keine anderen Orte.",
-                "Ausgangstext dieser Seite:",
-                data.text,
-              ]
-                .filter(Boolean)
-                .join("\n\n"),
-            },
-          ],
-        }),
-      });
-      if (!res.ok) {
-        const roh = await res.text().catch(() => "");
-        return { ok: false as const, error: `xAI ${res.status}${roh ? `: ${roh.slice(0, 160)}` : ""}` };
-      }
-      const body = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-      const roh = body.choices?.[0]?.message?.content ?? "";
+      const roh = antwort.text;
       const start = roh.indexOf("{");
       const end = roh.lastIndexOf("}");
       if (start < 0 || end <= start) return { ok: false as const, error: "Keine Formulierung." };
@@ -150,7 +132,7 @@ export const formuliereText = createServerFn({ method: "POST" })
       }
       return { ok: true as const, text: text.trim() };
     } catch (fehler) {
-      return { ok: false as const, error: fehler instanceof Error ? fehler.message : "xAI nicht erreichbar." };
+      return { ok: false as const, error: fehler instanceof Error ? fehler.message : "Modell nicht erreichbar." };
     }
   });
 
@@ -159,33 +141,10 @@ export { grokFassung };
 export const entwerfeSzene = createServerFn({ method: "POST" })
   .validator(alsEingabe)
   .handler(async ({ data }) => {
-    const apiKey = process.env.XAI_API_KEY;
-    if (!apiKey) return { ok: false as const, error: "Kein xAI-Schlüssel auf dem Server." };
-
+    const antwort = await sprich(GROK_SZENE, grokFassung(data));
+    if (!antwort.ok) return antwort;
     try {
-      const res = await fetch("https://api.x.ai/v1/chat/completions", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: "grok-4.5",
-          temperature: 0.7,
-          max_tokens: 8000,
-          response_format: { type: "json_object" },
-          messages: [
-            { role: "system", content: GROK_SZENE },
-            { role: "user", content: grokFassung(data) },
-          ],
-        }),
-      });
-      if (!res.ok) {
-        const roh = await res.text().catch(() => "");
-        return { ok: false as const, error: `xAI ${res.status}${roh ? `: ${roh.slice(0, 160)}` : ""}` };
-      }
-      const body = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-      const text = body.choices?.[0]?.message?.content ?? "";
+      const text = antwort.text;
       const fence = text.match(/```(?:json)?\s*([\s\S]*?)```/);
       const roh = fence?.[1] ?? text;
       const start = roh.indexOf("{");
@@ -212,7 +171,7 @@ export const entwerfeSzene = createServerFn({ method: "POST" })
       if (!geprueft.success) return { ok: false as const, error: "Kein gültiges Szenen-JSON." };
       return { ok: true as const, ...alsSzene(geprueft.data, data) };
     } catch (fehler) {
-      return { ok: false as const, error: fehler instanceof Error ? fehler.message : "xAI nicht erreichbar." };
+      return { ok: false as const, error: fehler instanceof Error ? fehler.message : "Modell nicht erreichbar." };
     }
   });
 
