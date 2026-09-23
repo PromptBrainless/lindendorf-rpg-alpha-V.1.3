@@ -32,6 +32,7 @@ Die datengetriebenen Szenen liegen in [src/game/json/quests](https://github.com/
 
 ## Verknüpfte Wiki-Seiten
 
+- [Orte und Schauplätze](Orte.md)
 - [Queststruktur](Queststruktur.md)
 - [Quest-Ankunft](Quest-Ankunft.md)
 - [Szenenplan](Szenenplan.md)
