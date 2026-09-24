@@ -58,14 +58,14 @@ export function WeltPruefen({
   const [importMeldung, setImportMeldung] = useState<string | null>(null);
   const [codeOffen, setCodeOffen] = useState(seite);
   const [quelle, setQuelle] = useState<Quelle>(haupt.schluessel);
-  const [code, setCode] = useState(() => haupt.inhalt(szene, auflage));
+      const [code, setCode] = useState(() => haupt.inhalt(szene, auflage));
   const [busy, setBusy] = useState<"github" | "ablegen" | null>(null);
   const githubFn = useServerFn(legeKanonAufGithub);
   const ablegenFn = useServerFn(legeKiSzeneAb);
   const kanon = szene?.original ?? (szene ? { title: szene.title, lines: szene.lines, choices: szene.choices } : null);
   const diff = kanon ? kanonDiff(kanon, auflage) : null;
   const datei = (modulNachSchluessel(quelle, szene) ?? haupt).datei;
-  const texte = useMemo(() => vergleicheLaufzeit(), []);
+  const texte = useMemo(() => vergleicheLaufzeit(), [szene?.id, auflage]);
   const diese = texte.find((fund) => fund.id === szene?.id);
   const abweichungen = texte.filter((fund) => !fund.gleich);
 
@@ -74,7 +74,7 @@ export function WeltPruefen({
     setQuelle(next.schluessel);
     setCode(next.inhalt(szene, auflage));
     setImportMeldung(null);
-  }, [szene?.id, szene?.textKey]);
+  }, [szene?.id, szene?.textKey, auflage]);
 
   function ladeQuelle(next: Quelle) {
     const modul = modulNachSchluessel(next, szene) ?? modulFuerSzene(szene);
@@ -214,15 +214,9 @@ export function WeltPruefen({
                   const modul = modulNachSchluessel(quelle, szene) ?? modulFuerSzene(szene);
                   modul.pruefen(code);
                   setImportMeldung(`Gültig · ${modul.datei}`);
-                  if ((quelle === "auflage" || quelle === "szene") && onChange) {
-                    const roh = JSON.parse(code) as WeltAuflage;
-                    onChange(WeltAuflageSchema.parse({
-                      title: roh.title,
-                      lines: roh.lines,
-                      choices: roh.choices,
-                      art: roh.art,
-                      portrait: roh.portrait,
-                    }) as WeltAuflage);
+                          if ((quelle === "auflage" || quelle === "szene") && onChange) {
+                            const roh = JSON.parse(code) as WeltAuflage;
+                            onChange(WeltAuflageSchema.parse(roh) as WeltAuflage);
                     setImportMeldung("Gültig. Als Auflage gemerkt.");
                   }
                 } catch (fehler) {
@@ -281,7 +275,7 @@ export function WeltPruefen({
               const fund = await githubFn({
                 data: {
                   schluessel: schluessel || szene?.id || szene?.title || "karte",
-                  inhalt: quelle === "szene" ? code : JSON.stringify(auflage),
+                          inhalt: code,
                 },
               });
               if ("pending" in fund && fund.pending) {
