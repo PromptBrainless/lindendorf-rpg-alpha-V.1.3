@@ -24,6 +24,7 @@ Strukturseiten aus der Lore-Sammlung. Keine Seitentexte.
 ## Seiten
 
 - [Leitlinien](Leitlinien.md)
+- [Lore-Index](Lore-Index.md)
 - [Weltgeheimnis](Weltgeheimnis.md)
 - [Queststruktur](Queststruktur.md)
 - [Orte und Schauplätze](Orte.md)

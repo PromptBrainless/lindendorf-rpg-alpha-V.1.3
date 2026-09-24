@@ -53,6 +53,7 @@ import {
   spieleKlang,
 } from "@/game/klang";
 import { leseTageszeit } from "@/game/tageszeit";
+import { WIKI_LINKS } from "@/game/wiki";
 
 const WeltEditor = lazy(() => import("@/components/welt/WeltEditor").then((m) => ({ default: m.WeltEditor })));
 
@@ -503,6 +504,9 @@ export function GameApp() {
     spieleKlang("oeffnen");
     setSystemOffen(true);
   };
+  const oeffneWiki = () => {
+    window.open(WIKI_LINKS.index, "_blank", "noopener,noreferrer");
+  };
   const login = leiterLogin ? (
     <LeiterLogin
       onOk={() => {
@@ -595,6 +599,7 @@ export function GameApp() {
         onSave={saveCurrentGame}
         saveMessage={saveMessage}
         onKnowledge={() => setKnowledgeOpen((open) => !open)}
+        onWiki={leiterAn ? oeffneWiki : undefined}
         knowledgeOpen={knowledgeOpen}
         debug={debug}
         leiterOpen={leiterOpen}

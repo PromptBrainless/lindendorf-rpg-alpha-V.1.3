@@ -32,6 +32,7 @@ export function SceneStage({
   saveMessage,
   onKnowledge,
   knowledgeOpen,
+  onWiki,
   debug,
   leiterOpen,
   patch,
@@ -59,6 +60,7 @@ export function SceneStage({
   onSave: () => void;
   saveMessage: string | null;
   onKnowledge: () => void;
+  onWiki?: () => void;
   knowledgeOpen: boolean;
   debug: boolean;
   leiterOpen: boolean;
@@ -126,6 +128,7 @@ export function SceneStage({
           onSave={onSave}
           saveMessage={saveMessage}
           onKnowledge={onKnowledge}
+          onWiki={onWiki}
           onLeiter={onLeiter}
           onSystem={onSystem}
           leiterOpen={leiterOpen}

@@ -10,6 +10,7 @@ Sondern: *Welche Form von Schuld soll das Dorf weitertragen?*
 ## Seiten
 
 - [Leitlinien](Leitlinien.md)
+- [Lore-Index](Lore-Index.md)
 - [Weltgeheimnis](Weltgeheimnis.md)
 - [Queststruktur](Queststruktur.md)
 - [Orte und Schauplätze](Orte.md)

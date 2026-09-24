@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   BookOpen,
+  ExternalLink,
   ChevronDown,
   Coins,
   FlaskConical,
@@ -32,6 +33,7 @@ export function Hud({
   saveMessage,
   onKnowledge,
   onLeiter,
+  onWiki,
   onSystem,
   leiterOpen,
   leiterAn = false,
@@ -47,6 +49,7 @@ export function Hud({
   saveMessage: string | null;
   onKnowledge: () => void;
   onLeiter: () => void;
+  onWiki?: () => void;
   onSystem?: () => void;
   leiterOpen: boolean;
   leiterAn?: boolean;
@@ -189,6 +192,19 @@ export function Hud({
             {weltPunkt ? " ●" : ""}
           </span>
         </Button>
+        {leiterAn && onWiki ? (
+          <Button
+            type="button"
+            variant="secondary"
+            className="pointer-events-auto h-11 shrink-0 px-1.5 text-xs sm:px-3"
+            onClick={onWiki}
+            title="Lindendorf-Wiki öffnen"
+            aria-label="Lindendorf-Wiki öffnen"
+          >
+            <ExternalLink className="size-3.5" aria-hidden />
+            <span className="hidden sm:inline">Wiki</span>
+          </Button>
+        ) : null}
       </div>
       {offen ? (
         <div className="herein mx-auto mt-2 max-w-5xl border-t border-border pt-2">

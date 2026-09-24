@@ -246,22 +246,7 @@ export const legeKiSzeneAb = createServerFn({ method: "POST" })
     await mkdir(dirname(kiPfad), { recursive: true });
     await writeFile(kiPfad, `${JSON.stringify(bestand, null, 2)}\n`, "utf8");
 
-    const fund = fundFuerSzene(szene.id, szene.title);
-    let datei = "json/ki-auflagen.json";
-    if (fund) {
-      const teilPfad = join(process.cwd(), "src/game/json/quests", fund.teil.datei);
-      try {
-        const teil = JSON.parse(await readFile(teilPfad, "utf8")) as { szenen?: SzeneJson[] };
-        if (Array.isArray(teil.szenen)) {
-          teil.szenen = teil.szenen.map((eintrag) => (eintrag.id === szene.id ? { ...eintrag, ...szene } : eintrag));
-          await writeFile(teilPfad, `${JSON.stringify(teil, null, 2)}\n`, "utf8");
-          datei = fund.teil.datei;
-        }
-      } catch {
-        /* nur ki-auflagen.json */
-      }
-    }
-    return { ok: true as const, id: szene.id, datei };
+    return { ok: true as const, id: szene.id, datei: "json/ki-auflagen.json" };
   });
 
 export const legeWissenAb = createServerFn({ method: "POST" })

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { BookMarked, FlaskConical, LayoutGrid, MapPinned, ShieldCheck, ShieldQuestion, UserRound, Users2 } from "lucide-react";
+import { BookMarked, ExternalLink, FlaskConical, LayoutGrid, MapPinned, PanelLeft, ShieldCheck, ShieldQuestion, UserRound, Users2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { EffektId, Held, SceneView } from "@/game/types";
 import type { Tageszeit } from "@/game/tageszeit";
@@ -14,6 +14,7 @@ import {
 } from "@/game/welt";
 import { viewAusKanon } from "@/game/welt-graph";
 import { mapGmToolState } from "@/game/gm/mapGmToolState";
+import { WIKI_LINKS } from "@/game/wiki";
 import { WeltEntwurf } from "./WeltEntwurf";
 import { WeltHeld } from "./WeltHeld";
 import { WeltKarte } from "./WeltKarte";
@@ -140,6 +141,26 @@ export function WeltEditor({
             {vorschau ? <p className="mt-1 text-xs text-accent">{vorschau}</p> : null}
           </div>
           <div className="flex shrink-0 gap-2">
+            <Button
+              type="button"
+              variant="secondary"
+              className="h-11 px-3 text-sm"
+              onClick={() => window.location.assign("/editor")}
+              title="Vollständige Spielleiter-Werkstatt öffnen"
+            >
+              <PanelLeft className="size-3.5" aria-hidden />
+              <span className="hidden sm:inline">Werkstatt</span>
+            </Button>
+            <Button
+              type="button"
+              variant="secondary"
+              className="h-11 px-3 text-sm"
+              onClick={() => window.open(WIKI_LINKS.index, "_blank", "noopener,noreferrer")}
+              title="Lindendorf-Wiki öffnen"
+            >
+              <ExternalLink className="size-3.5" aria-hidden />
+              <span className="hidden sm:inline">Wiki</span>
+            </Button>
             {onAus ? (
               <Button type="button" variant="secondary" className="h-11 px-3 text-sm" onClick={onAus}>
                 SL aus
