@@ -129,7 +129,7 @@ export function WeltEditor({
           <div className="flex items-start justify-between gap-3">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h1 id="welt-titel" className="font-display text-2xl font-semibold">Welt</h1>
+              <h1 id="welt-titel" className="font-display text-2xl font-semibold">Weltwerkzeug 2.0</h1>
               <span className="rounded-full border border-border px-2 py-0.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-muted-fg">
                 {nichtHeld ? "Fremde Szene" : werk.stand === "auflage" ? "Auflage" : "Kanon"}
               </span>
@@ -138,6 +138,10 @@ export function WeltEditor({
               ) : null}
             </div>
             <p className="mt-0.5 text-xs text-muted-fg">{sicht?.title ?? "Keine Szene ausgewählt"}</p>
+            <p className="mt-1 text-[11px] text-subtle-fg">
+              {held?.name ? `${held.name} · ` : ""}
+              {merkt ? "Lokale Auflage · Kanon bleibt erhalten" : "Kanonische Seite · bereit zur Bearbeitung"}
+            </p>
             {vorschau ? <p className="mt-1 text-xs text-accent">{vorschau}</p> : null}
           </div>
           <div className="flex shrink-0 gap-2">

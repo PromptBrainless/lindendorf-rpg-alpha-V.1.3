@@ -16,6 +16,12 @@ Eine Auflage verändert deshalb zunächst nur die Fassung einer Seite. Der urspr
 
 ## Die Bereiche der Werkstatt
 
+## Version 2.0 der Oberfläche
+
+Die Werkstatt verwendet eine dreiteilige Arbeitsansicht. Links liegen die gruppierten Bereiche für Orientierung, Erzählung und Kontrolle. In der Mitte arbeitet die Spielleitung am ausgewählten Inhalt. Rechts bleibt der Arbeitskontext sichtbar: geöffnete Seite, Kennung, Kanon- oder Auflagenstatus und die passenden Lore-Seiten. Auf kleinen Bildschirmen wird die Kontextspalte ausgeblendet, ohne die Arbeitsbereiche oder ihre Reihenfolge zu verlieren.
+
+Das laufende Weltwerkzeug verwendet dieselbe Sprache. Sein Overlay nennt die aktuelle Seite, den Helden, den Speicherstand und den Unterschied zwischen Kanon und lokaler Auflage. Von dort führt ein eigener Weg zurück in die Gesamtwerkstatt oder in das Wiki. Die laufende Partie bleibt dabei offen genug, um die aktuelle Szene zu prüfen, ohne den gesamten Bildschirm mit einer zweiten Anwendung zu verdecken.
+
 ### Übersicht
 
 Die Übersicht zeigt, wie groß die gegenwärtige Partie ist. Sie zählt die Questreihen, die vorhandenen Seiten, die Orte aus dem aktiven Weltbild und die Textstellen, die noch geprüft werden müssen. Von hier aus gelangt die Spielleitung direkt zum Schreiben, zu einer neuen Figur oder zu einer Wissenstafel.

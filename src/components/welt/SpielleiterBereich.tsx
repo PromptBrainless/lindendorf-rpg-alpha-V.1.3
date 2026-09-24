@@ -14,6 +14,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import type { SceneView } from "@/game/types";
 import { baueWeltGraph, viewAusKanon } from "@/game/welt-graph";
 import {
   auflageFuerSicht,
@@ -55,6 +56,12 @@ const BEREICHE: Array<{ id: Bereich; titel: string; untertitel: string; Symbol: 
   { id: "quest", titel: "Questpfade", untertitel: "Wege prüfen", Symbol: ShieldQuestion },
   { id: "spieler", titel: "Partien", untertitel: "Stände laden", Symbol: UsersRound },
   { id: "pruefen", titel: "Prüfen", untertitel: "Vor dem Spiel", Symbol: ShieldCheck },
+];
+
+const BEREICH_GRUPPEN: Array<{ titel: string; ids: Bereich[] }> = [
+  { titel: "Orientierung", ids: ["uebersicht", "orte", "spieler"] },
+  { titel: "Erzählung", ids: ["geschichte", "szenen", "figuren", "wissen"] },
+  { titel: "Kontrolle", ids: ["quest", "pruefen"] },
 ];
 
 export function SpielleiterBereich() {
@@ -104,20 +111,23 @@ export function SpielleiterBereich() {
   });
 
   return (
-    <main className="min-h-screen bg-bg text-fg">
+    <main className="min-h-screen bg-[#0b0a08] text-fg selection:bg-accent/30">
       <div className="mx-auto max-w-[1440px] px-4 py-5 sm:px-6 lg:px-8">
-        <header className="border-b border-border pb-5">
+        <header className="sticky top-0 z-30 -mx-4 border-b border-border bg-[#0b0a08]/95 px-4 py-4 backdrop-blur-xl sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8">
           <div className="flex flex-wrap items-start justify-between gap-4">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-accent">How to be a Hero — Lindendorf</p>
-              <h1 className="mt-2 font-display text-4xl font-semibold sm:text-5xl">Spielleiter-Werkstatt</h1>
+              <div className="flex flex-wrap items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-accent">
+                <span>How to be a Hero — Lindendorf</span>
+                <span className="rounded-full border border-accent/40 px-2 py-0.5 text-[10px] tracking-[0.12em] text-muted-fg">Weltwerkzeug 2.0</span>
+              </div>
+              <h1 className="mt-2 font-display text-4xl font-semibold tracking-tight sm:text-5xl">Werkstatt für das ganze Tal</h1>
               <p className="mt-2 max-w-3xl text-sm leading-relaxed text-muted-fg">
-                Hier entsteht das Werk hinter der Partie: die Geschichte, ihre Seiten, die Menschen im Tal, die Orte und das Wissen, das sich ein Held verdienen kann.
+                Geschichte, Figuren, Orte, Wissen und Wege liegen in einem Arbeitsraum. Jede Änderung bleibt an der bestehenden Partie lesbar.
               </p>
             </div>
             <div className="flex flex-wrap items-center justify-end gap-2 text-xs text-muted-fg">
-              <span className="inline-flex items-center gap-1.5"><CheckCircle2 className="size-4 text-ok" aria-hidden />Kanon geladen</span>
-              <span className="rounded-sm border border-border px-2 py-1">8 Quests · {graph.knoten.length} Seiten</span>
+              <span className="inline-flex items-center gap-1.5 rounded-full border border-ok/30 bg-ok/5 px-2.5 py-1"><CheckCircle2 className="size-4 text-ok" aria-hidden />Kanon geladen</span>
+              <span className="rounded-full border border-border px-2.5 py-1">8 Quests · {graph.knoten.length} Seiten</span>
               <a
                 href={WIKI_LINKS.index}
                 target="_blank"
@@ -131,28 +141,39 @@ export function SpielleiterBereich() {
           </div>
         </header>
 
-        <div className="mt-5 grid gap-5 lg:grid-cols-[15rem_minmax(0,1fr)]">
+        <div className="mt-5 grid gap-5 lg:grid-cols-[16rem_minmax(0,1fr)_13rem]">
           <nav className="self-start lg:sticky lg:top-5" aria-label="Spielleiter-Bereiche">
-            <div className="grid gap-1 rounded-md border border-border bg-surface/50 p-2">
-              {BEREICHE.map(({ id, titel, untertitel, Symbol }) => (
-                <button
-                  key={id}
-                  type="button"
-                  aria-current={bereich === id}
-                  onClick={() => setBereich(id)}
-                  className={`flex min-h-14 items-center gap-3 rounded-sm px-3 text-left transition-colors duration-[var(--motion-quick)] ${bereich === id ? "bg-surface-2 text-fg" : "text-muted-fg hover:bg-surface hover:text-fg"}`}
-                >
-                  <Symbol className="size-4 shrink-0" aria-hidden />
-                  <span>
-                    <span className="block text-sm font-semibold">{titel}</span>
-                    <span className="block text-xs text-subtle-fg">{untertitel}</span>
-                  </span>
-                </button>
+            <div className="grid gap-4 rounded-md border border-border bg-surface/40 p-2">
+              {BEREICH_GRUPPEN.map((gruppe) => (
+                <div key={gruppe.titel}>
+                  <p className="px-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-subtle-fg">{gruppe.titel}</p>
+                  <div className="grid gap-1">
+                    {gruppe.ids.map((id) => {
+                      const eintrag = BEREICHE.find((item) => item.id === id)!;
+                      const Symbol = eintrag.Symbol;
+                      return (
+                        <button
+                          key={id}
+                          type="button"
+                          aria-current={bereich === id}
+                          onClick={() => setBereich(id)}
+                          className={`flex min-h-12 items-center gap-3 rounded-sm px-3 text-left transition-colors duration-[var(--motion-quick)] ${bereich === id ? "bg-accent text-accent-fg shadow-sm" : "text-muted-fg hover:bg-surface-2 hover:text-fg"}`}
+                        >
+                          <Symbol className="size-4 shrink-0" aria-hidden />
+                          <span>
+                            <span className="block text-sm font-semibold">{eintrag.titel}</span>
+                            <span className={`block text-xs ${bereich === id ? "text-accent-fg/70" : "text-subtle-fg"}`}>{eintrag.untertitel}</span>
+                          </span>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
               ))}
             </div>
             <div className="mt-3 rounded-md border border-border px-3 py-3 text-xs leading-relaxed text-muted-fg">
               <p className="font-semibold text-fg">Arbeitsregel</p>
-              <p className="mt-1">Auflagen verändern eine Seite für die Partie. Der Kanon bleibt als Vergleich erhalten.</p>
+              <p className="mt-1">Erst Seite und Folge benennen. Dann schreiben. Der Kanon bleibt als Vergleich erhalten.</p>
             </div>
           </nav>
 
@@ -199,6 +220,8 @@ export function SpielleiterBereich() {
               </Arbeitsflaeche>
             ) : null}
           </section>
+
+          <KontextPanel szene={szene} auflage={auflage} bereich={bereich} />
         </div>
       </div>
     </main>
@@ -246,6 +269,42 @@ function Uebersicht({ graph, onBereich, onSzene }: { graph: ReturnType<typeof ba
         <p className="mt-1">Der Pakt unter der Kapelle bleibt verborgen, bis die Reihe Das Kesseljahr ihn über die Gasse, Ilse Brandtners Liste und das Gewölbe öffnet. Die Werkstatt zeigt diese Grenze an jeder Stelle, an der eine Seite bearbeitet wird.</p>
       </div>
     </div>
+  );
+}
+
+function KontextPanel({ szene, auflage, bereich }: { szene: SceneView | null; auflage: WeltAuflage; bereich: Bereich }) {
+  return (
+    <aside className="hidden self-start lg:sticky lg:top-24 lg:block" aria-label="Arbeitskontext">
+      <div className="grid gap-3">
+        <section className="rounded-md border border-border bg-surface/40 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Arbeitskontext</p>
+          <p className="mt-3 text-xs text-subtle-fg">Bereich</p>
+          <p className="text-sm font-semibold text-fg">{BEREICHE.find((item) => item.id === bereich)?.titel}</p>
+          <p className="mt-3 text-xs text-subtle-fg">Ausgewählte Seite</p>
+          <p className="mt-1 text-sm leading-snug text-fg">{szene?.title ?? "Keine Seite"}</p>
+          <p className="mt-3 text-xs text-subtle-fg">Speicherstand</p>
+          <p className={`mt-1 text-sm font-semibold ${auflageLeer(auflage) ? "text-ok" : "text-warn"}`}>
+            {auflageLeer(auflage) ? "Kanon" : "Lokale Auflage"}
+          </p>
+          {szene?.id ? <p className="mt-2 break-all font-mono text-[10px] text-subtle-fg">{szene.id}</p> : null}
+        </section>
+        <section className="rounded-md border border-border bg-surface/30 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Weltwissen</p>
+          <div className="mt-2 grid gap-1">
+            {[
+              ["Lore-Index", WIKI_LINKS.lore],
+              ["Orte", WIKI_LINKS.orte],
+              ["Figuren", WIKI_LINKS.npc],
+              ["Wissenstafeln", WIKI_LINKS.wissen],
+            ].map(([label, href]) => (
+              <a key={label} href={href} target="_blank" rel="noreferrer" className="rounded-sm px-2 py-1.5 text-xs text-muted-fg hover:bg-surface-2 hover:text-fg">
+                {label}
+              </a>
+            ))}
+          </div>
+        </section>
+      </div>
+    </aside>
   );
 }
 
