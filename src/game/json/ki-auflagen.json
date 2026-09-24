@@ -85,9 +85,8 @@
     "art": "mill",
     "portrait": "miller",
     "lines": [
-      "Die Worte hallen in deinem Kopf wider, während du ihm näherkommst. Feuchte Kälte steigt vom Boden, vermischt mit dem faulen Geruch alten Mehls, das in den Ritzen der Steinmühle klebt und unter deinen Schritten zu grauem Brei wird. Bertok prüft das Mahlwerk, obwohl es längst justiert ist. Seine Finger fahren langsam über die grobe Oberfläche, drücken, tasten, als könnten sie eine Schuld finden, die der Stein nicht trägt. Der Stein ist kalt, ein Zeichen für die Untätigkeit, die ihn umgibt. Die Kälte frisst sich in seine Haut, macht die Hand schwer und taub, während das große Wasserrad draußen dumpf und gleichmäßig knarzt, Wasser spritzt, Gewicht verlagert, ohne dass hier drinnen etwas mahlt.",
-      "„Kein Mehl heute. Kein Mehl seit zwei Wochen.“ Er sagt es, bevor du fragst, als wüsste er bereits um die drängenden Fragen, die in dir brodeln. Die Worte kommen trocken, ohne Atem dazwischen, und der Geruch von nassem Gestein und abgestandenem Getreide legt sich über alles. Namen nennt er nicht. Schlechtes Korn, niedriges Wasser, Ärger mit der Lieferung. Die Hand auf dem Mahlstein zittert trotzdem, ein feines Zittern, das er nicht erklären will. Das Zittern läuft durch den kalten Stein, spürbar als leichtes Vibrieren unter dem Druck seiner Finger, während das Rad draußen weiter lastet und das Wasser kalt und schwer gegen die Schaufeln schlägt.",
-      "Bertok prüft den Stein, obwohl er justiert ist. „Kein Mehl heute. Kein Mehl seit zwei Wochen.“ Schlechtes Korn. Niedriges Wasser. Namen nennt er nicht, solange du nur dastehst."
+      "Feuchte Kälte steigt vom Boden und mischt sich mit dem Geruch alten Mehls, das in den Ritzen des Mahlwerks klebt. Bertok prüft den Stein, obwohl er längst justiert ist. Seine Finger fahren über die kalte Oberfläche, als könnten sie eine Schuld finden, die der Stein nicht trägt.",
+      "„Kein Mehl heute. Kein Mehl seit zwei Wochen.“ Er sagt es, bevor du fragst. Schlechtes Korn, niedriges Wasser, Ärger mit der Lieferung — Namen nennt er nicht. Seine Hand auf dem Mahlstein zittert trotzdem, ein feines Zittern, das er nicht erklären will, solange du nur dastehst."
     ],
     "choices": [
       "Vertrauen gewinnen",
@@ -118,10 +117,8 @@
     "title": "Der bittere Krug",
     "art": "well",
     "lines": [
-      "Der Wassereimer am Dorfbrunnen steht halb voll, so wie ihn die Nacht zurückgelassen hat, denn niemand hat sich heute Morgen die Mühe gemacht, ihn zu leeren und neu zu füllen, wie es sonst die erste Pflicht des Tages ist, noch vor dem Brot, noch vor dem Vieh. Das Wasser darin hat die falsche Farbe angenommen, ein trübes Graubraun, das eher an aufgewühlten Teichgrund erinnert als an das, was aus der Tiefe der Erde kommen sollte, klar und kalt und ohne Geschichte.",
-      "Vor der Apotheke hustet ein Kind, ein trockenes, hartes Husten, das sich anhört, als sitze ihm etwas Falsches in der Brust fest. Die Mutter hält es fester an sich, fester, als das bloße Husten es eigentlich verlangte, mit jener Art von Griff, die weniger dem Kind gilt als der eigenen Angst, die man damit niederhalten will.",
-      "Am Brunnenrand steht Ratsherr Dennek und rührt mit einem Stock im Eimer, langsam, im Kreis, immer wieder, als könnte man ein vergiftetes Wasser durch bloßes Rühren wieder klären, so wie man einen Brei glattstreicht, dem nichts mehr fehlt als ein wenig Geduld. Er sieht dabei nicht auf, weder zum Kind noch zur Mutter noch zu irgendwem, der vorbeigeht — als hoffe er, dass die Bewegung seiner Hand genüge, um auch die Fragen im Kreis zu halten, die man ihm sonst stellen würde.",
-      "Das Wasser im Eimer hat die falsche Farbe. Graubraun, wie aufgewühlter Teichgrund. Vor der Apotheke hustet ein Kind. Dennek rührt im Kreis, als ließe sich die Frage glattstreichen."
+      "Der Wassereimer am Brunnen steht halb voll, so wie ihn die Nacht zurückgelassen hat — niemand hat ihn heute Morgen geleert und neu gefüllt, wie es sonst die erste Pflicht des Tages ist. Das Wasser darin hat die falsche Farbe: ein trübes Graubraun, das eher an aufgewühlten Teichgrund erinnert als an das, was aus der Tiefe kommen sollte.",
+      "Vor der Apotheke hustet ein Kind, trocken und hart. Die Mutter hält es fester, als das Husten allein verlangt. Am Brunnenrand rührt Ratsherr Dennek mit einem Stock im Eimer, im Kreis, immer wieder, als ließe sich die Frage glattstreichen. Er sieht dabei niemanden an."
     ],
     "choices": [
       "Weiter"
@@ -157,9 +154,9 @@
     "title": "Der Fremde am Weg",
     "art": "stranger",
     "lines": [
-      "Du packst den mageren Mann am nassen Mantel. Der Stoff ist schwer von Feuchtigkeit, kalt und steif, riecht nach nassem Haar und altem Schweiß. Deine Finger graben sich in den Kragen, spüren die knochige Schulter darunter. Du ziehst ihn heran und entreißt ihm das Artefakt. Der Riemen spannt sich, dann reißt der Stoff mit einem trockenen Laut, kurz und hässlich, wie knochentrockenes Leder, das nachgibt.",
-      "Er stolpert zurück. Die nassen Falten des Mantels schlagen gegen seine dünnen Beine. Seine Hände greifen nach dem leeren Riemen an der Hüfte, tasten über die abgerissene Stelle, finden nur nasse Kante und nichts. Das Gewicht fehlt. Der Nebel nimmt ihn auf, erst die Schultern, dann den Rest, bis nur noch der Geruch von nassem Tuch und dem metallischen Hauch des entwendeten Stücks in der Luft hängt.",
-      "Das Silber liegt schwer in deiner Hand. Es ist kalt, zieht die Wärme aus der Haut, die Kanten drücken sich in die Fingerkuppen. In Lindendorf wird jemand wissen, woher es stammt."
+      "Du packst den mageren Mann am nassen Mantel und entreißt ihm das Artefakt. Der Riemen spannt sich, dann reißt der Stoff mit einem trockenen, hässlichen Laut.",
+      "Er stolpert zurück, die Hände tasten über die abgerissene Stelle am Riemen und finden nur nasse Kante. Der Nebel nimmt ihn auf, bis nur noch der Geruch von nassem Tuch und Metall in der Luft hängt.",
+      "Das Silber liegt schwer und kalt in deiner Hand. In Lindendorf wird jemand wissen, woher es stammt."
     ],
     "choices": [
       "Weiter"
@@ -270,11 +267,9 @@
     "art": "chapel",
     "portrait": null,
     "lines": [
-      "Fenn hat seinen Platz so gewählt, dass die Kirchentür ihn nicht trifft, wenn sie aufschlägt — eine Berechnung, die nur ein Mensch anstellt, der diesen Platz nicht zum ersten Mal einnimmt. Die Dämmerung liegt schwer auf dem nassen Dach der Steinkapelle. Es riecht nach nassem Stein und fauligem Moos, kalt, erdig, mit dem metallischen Beigeschmack von altem Eisen im Mörtel. Wasser sickert über die Kante und tropft neben seinem Ohr auf den Boden, regelmäßig wie ein schwacher Puls.",
-      "Der Stein unter ihm ist abgewetzt zu einer sanften Mulde, genau von der Form, die ein Körper über viele Winter hinterlässt. Sein Gewicht sinkt hinein. Die Kälte greift durch den Mantel bis in die Hüfte, und die Mulde nimmt ihn auf, als hätte sie auf genau dieses Maß gewartet. Die Kirchmauer in seinem Rücken ist rau, fleckig von dunklen Flechten. Wer hier sitzt, sitzt nicht zum ersten Mal und nicht zum zehnten.",
-      "In der Tasche des geflickten Mantels hält er ein morsches Stück Lattenzaun. Zehn Winter haben das Holz glattgeschliffen. Die Nagellöcher sind Dellen. Die Hand bleibt in Bewegung, als zähle sie etwas, das niemand mehr zählen will. Er ist Fenn, der Bettler an der Kirchmauer, nicht der Mann am Brunnen.",
-      "„Weißt du, warum dort niemand mehr geht?“ Er stellt die Frage, ohne eine Antwort zu erwarten, als wäre die Frage selbst schon die halbe Last. Er wartet, ob du zuhörst oder drängst. Das Jahr, das die Gasse trägt, gibt er nicht her, solange du die Antwort schon im Mund hast.",
-      "Fenn hat die Mulde im Stein gewählt, nicht du. „Weißt du, warum dort niemand mehr geht?“ Er stellt die Frage. Als Kind hat er gesehen, wie man Leute aus der Gasse holte. Das sagt er nur, wenn du zuhörst."
+      "Fenn hat seinen Platz so gewählt, dass die Kirchentür ihn nicht trifft, wenn sie aufschlägt. Die Dämmerung liegt schwer auf dem nassen Kapellendach, es riecht nach Stein und faulem Moos. Der Stein unter ihm ist zu einer flachen Mulde abgewetzt — von der Form, die ein Körper über viele Winter hinterlässt.",
+      "In der Tasche seines geflickten Mantels hält er ein morsches Stück Lattenzaun, von zehn Wintern glattgeschliffen. Die Hand bleibt in Bewegung, als zähle sie etwas, das niemand mehr zählen will.",
+      "„Weißt du, warum dort niemand mehr geht?“ Er stellt die Frage, ohne eine Antwort zu erwarten. Das Jahr, das die Gasse trägt, gibt er nur her, wenn du zuhörst statt zu drängen."
     ],
     "choices": [
       "Weiter"
@@ -774,11 +769,8 @@
     "title": "Lindendorf",
     "art": "village",
     "lines": [
-      "Einen Moment lang schon stehst du nun mitten im Dorf.",
-      "Der Boden unter den Sohlen ist aufgeweicht, Matsch, der an den Rändern der Schuhe klebt und schwer zieht. Nichts geschieht. Die Luft riecht nach nassem Holz und altem Rauch, nach stehendem Wasser und dem metallischen Hauch von Regen auf Stein. Es regnet. Fein, unablässig, kalt; Tropfen laufen dir am Nacken hinunter, sammeln sich im Kragen, drücken das Tuch schwer gegen die Haut.",
-      "Vor dir steht das Rathaus, Fachwerk dunkel vom Nassen, Balken gequollen, die Fächer dazwischen stumpf und fleckig. Daneben die Taverne, Tür geschlossen, aus den Fugen zieht ein dumpfer Geruch von abgestandenem Bier und feuchtem Stroh. Der Brunnen in der Mitte trägt einen Ring aus Moos und Schlamm; das Wasser darin ist trübe, die Kette klirrt leise, wenn der Wind sie bewegt. Weiter links die Mühle, das Rad hängt schwer im nassen Gang, speichert das Geräusch von tropfendem Holz und knirschendem Zapfen. Dahinter der Weg zum Hang, aufgeweicht, glänzend, ohne Spur von Eile.",
-      "Der Regen hämmert auf Dachfirste, rinnt über Schwellen, sammelt sich in Pfützen, die den Himmel grau zurückwerfen. Deine Kleider saugen sich voll. Das Gewicht sitzt auf den Schultern, in den Gelenken, im Atem. Nichts geschieht.",
-      "Was tust du?",
+      "Du stehst mitten im Dorf. Der Boden ist aufgeweicht, Matsch klebt schwer an den Schuhen. Es regnet fein und unablässig; das Wasser läuft dir im Nacken hinunter und sammelt sich im Kragen.",
+      "Vor dir steht das Rathaus, Fachwerk dunkel vom Nassen. Daneben die Taverne, Tür geschlossen, ein dumpfer Geruch von abgestandenem Bier zieht durch die Fugen. Der Brunnen in der Mitte trägt einen Ring aus Moos, das Wasser darin ist trüb. Weiter die Mühle, das Rad hängt schwer im nassen Gang. Dahinter der Weg zum Hang.",
       "Häuser drücken sich aneinander. Frauen am Brunnen sehen dir nach, nicht neugierig, sondern prüfend. Über dem Rathaus klebt dasselbe rote Wachs wie am Hang."
     ],
     "choices": [
@@ -851,9 +843,9 @@
     "art": "mill",
     "portrait": "miller",
     "lines": [
-      "Das große Wasserrad schlägt schwer gegen das Wasser und mahlt nichts. Jeder Schlag drückt nasse Kälte in die Balken, das Holz stinkt nach Schlamm und altem Fett, und das Gewicht des stillen Rades lastet auf dem gesamten Bau, als wolle es ihn in den Fluss drücken. Der monotonen Geräuschkulisse des Wassers, das unermüdlich gegen die Mühlsteine plätschert, steht die Stille des stillstehenden Mahlwerks gegenüber; tropfendes Nass sammelt sich in den Rillen, riecht stechend nach nassem Stein und verrottetem Mehlstaub. Es ist, als würde die Mühle selbst in eine Art tiefen Schlaf gefallen sein, unfähig, ihre Bestimmung zu erfüllen, die Steine kalt und stumpf unter einer Haut aus Feuchtigkeit.",
-      "Bertok bleibt am Mahlwerk, sein Blick konzentriert auf die beweglichen Teile gerichtet, während seine Hände die abgenutzten Oberflächen abtasten. Die Finger gleiten über kaltes Eisen, spüren jede Scharte, jedes abgewetzte Gewicht, den groben Staub, der an der Haut klebt und bitter schmeckt, wenn er ihn unwillkürlich berührt. Aus der Kornkammer dringt das leise Klicken von gezählten Säcken, ein Geräusch, das in dieser trostlosen Umgebung wie ein Echo aus besseren Zeiten wirkt; die Säcke liegen schwer, der Stoff rau und feucht, der Geruch von altem Korn mischt sich mit dem kalten Zug, der vom Rad heraufzieht.",
-      "Hinter dem Haus fällt der Boden zum Fluss ab, und die sanfte Neigung führt hinunter zu dem glitzernden Wasser, das in der Sonne funkelt. Der Abhang ist glitschig von Nässe, Erde und fauligem Gras, die Kälte steigt vom Wasser herauf und legt sich auf die Haut wie nasses Tuch. Fenn hat vom Kesseljahr erzählt, einem Jahr, das für viele in der Gegend eine besondere Bedeutung hatte, als die Felder reichlich Ertrag brachten und das Land aufgeteilt wurde, um den Bedürfnissen der Dorfbewohner gerecht zu werden. Die Mühle steht auf diesem Land, das damals in mühsamer Arbeit gewonnen wurde, und Bertok mahlt, als gehörte der Grund ihm. Er fühlt sich verbunden mit der Erde, als wäre sie ein Teil seiner selbst, auch wenn die Realität ihm oft das Gegenteil vor Augen führt; das Gewicht der stehenden Steine, der kalte Geruch von Schlamm und Stein, das nutzlose Schlagen des Rades halten ihn fest an diesem einen Fleck.",
+      "Das Wasserrad schlägt schwer gegen das Wasser und mahlt nichts. Kein Mehlstaub steht in der Luft, nur der Geruch von nassem Stein und altem Fett. Die Steine liegen kalt und stumm unter einer Haut aus Feuchtigkeit.",
+      "Bertok bleibt am Mahlwerk. Seine Hände sind mehlweiß, obwohl seit Tagen kein Korn mehr durch die Mühle gelaufen ist. Aus der Kornkammer dringt das leise Klicken gezählter Säcke — ein Geräusch wie ein Echo aus besseren Zeiten.",
+      "Hinter dem Haus fällt der Boden zum Fluss ab. Fenn hat vom Kesseljahr erzählt, als das Land unter den Höfen aufgeteilt wurde. Die Mühle steht auf diesem Grund, und Bertok mahlt, als gehörte er ihm — auch wenn das stille Rad ihn Lügen straft.",
       "Das Rad schlägt gegen das Wasser und mahlt nichts. Bertoks Hände sind mehlweiß, obwohl seit Tagen kein Stein gearbeitet hat. Die Stille ist die Decke. Was darunter liegt, sagt er nicht beim ersten Satz."
     ],
     "choices": [
@@ -865,8 +857,9 @@
     "art": "townhall",
     "portrait": "holm",
     "lines": [
-      "Du stehst im holzvertäfelten Kontor und spürst, wie die Kälte vom Boden durch die Sohlen kriecht. Kerzen flackern über den Papieren, Ruß hängt in der Luft und legt sich bitter auf die Zunge. Holm sitzt dir gegenüber, die Hände flach auf dem Tisch, als wöge er etwas Unsichtbares ab. Du kannst den Auftrag einfach annehmen — oder ihn dir verdienen. Hinter Holm tickt eine Uhr, obwohl du keine siehst. Jeder Schlag klingt wie ein weiterer Sack Mehl, der im Steinbruch verschwindet. Das Holz der Vertäfelung riecht nach altem Wachs und feuchtem Staub. Die Papiere rascheln leise, wenn ein Luftzug die Flammen zerrt. Holms Blick bleibt schwer auf dir liegen, ohne Eile, ohne Wärme. Du spürst das Gewicht der Entscheidung in den Schultern, kalt und greifbar wie nasse Wolle. Die Kerzen tropfen, Wachs erstarrt am Rand der Leuchter. Wieder der Schlag. Wieder der Sack, der fällt und vergeht. Du atmest den Geruch von Tinte und kaltem Holz und wartest.",
-      "Holm sitzt dir gegenüber. Die Hände flach auf dem Tisch. „Banditen im Steinbruch“, sagt er. „Das Dorf soll schlafen können, ohne an die Glocke zu denken.“ Wasser, Mehl und die leere Gasse nennt er nicht."
+      "Du stehst im holzvertäfelten Kontor. Kälte kriecht vom Boden durch die Sohlen. Kerzen flackern über den Papieren, Ruß hängt bitter in der Luft. Holm sitzt dir gegenüber, die Hände flach auf dem Tisch, als wöge er etwas Unsichtbares ab.",
+      "Hinter ihm tickt eine Uhr, obwohl du keine siehst. Jeder Schlag klingt wie ein weiterer Sack Mehl, der im Steinbruch verschwindet.",
+      "„Banditen im Steinbruch“, sagt Holm. „Das Dorf soll schlafen können, ohne an die Glocke zu denken.“ Wasser, Mehl und die leere Gasse nennt er nicht. Du kannst den Auftrag einfach annehmen — oder ihn dir verdienen."
     ],
     "choices": [
       "Weiter"
@@ -876,10 +869,8 @@
     "title": "Ratsherr Dennek",
     "art": "well",
     "lines": [
-      "Dennek rührt weiter im Eimer, mechanisch, ohne Überzeugung, und das Wasser wird dadurch um keinen Deut klarer, was ihm selbst nicht zu entgehen scheint, auch wenn er die Bewegung nicht einstellt. „Trockenes Jahr“, sagt er, mit der glatten Sicherheit eines Mannes, der diesen Satz schon oft geübt hat. „Der Brunnen gibt, was er kann. Mehr zu verlangen wäre schon Klage, und wofür sollte man klagen, wenn die Erde selbst knapp ist?“",
-      "Der Stock kreist immer an derselben Stelle vorbei. Die Fuge rechts am Rand bleibt unberührt. Das Wasser, das er aufwühlt, fällt in sich zurück und bleibt grau.",
-      "An seinen Stiefeln klebt hellerer Lehm als auf dem Platz. Der Weg zum Wald ist kürzer, als sein Satz vom trockenen Jahr behauptet.",
-      "„Trockenes Jahr“, sagt Dennek. „Der Brunnen gibt, was er kann.“ Er rührt weiter, ohne Überzeugung. Seinen Stock führt er an einer Fuge vorbei. Den Namen dahinter sagt er nicht von allein."
+      "Dennek rührt weiter im Eimer, mechanisch, ohne Überzeugung — das Wasser wird dadurch um keinen Deut klarer. „Trockenes Jahr“, sagt er, mit der glatten Sicherheit eines Mannes, der diesen Satz schon oft geübt hat. „Der Brunnen gibt, was er kann. Mehr zu verlangen wäre schon Klage.“",
+      "Der Stock kreist immer an derselben Stelle vorbei, die Fuge rechts am Rand bleibt unberührt. An seinen Stiefeln klebt hellerer Lehm als auf dem Platz — der Weg zum Wald ist kürzer, als sein Satz vom trockenen Jahr behauptet."
     ],
     "choices": [
       "Nach dem trockenen Jahr fragen (Charisma, schwer)",
@@ -1015,8 +1006,8 @@
     "title": "Uferpfad",
     "art": "ditch",
     "lines": [
-      "Ohne klare Spur dauert der Weg länger. Du spürst es in den Waden, wie der bemooste Waldweg dich festhält, jede Sohle schwer vom nassen Lehm, der klebt und zerrt und den Geruch von fauler Erde und kaltem Wasser hochdrückt. Dornen greifen nach dem Stoff an deinen Beinen, reißen feine Linien in die Haut, lassen Wärme sickern, die sofort wieder erkaltet. Der Uferpfad knickt. Derselbe Knick. Nasser Lehm schmiert unter dem Gewicht deines Schritts, rutscht, hält. Du gehst weiter und triffst ihn wieder: denselben Knick im Ufer, denselben fauligen Hauch vom Wasser, dasselbe kalte Gewicht in den Knochen.",
-      "Schließlich der morsche Steg. Holz, das nachgibt unter dem Blick schon, weich vom ständigen Nässe, grünschillernd, schwer von Moos und dem Geruch nasser Fäulnis. Dahinter das Haus. Es will leer wirken. Läden hängen schief, Fenster starren dunkel, die Luft davor steht still und kalt. Es schafft es nicht. Irgendetwas lastet darin, ein dumpfes Gewicht hinter den Wänden, ein Geruch von bewohntem Dunkel, der durch die Ritzen drückt und dir sagt, dass Leerheit hier nur eine dünne Haut ist.",
+      "Ohne klare Spur dauert der Weg länger. Nasser Lehm klebt an den Sohlen und zieht schwer an jedem Schritt, der Uferpfad knickt immer an derselben Stelle. Dornen greifen nach dem Stoff an deinen Beinen.",
+      "Schließlich der morsche Steg, das Holz weich von ständiger Nässe. Dahinter das Haus: Läden hängen schief, Fenster starren dunkel. Es will leer wirken und schafft es nicht — irgendetwas lastet darin.",
       "Der Pfad fällt zum Fluss. Halb verhängte Fenster. Dort wiegt jemand Getreide, das hier nicht gemahlen wird."
     ],
     "choices": [

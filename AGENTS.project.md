@@ -21,7 +21,9 @@ Repo: nur `PromptBrainless/lindendorf-rpg-alpha-V.1.1`. Remote `origin`. Keine S
 | Namen, Flags, Labels, solange die Szene nicht umgebaut ist | `docs/QUESTREGISTER.md`, bei Zweifel der Code |
 | Klassen, Karrieren, Status, Schicksal | `wiki/` und `docs/KARRIERE-PLANUNG.md`. Noch keine fertige Mechanik. Nicht als Rassen bauen. |
 
-Wenn eine Szene dem Wiki widerspricht, ist das Wiki das Ziel und der Code der Ist-Stand. Nicht beides gleichzeitig in einen Satz schreiben. Eine Szene wird erst umgestellt, wenn der Auftrag diese Szene nennt.
+Wenn eine Szene dem Wiki widerspricht, ist das Wiki das Ziel und der Code der Ist-Stand. Nicht beides gleichzeitig in einen Satz schreiben.
+
+**Laufendes Spielleiter-Mandat (seit 24. September 2026):** Der Projekteigner hat die Sperre "eine Szene wird nur nach ausdrücklich benanntem Auftrag umgestellt" aufgehoben. Als Spielleiter darf ich Szenen fortlaufend ausbauen und vertiefen, um die im Wiki bereits ausgearbeitete Tiefe in den tatsächlichen Spieltext zu holen und die Erzählweise auszuweiten (mehr Absätze, mehr Figurentiefe, mehr sinnliche Details). Unverändert bleiben dabei: das Weltgeheimnis, alle Namen/Flags aus `docs/QUESTREGISTER.md`, die Reihenfolge Symptome → Besitzer → Rechnung, der Spielausgang und die Wahlmöglichkeiten. Es wird erweitert und vertieft, nicht umgeschrieben oder widerlegt.
 
 ## Was das Wiki festlegt
 

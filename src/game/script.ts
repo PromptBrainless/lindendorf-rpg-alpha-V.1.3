@@ -359,6 +359,7 @@ async function dorfBuergermeister(rt: Runtime, held: Held) {
     lines: [
       "Bürgermeister Holm hat Augen wie nasse Kiesel.",
       "Auf dem Tisch: eine leere Kasse, ein Siegel, ein Brief mit gebrochenem Wachs.",
+      "Der Tisch zwischen euch ist zu aufgeräumt für einen Mann mit leerer Kasse. Jedes Blatt liegt im rechten Winkel zur Kante, als könne Ordnung ersetzen, was fehlt. Holm richtet ein verrutschtes Papier gerade, noch während er spricht — eine Bewegung, die er selbst nicht zu bemerken scheint.",
       "„Banditen kommen nachts. Drei Mal schon. Getreide, zwei Ziegen, das Silbergerät der Kirche.“",
       "„Seit zwei Wochen kommt kein Mehl. Bertok schließt die Mühle, bevor jemand fragen kann. Er sagt, das Wasser stehe zu niedrig. Ich glaube ihm das nicht.“",
       ...echoHolmVersorgung(held),

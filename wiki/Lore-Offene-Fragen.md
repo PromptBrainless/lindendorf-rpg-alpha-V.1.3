@@ -4,19 +4,13 @@ Diese Lücken gehören zum Wissensstand der Welt. Sie werden hier nicht geschlos
 
 ## Ungeklärt in den Quellen
 
-1. Zweck der Grube unter der Kapelle. Ob dort etwas gebunden wurde, bleibt offen.
-2. Identität des Auftraggebers hinter Kess und dem Lager. Nur: jemand aus dem Dorf. Kess sagt, die Vorgänge hätten vor seinem Auftrag begonnen.
-3. Bedeutung des Siegels: offenes Auge über drei Linien. Nordpass und Fremder tragen dasselbe Zeichen. Verhältnis zu Vahls Siegelring unbestätigt.
-4. Name und Herkunft des Fremden am Weg.
-5. Umstände von Ilse Brandtners Tod. Fundort: Mühlbach, niedriger Wasserstand. Mehr steht nicht da.
-6. Ursache dafür, dass seit dem Kesseljahr offiziell weniger Menschen sterben und zugleich mehr verschwinden.
-7. Widerspruch der Zeitanker: Kesseljahr vor etwa dreißig Jahren, Gasse in Spieltexten seit zehn Jahren unbetreten.
+Am Anfang aller offenen Fragen steht die Grube unter der Kapelle: Ob dort je etwas gebunden wurde, sagt keine Quelle, und ihr eigentlicher Zweck bleibt ungeklärt. Ebenso ungeklärt ist, wer hinter Kess und seinem Lager steht — gesichert ist nur, dass es jemand aus dem Dorf ist, und Kess selbst sagt, die Vorgänge hätten schon vor seinem Auftrag begonnen. Das Siegel, ein offenes Auge über drei Linien, verbindet den Nordpass mit dem namenlosen Fremden, ohne dass sein Verhältnis zu Vahls Siegelring je bestätigt wurde — und über den Fremden selbst, seinen Namen und seine Herkunft, schweigen die Quellen ganz.
+
+Auch Ilse Brandtners Tod ist nur in Umrissen belegt: gefunden im Mühlbach, bei niedrigem Wasserstand, mehr sagen die Aufzeichnungen nicht. Warum seit dem Kesseljahr offiziell weniger Menschen sterben und zugleich mehr verschwinden, nennt keine Quelle als Ursache. Und ein Widerspruch bleibt bestehen, ohne aufgelöst zu werden: Das Kesseljahr liegt rund dreißig Jahre zurück, während Spieltexte die Gasse erst seit zehn Jahren unbetreten nennen.
 
 ## Bewusst nicht festlegen
 
-Kein neuer Name für den Auftraggeber.  
-Keine geschlossene Theologie für Grube oder Siegel.  
-Keine eigene „achte Quest Kirche“. Kirche und Gewölbe liegen in [Das Kesseljahr](Lore-Quest-Chronologie.md).
+Für den Auftraggeber hinter dem Lager wird kein neuer Name erfunden. Für Grube oder Siegel entsteht keine geschlossene Theologie. Und Kirche mit Gewölbe bekommen keine eigene „achte Quest“ — beides gehört zu [Das Kesseljahr](Lore-Quest-Chronologie.md).
 
 ## Wo das bestehende Wiki weitergeht
 

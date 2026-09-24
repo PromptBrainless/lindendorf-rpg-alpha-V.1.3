@@ -14,12 +14,4 @@ Das rote Wachs ist ausdrücklich kein Glaubenszeichen. Die Glocke läutet nicht 
 
 ## Erinnerung als Macht
 
-Wiederkehrendes Motiv ist nicht Magie, sondern Erinnerung.
-
-- Menschen verschwinden aus den Aufzeichnungen.
-- Eine Gasse verschwindet aus dem Ortsbild.
-- Namen bleiben auf einer geheimen Liste.
-- Die Kirche speichert, was offiziell nicht existieren darf.
-- Mehrere [Enden](Enden.md) drehen sich darum, ob Namen veröffentlicht, verborgen oder vernichtet werden.
-
-Kontrolle über Erinnerung ist die wichtigste Form von Macht im Tal.
+Das wiederkehrende Motiv dieser Welt ist nicht Magie, sondern Erinnerung, und ihr Verlust ist die eigentliche Gewalt: Menschen verschwinden aus den Aufzeichnungen, eine ganze Gasse verschwindet aus dem Ortsbild, und nur eine geheime Liste hält fest, wessen Namen das Dorf sonst vergessen hätte. Die Kirche bewahrt, was offiziell nicht existieren darf, und genau darum drehen sich am Ende mehrere mögliche Zustände des Dorfes: ob Namen veröffentlicht, verborgen oder vernichtet werden (siehe [Enden](Enden.md)). Kontrolle über Erinnerung ist im Tal die wichtigste Form von Macht — wichtiger als Amt, Land oder Wasser.

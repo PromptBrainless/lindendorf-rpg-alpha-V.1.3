@@ -10,7 +10,9 @@ Die 71 Spielseiten bleiben die Erzählquelle. Widersprüche zwischen Lore-Sammlu
 
 Der Lore-Index ist der Eingang in die Spielwelt von Lindendorf. Er ordnet nicht nur Namen und Orte. Er hält fest, welche Wahrheit an welcher Stelle der Geschichte sichtbar werden darf. Eine Welt, in der alle Geheimnisse von Beginn an ausgesprochen werden, lässt dem Spieler nichts mehr zu entdecken. In Lindendorf liegt die Wahrheit deshalb nicht als fertige Erklärung über dem Tal. Sie liegt in Rechnungen, Gerüchen, Lücken, Namen und Dingen, die jemand zu lange nicht ansehen will.
 
-Dieses Register beschreibt den Zielkanon der Welt. Der Spielcode beschreibt dagegen, was die Partie heute tatsächlich zeigt. Beides gehört zusammen, darf aber nicht verwechselt werden. Wenn eine Szene im Code noch weniger erzählt als der Kanon, gilt das nicht als Fehler des Wikis. Es bedeutet, dass diese Wahrheit für eine spätere Überarbeitung vorbereitet ist. Eine Szene wird erst umgeschrieben, wenn der betreffende Auftrag sie ausdrücklich nennt.
+Dieses Register beschreibt den Zielkanon der Welt. Der Spielcode beschreibt dagegen, was die Partie heute tatsächlich zeigt. Beides gehört zusammen, darf aber nicht verwechselt werden. Wenn eine Szene im Code noch weniger erzählt als der Kanon, gilt das nicht als Fehler des Wikis. Es bedeutet, dass diese Wahrheit noch nicht in den Spieltext geholt wurde.
+
+**Laufendes Spielleiter-Mandat (seit 24. September 2026):** Szenen werden nicht mehr nur nach ausdrücklich benanntem Auftrag überarbeitet, sondern fortlaufend ausgebaut, damit der hier festgehaltene Kanon tatsächlich im Spieltext ankommt und die Erzählweise ausführlicher wird. Weltgeheimnis, Namen, Flags, Reihenfolge des Erkennens und Spielausgänge bleiben dabei unangetastet — es wird vertieft, nicht widerlegt oder umgeplottet.
 
 ## Der Kern der Welt
 

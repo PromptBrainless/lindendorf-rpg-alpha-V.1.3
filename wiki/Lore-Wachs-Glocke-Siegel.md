@@ -26,10 +26,6 @@ Was Auge und drei Linien bedeuten, ist nicht geklärt.
 
 ## Belegte Beziehungen
 
-| Zeichen | Belegte Funktion | Offen |
-|---|---|---|
-| Wachs | Versiegelung, Schriftgut, Markierung an Türen | volle symbolische Lesart |
-| Glocke | Signal, kein Gebet | wer das Netz steuert |
-| Siegel | Kennzeichnung eines alten oder unbekannten Zusammenhangs | Bedeutung des Auges, Verhältnis zu Vahls Ring |
+Von den drei Zeichen ist am besten belegt, was sie nicht sind: kein Gebet, kein offen lesbares Symbolsystem. Wachs ist als Material für Versiegelung und Markierung an Türen gesichert, seine volle symbolische Lesart bleibt aber Deutung des Wikis. Die Glocke ist als Signal gesichert, wer das Netz dahinter steuert, ist es nicht. Das Siegel kennzeichnet einen alten oder unbekannten Zusammenhang; was Auge und drei Linien bedeuten und wie sie zu Vahls Ring stehen, bleibt offen.
 
 Die Enden [Siegel brechen](Enden.md) und [Alles verbrennen](Enden.md) setzen diese Zeichen voraus, ohne sie zu erklären.

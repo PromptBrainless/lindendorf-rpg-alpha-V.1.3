@@ -14,23 +14,11 @@ Ilses Liste ist das Gegenstück: Sie bewahrt die Namen, die aus den Büchern sol
 
 ## Schuld als Instrument
 
-Schuld ist nicht nur moralisch, sondern wirtschaftlich.
-
-- Grovin hat den Brunnen gebaut und den Lohn nie erhalten. Dennek hält die Abhängigkeit.
-- Rennik besitzt Bertoks Schuldschein und trägt selbst eine zweite Schuld in einem Nachbarort.
-- Jorren haftet für Salz im Geröll.
-
-Schuldscheine sind Teil der Machtverhältnisse.
+Schuld ist in Lindendorf nicht nur moralisch, sondern wirtschaftlich, und sie bindet Menschen enger als jedes Amt. Grovin hat den Brunnen gebaut und den Lohn nie erhalten; Dennek hält genau diese Abhängigkeit lebendig, statt sie zu begleichen. Rennik wiederum besitzt Bertoks Schuldschein und trägt selbst eine zweite Schuld in einem Nachbarort, während Jorren für eine Ladung Salz im Geröll haftet, die nie ganz seine eigene war. Schuldscheine sind hier kein Randphänomen der Wirtschaft, sondern Teil der Machtverhältnisse selbst.
 
 ## Amt und Macht
 
-Formelles Amt und tatsächliche Macht fallen nicht zusammen.
-
-- Holm besitzt das Amt.
-- Dennek kontrolliert den Brunnen.
-- Vahl steht für das Land und dessen geplante Bebauung.
-
-Die drei Familien waren bereits im Kesseljahr gemeinsam beteiligt.
+Formelles Amt und tatsächliche Macht fallen in Lindendorf nicht zusammen. Holm besitzt das Amt, doch Dennek kontrolliert den Brunnen, und Vahl steht für das Land und dessen geplante Bebauung — drei getrennte Hebel, die erst zusammen die wirkliche Ordnung des Tals ergeben. Diese Verteilung ist nicht zufällig gewachsen: Die drei Familien waren bereits im Kesseljahr gemeinsam beteiligt, und die heutige Aufteilung der Macht trägt noch die Handschrift jener Entscheidung.
 
 ## Versorgung
 

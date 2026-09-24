@@ -6,19 +6,11 @@ Spielseiten: [Queststruktur](Queststruktur.md). Zustände danach: [Enden](Enden.
 
 ## Historische Vorgeschichte
 
-- Unter dem späteren Standort der Kapelle existiert bereits eine Grube.
-- Die Grube ist älter als die Kirche.
-- Ob dort etwas gebunden wurde, bleibt unbekannt.
-- Am Nordpass erscheint später das Zeichen eines offenen Auges über drei Linien. Datierung: „vor Jahren“.
+Unter dem späteren Standort der Kapelle liegt eine Grube, die älter ist als die Kirche darüber. Die Quellen nennen sie nicht als geweihte Kammer, und ob dort jemals etwas gebunden wurde, bleibt unbekannt. Erst später, am Nordpass, taucht ein Zeichen auf, das dieselbe stumme Herkunft zu tragen scheint: ein offenes Auge über drei Linien, datiert nur mit „vor Jahren“, ohne dass eine Quelle sagt, wer es dort hinterließ.
 
 ## Das Kesseljahr (ca. 30 Jahre vor der Handlung)
 
-- Vahl, Dennek und Holm beschließen, die Versorgung des Tals zu kontrollieren.
-- Eine Gasse verschwindet aus den Aufzeichnungen.
-- Bewohner gehen zur Mühle, in den Steinbruch, in die Lagerhäuser — oder ohne Eintrag.
-- Fenn erlebt die Räumung als Kind.
-- Ilse Brandtner beginnt die geheime Liste. Die Kirche bewahrt sie.
-- Danach: offiziell weniger Tote, mehr Verschwundene.
+Vahl, Dennek und Holm beschließen als informeller Rat, die Versorgung des Tals unter ihre Kontrolle zu bringen. Eine ganze Gasse verschwindet daraufhin aus den Aufzeichnungen; ihre Bewohner werden zur Mühle, in den Steinbruch oder in die Lagerhäuser verteilt, und wer sich wehrt, verschwindet ganz ohne Eintrag. Fenn erlebt diese Räumung noch als Kind. Ilse Brandtner beginnt in derselben Zeit ihre geheime Liste, und die Kirche nimmt sie auf, als das Einzige, was von den Namen bleiben darf. Seither sterben offiziell weniger Menschen im Tal — und zugleich verschwinden mehr.
 
 ## Quest 1 — Ankunft
 
@@ -84,4 +76,4 @@ Seite 71. Siehe [Enden](Enden.md).
 
 ## Nach der Questreihe
 
-Namen können veröffentlicht, verborgen oder vernichtet werden. Die Ordnung kann stehen bleiben oder brechen. Grube, Auftraggeber, Siegel und Fremder bleiben offen.
+Am Ende steht kein Urteil, sondern ein Zustand: Namen können veröffentlicht, verborgen oder vernichtet werden, und die Ordnung des Dorfes kann stehen bleiben oder brechen. Grube, Auftraggeber, Siegel und der namenlose Fremde bleiben, was sie von Anfang an waren — offen.
