@@ -58,6 +58,8 @@ export function WeltWissen({ aktuell }: { aktuell?: string }) {
       title: entwurf.title.trim(),
       bild: entwurf.bild.trim() || wissenBildFuer(entwurf.id),
       lines,
+      szenen: entwurf.szenen?.map((id) => id.trim()).filter(Boolean),
+      wissen: entwurf.wissen?.map((id) => id.trim()).filter(Boolean),
       stimmeSrc: zuege[0]?.src,
       stimmen: zuege.length ? zuege : undefined,
     };
@@ -121,6 +123,26 @@ export function WeltWissen({ aktuell }: { aktuell?: string }) {
             onChange={(event) => setEntwurf({ ...entwurf, lines: event.target.value.split("\n") })}
           />
         </label>
+        <div className="grid gap-3 sm:grid-cols-2">
+          <label className="text-xs text-muted-fg">
+            Szenen-Labels, die diese Tafel öffnen
+            <textarea
+              className="mt-1 min-h-20 w-full rounded-sm border border-border bg-surface px-3 py-2 text-sm text-fg"
+              value={(entwurf.szenen ?? []).join("\n")}
+              onChange={(event) => setEntwurf({ ...entwurf, szenen: event.target.value.split("\n") })}
+              placeholder="z. B. intro-fremder-am-weg"
+            />
+          </label>
+          <label className="text-xs text-muted-fg">
+            Knowledge-Schlüssel, die diese Tafel öffnen
+            <textarea
+              className="mt-1 min-h-20 w-full rounded-sm border border-border bg-surface px-3 py-2 text-sm text-fg"
+              value={(entwurf.wissen ?? []).join("\n")}
+              onChange={(event) => setEntwurf({ ...entwurf, wissen: event.target.value.split("\n") })}
+              placeholder="z. B. artefakt_gesehen"
+            />
+          </label>
+        </div>
         <BildFeld bild={entwurf.bild} onBild={(bild) => setEntwurf({ ...entwurf, bild })} />
         <StimmeFeld
           src={entwurf.stimmeSrc}
@@ -173,6 +195,8 @@ function lade(id: string, aktuell?: string): WissenTafelJson {
     bild: wissenBildFuer(id || aktuell || "dorf-platz"),
     offen: false,
     lines: [""],
+    szenen: aktuell ? [aktuell] : [],
+    wissen: [],
     stimmen: [],
   };
 }

@@ -11,6 +11,8 @@ export const WissenTafelSchema = z.object({
   bild: z.string().min(1),
   offen: z.boolean().optional(),
   lines: z.array(z.string()).min(1),
+  szenen: z.array(z.string().min(1)).optional(),
+  wissen: z.array(z.string().min(1)).optional(),
   stimmeSrc: z.string().optional(),
   stimmen: z.array(z.union([z.string(), StimmeZugSchema])).optional(),
 });

@@ -1,7 +1,7 @@
 import { ART } from "./art";
 import { fundFuerSzene, szeneSicht } from "./json/baum";
 import { stimmeDatei } from "./json/stimme";
-import { wissenDatei } from "./json/wissen";
+import { wissenDatei, WISSEN_DATEIEN } from "./json/wissen";
 import { deriveKnowledge, knowledgeLabels, type KnowledgeKey } from "./knowledge";
 import { szeneBildName, szeneWissenPfad } from "./szene-bilder";
 import type { ArtKey, Held } from "./types";
@@ -14,6 +14,8 @@ export type WissenTafel = {
   bild: string;
   offen: boolean;
   lines: string[];
+  szenen?: string[];
+  wissen?: string[];
   stimmeSrc?: string;
   stimmen?: import("./stimme").StimmeRoh[];
 };
@@ -43,6 +45,8 @@ function tafelAusDatei(id: string, offen = false): WissenTafel | null {
     bild: datei.bild,
     offen: datei.offen ?? offen,
     lines: datei.lines,
+    szenen: datei.szenen,
+    wissen: datei.wissen,
     stimmeSrc: zuege[0]?.src,
     stimmen: zuege.length ? zuege : undefined,
   };
@@ -96,10 +100,25 @@ export function wissenTafeln(held: Held): WissenTafel[] {
     gesehen.add(tafel.id);
     tafeln.push(tafel);
   }
-  for (const key of deriveKnowledge(held)) {
+  for (const datei of Object.values(WISSEN_DATEIEN)) {
+    if (!datei.szenen?.some((id) => (held.karten ?? []).includes(id))) continue;
+    const tafel = tafelAusDatei(datei.id);
+    if (!tafel || gesehen.has(tafel.id)) continue;
+    gesehen.add(tafel.id);
+    tafeln.push(tafel);
+  }
+  const aktiveWissen = deriveKnowledge(held);
+  for (const key of aktiveWissen) {
     if (gesehen.has(key)) continue;
     gesehen.add(key);
     tafeln.push(wissenTafelFuer(key));
+  }
+  for (const datei of Object.values(WISSEN_DATEIEN)) {
+    if (!datei.wissen?.some((key) => aktiveWissen.has(key as KnowledgeKey))) continue;
+    const tafel = tafelAusDatei(datei.id);
+    if (!tafel || gesehen.has(tafel.id)) continue;
+    gesehen.add(tafel.id);
+    tafeln.push(tafel);
   }
   knowledgeLabels(held).offen.forEach((frage, index) => {
     const id = `offen-${index}`;
