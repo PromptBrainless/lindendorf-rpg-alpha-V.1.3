@@ -1,11 +1,25 @@
 # How to be a Hero — Lindendorf
 
-Wiki der Neuausrichtung. Stand: 23. September 2026.
+Wiki der Neuausrichtung. Stand: 24. September 2026.
 
 Lindendorf ist kein Heldenepos. Es ist ein Dorf, das seit Jahren mit Problemen lebt, die niemand gelöst hat. Fast jede Figur hat sich arrangiert. Fast jede Figur trägt Schuld. Fast jede Figur verdient an etwas, das sie nach außen verurteilt.
 
 Die zentrale Frage lautet nicht: *Wie rettet der Held Lindendorf?*  
 Sondern: *Welche Form von Schuld soll das Dorf weitertragen?*
+
+## Lore der Welt
+
+Strukturseiten aus der Lore-Sammlung. Keine Seitentexte.
+
+- [Lore-Index](Lore-Index.md)
+- [Weltchronik](Lore-Weltchronik.md)
+- [Quest-Chronologie](Lore-Quest-Chronologie.md)
+- [Die drei Familien](Lore-Drei-Familien.md)
+- [Recht, Schuld und Versorgung](Lore-Recht-und-Versorgung.md)
+- [Kirche und Gedächtnis](Lore-Kirche-und-Gedaechtnis.md)
+- [Wachs, Glocke und Siegel](Lore-Wachs-Glocke-Siegel.md)
+- [Soziale Ordnung](Lore-Soziale-Ordnung.md)
+- [Offene Fragen](Lore-Offene-Fragen.md)
 
 ## Seiten
 
