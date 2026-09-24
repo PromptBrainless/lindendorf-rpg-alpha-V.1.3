@@ -158,7 +158,7 @@ export async function gasseGewoelbe(rt: Runtime, held: Held) {
       probe: suche,
       lines: [
         "Der lockere Stein gibt nach. Dahinter liegt Wachstuch, trocken gegen die Feuchte, festgewickelt.",
-        "Ilse Brandtners Hand: Namen, Daten, drei Ratsherren, die Aufteilung des Landes. Die Schrift ist klein und gleichmäßig, als hätte das Papier nicht reichen sollen.",
+        "Ilse Brandtners Schrift: Namen, Daten, drei Ratsherren, die Aufteilung des Landes. Die Schrift ist klein und gleichmäßig, als hätte das Papier nicht reichen sollen.",
       ],
     });
     await rt.present({

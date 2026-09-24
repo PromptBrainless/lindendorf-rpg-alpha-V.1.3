@@ -127,7 +127,7 @@ export const LAGER_WEGE = LagerWegeSchema.parse({
       "Kess sieht deine Augen länger an als dein Schwert.",
       "„Packen. Bevor ich es mir anders überlege.“",
       "Sie lassen die Kirchenkiste. Mehr Großmut steckt nicht in diesem Steinbruch.",
-      "Kess nimmt den stumpfen Würfel vom Boden und schiebt ihn mit dem Stiefel ins Feuer. „Das Dorf hat euch geschickt“, sagt er. „Aber das, was hier passiert, hat längst angefangen.“",
+      "Kess hebt den stumpfen Würfel vom Boden und schiebt ihn mit dem Stiefel ins Feuer. Er spricht: „Das Dorf hat euch geschickt.“ Doch das, was hier geschieht, begann längst.",
       "Die Männer lösen ihre Hände von den Waffen. Nicht aus Vertrauen. Aus Müdigkeit und weil du ihnen einen Moment gegeben hast, in dem niemand zuerst schlagen musste.",
     ],
     drohenFail: ["Lachen. Kurzes Lachen. Dann Stahl."],
@@ -145,7 +145,7 @@ export const LAGER_WEGE = LagerWegeSchema.parse({
     luegeErfolg: [
       "Kess glaubt nicht an Helden. Er glaubt an Galgen.",
       "In zehn Atemzügen ist das Lager halb leer. Die Kiste bleibt, weil sie schwer ist.",
-      "Er hebt die Hand, und die Männer sehen zuerst zu ihm, dann zum Grat. Einer flucht. Einer rennt. Kess bleibt stehen, bis du weit genug weg bist, um nicht mehr zurückzuschlagen.",
+      "Er hebt die Hand, und die Männer blicken zuerst zu ihm, dann zum Grat. Einer flucht. Einer rennt. Kess bleibt stehen, bis du weit genug entfernt bist, um nicht mehr zurückzuschlagen.",
       "Du weißt nicht, ob er dir geglaubt hat. Du weißt nur, dass er die Angst besser kennt als du.",
     ],
     luegeFail: "„Die Wache. Natürlich. Und ich bin der Bischof.“",
@@ -154,7 +154,7 @@ export const LAGER_WEGE = LagerWegeSchema.parse({
     title: "Steinbruch",
     auf: [
       "Kein Duell. Ein Gedränge aus Stahl, Feuerlicht und schlechtem Boden.",
-      "Der erste Schlag trifft nicht dort, wo du ihn erwartest. Jemand rutscht im Schlamm aus, ein Zelt kippt, und plötzlich kämpfen alle in einem Raum, der für keinen von euch groß genug ist.",
+      "Der erste Schlag trifft nicht dort, wo du ihn erwartest. Jemand rutscht im Schlamm aus. Ein Zelt kippt. Plötzlich kämpfen alle in einem Raum, der für keinen von euch groß genug ist.",
       "Kess trägt kein Wappen. Er trägt eine Narbe, einen stumpfen Säbel und die Gewissheit, dass derjenige gewinnt, der nach dem Lärm noch zählen kann.",
       "Hinter dir steht die Kirchenkiste. Vor dir stehen Männer, die wissen, dass sie ohne sie nichts mehr haben, was ein Dorf zurückkaufen würde.",
     ],

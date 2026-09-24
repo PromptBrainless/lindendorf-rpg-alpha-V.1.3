@@ -1,0 +1,93 @@
+{
+  "intro-weg": {
+    "lines": [
+      "Der Weg ins Tal ist alt, älter als die Furchen, die ihn noch halten, und so schmal, dass sich zwei Wagen nur begegnen, wenn einer weicht — meistens der Schwächere.",
+      "Du gehst allein.",
+      "Der Regen hat in der Nacht aufgehört, doch er hängt noch in der Luft wie ein Versprechen, das niemand eingelöst hat. Er sammelt sich in den Fugen des Steins, sucht sich einen Weg unter deine Sohlen, bis die Kälte in den Nähten deiner Stiefel wohnt und dort bleibt, gleichgültig gegen jeden Schritt, der folgt.",
+      "Auf der Karte war Lindendorf kaum mehr als ein Tintenfleck am Rand des Tals, ein Name, zwischen Hügel und Wald gequetscht, als hätte selbst der Kartenschreiber gehofft, niemand müsse jemals dorthin.",
+      "In der Dämmerung wirkt es größer. Oder näher. Als hätte die Dunkelheit hier ein zweites Dorf über das erste gelegt, eines, das man auf keiner Karte einträgt.",
+      "Unter deinen Sohlen lockern sich die Steine. Schwarzes Gras wächst aus den Fugen, niedergetreten von Rädern und Hufen, deren Spuren älter wirken, als die Jahreszeit erlaubt.",
+      "Seit Tagen, glaubst du, hat niemand diesen Weg benutzt. Kein Händler. Kein Bauer. Nicht einmal ein Bettler — und Bettler gehen für gewöhnlich überallhin, wo andere sich fürchten zu gehen.",
+      "Nur der Wind bewegt sich mit dir. Er streicht über die Hänge, trägt den Geruch von nassem Holz — und darunter etwas Süßliches, das du kennst, ohne es benennen zu wollen.",
+      "Du bleibst nicht stehen. Umkehren ist keine Richtung. Es ist nur die Entscheidung, dieselbe Strecke ein zweites Mal zu gehen, mit demselben Regen in denselben Nähten.",
+      "Also setzt du einen Fuß vor den anderen. Manchmal besteht der einzige Unterschied zwischen Mut und Gewohnheit darin, dass niemand mehr weiß, warum er überhaupt weiterläuft."
+    ]
+  },
+  "intro-fremder-am-weg": {
+    "lines": [
+      "Etwa fünfzig Schritt voraus tritt eine Gestalt aus dem Regen. Ein Mann, mager genug, dass der Wind an seinem Mantel zerren kann, als gehöre der Stoff eher dem Wetter als ihm.",
+      "Sein Gang ist ungleichmäßig — nicht das Hinken eines Verletzten, eher das Stolpern eines Menschen, der zu lange wach geblieben ist oder zu viel verloren hat, um noch auf seine eigenen Füße zu vertrauen.",
+      "Nasses Haar klebt an seiner Stirn. Der linke Ärmel ist dunkel verfärbt, das Blut darauf längst getrocknet und schwarz geworden wie altes Harz.",
+      "Als er kurz ins Straucheln gerät, schlägt der Mantel auseinander, und etwas Silbernes blitzt darunter hervor — klein, handtellergroß, doch selbst auf diese Entfernung erkennst du das Zeichen: ein offenes Auge über drei eingeritzten Linien.",
+      "Kirchensilber. Kein Schmuck. Ein Rest von etwas, das Ordnung versprochen hat und jetzt an einem Mann hängt, dem es nicht gehört.",
+      "Du hast das Symbol schon einmal gesehen, am Nordpass, vor Jahren, in einen Grenzstein geschlagen und halb unter Eis verborgen. Händler spuckten damals darüber und bekreuzigten sich, ohne zu erklären, warum.",
+      "Heute gibt es keinen Schnee. Nur Regen, Schlamm, und einen Fremden, der etwas bei sich trägt, das ihm kaum gehören dürfte.",
+      "Der Mann hat dich noch nicht bemerkt. Hinter ihm verschluckt der Nebel den Weg, vor ihm liegt Lindendorf, und zwischen euch stehen nur wenige Schritte, schlechtes Wetter und die Frage, wem das Blut auf seinem Ärmel eigentlich gehört."
+    ]
+  },
+  "der-fremde-am-weg": {
+    "lines": [
+      "Der Fremde ist weitergegangen, oder der Nebel hat ihn genommen. Das Zeichen bleibt: ein offenes Auge über drei Linien, Kirchensilber, kein Schmuck.",
+      "Du hast es gesehen. Ob es in deiner Hand liegt oder unter seinem Mantel verschwunden ist, ändert den Weg nicht. Lindendorf liegt voraus, und das Silber wird dort wieder auftauchen, wo jemand es nicht erwartet."
+    ]
+  },
+  "intro-tal": {
+    "lines": [
+      "Der Wald steht dicht an den Hängen, so eng, dass sich die Stämme beinahe berühren und der Weg zu einem schmalen Streifen nasser Erde wird, der sich zwischen ihnen hindurchzwängt.",
+      "Zwischen den Bäumen hängen Nebelfetzen, die sich nicht auflösen wollen.",
+      "Weiter unten steigt Rauch, senkrecht und ohne Neigung. Kein Wind fasst ihn an. Ein Rauch, der so gerade steht, ist selten ein gutes Zeichen.",
+      "Jemand hat die Felder abgeerntet. Jemand anderes hat vergessen, die Zäune danach zu reparieren, als hätte die Ernte alle Kraft verbraucht, die für die Zukunft übrig gewesen wäre.",
+      "Am Waldrand liegen Bündel aus nassem Reisig, sorgfältig geschichtet und doch unberührt. Daneben steckt ein einzelner Kinderschuh im Schlamm, der Schaft eingedrückt, die Sohle voller schwarzer Erde. Niemand sucht ihn.",
+      "Kein Vogel ruft. Weit oberhalb des Weges bricht ein Ast, und danach wartet das Tal wieder auf ein Geräusch von dir.",
+      "Du verstehst noch nicht, was hier geschehen ist. Du erkennst nur die Handschrift einer Gegend, in der Menschen gelernt haben, ihre Fragen leise zu stellen."
+    ]
+  },
+  "intro-rauch-graben": {
+    "lines": [
+      "Weiter unten steigt Rauch, senkrecht und ohne Neigung. Kein Wind fasst ihn an. Er bleibt, wo er ist, eine graue Säule über den Hängen, und trägt den Geruch von nassem Brand und kalter Asche nicht fort.",
+      "Vom Steinbruch her, sagst du dir, obwohl du den Steinbruch noch nicht gesehen hast. Nur die Richtung. Osten. Und die Gewissheit, dass jemand dort Feuer hält, das niemand löschen will.",
+      "Ein Rauch, der so gerade steht, gehört keinem Herd. Herdfeuer wackeln. Dieses tut es nicht.",
+      "Unterhalb der Kapelle klafft ein trockener Graben im Hang. Einst muss dort Wasser gelaufen sein. Die Mulde ist glatt gewaschen, jetzt staubig und tot.",
+      "Darin liegen die Knochen von Tieren, ausgebleicht und ordentlich nebeneinander gereiht, als hätte sie jemand dort abgelegt, statt sie verwesen zu lassen.",
+      "Kein Geruch von Fäulnis mehr, nur Kalk und Kälte. Wer so legt, zählt. Wer so legt, will, dass man sieht, dass gezählt wurde.",
+      "Du spürst das Gewicht des Hangs über dir. Irgendwo unter dem Dorf muss dasselbe Wasser fehlen, das hier aufgehört hat zu laufen."
+    ]
+  },
+  "graben": {
+    "lines": [
+      "Der Graben unter der Kapelle ist trocken. Die Mulde ist glatt gewaschen und tot. Tierknochen liegen darin ordentlich gereiht, Kalk und Kälte, kein Gestank mehr.",
+      "Jemand hat gezählt. Das Wasser, das hier einmal lief, fehlt jetzt weiter unten, im Dorf."
+    ]
+  },
+  "intro-hang": {
+    "lines": [
+      "Oberhalb des Dorfes schneidet ein alter Weg den Hang, hart und schmal. Der Schotter unter deinen Sohlen knirscht nass und gibt bei jedem Schritt ein wenig nach.",
+      "Dort oben steht eine Kapelle, ihr Dach dunkler als der Himmel darüber.",
+      "Eine kleine Glocke bewegt sich einmal über dem Geröll. Du kennst den Weg noch nicht. Du merkst dir nur den Ton. Sie läutet nicht zum Gebet. Sie meldet, dass sich etwas bewegt, und schweigt dann wieder.",
+      "Über dem Türsturz klebt ein Streifen rotes Wachs, frisch gebrochen. Dasselbe Zeichen wirst du unten im Dorf wiederfinden. Jemand markiert Türen, hinter denen etwas entfernt wurde, das nicht zurückkehren darf.",
+      "Die Glocke schweigt. Trotzdem hast du das Gefühl, dass etwas im Tal jetzt weiß, dass du angekommen bist."
+    ]
+  },
+  "intro-lindendorf": {
+    "lines": [
+      "Häuser drücken sich aneinander, als könnten sie so wärmer bleiben, ihre Dächer tief gezogen wie Kapuzen über gesenkte Köpfe.",
+      "Am Brunnen halten Frauen die Arme vor der Brust verschränkt und sehen dir nach, bis du vorbei bist — nicht neugierig, sondern prüfend, wie man ein Wetter prüft, das umschlagen könnte.",
+      "In der Taverne bläst jemand hastig eine Lampe aus, als koste jede Flamme mehr, als sie an Licht zurückgibt.",
+      "Auch über der Rathaustür klebt ein Zeichen aus rotem Wachs, wie du es schon am Hang gesehen hast. Hier ist es alt und unversehrt, ein Siegel, das noch niemand zu brechen wagte.",
+      "Ein Gerber deckt seine Ware mit einer zu kleinen Plane ab. Ein Teil des Leders bleibt im Regen liegen. Er sieht kurz hin und wendet sich ab.",
+      "Hinter einem offenen Fenster hustet ein alter Mann. Eine Stimme zählt dahinter Münzen, so leise, als könnte lautes Zählen sie kosten.",
+      "Lindendorf wirkt nicht verlassen. Es wirkt schlimmer: bewohnt von Menschen, die sich daran gewöhnt haben, dass niemand kommt — und die sich jetzt fragen, was es bedeutet, dass doch jemand gekommen ist."
+    ]
+  },
+  "intro-ankunft": {
+    "lines": [
+      "Du bleibst am Rand des Platzes stehen. Niemand fragt, wer du bist.",
+      "Das ist zunächst höflich. Dann merkst du, dass es Vorsicht ist — eine Höflichkeit, die man sich antrainiert, wenn Fragen in der Vergangenheit selten gut ausgegangen sind.",
+      "Du könntest weitergehen. Der Weg nach Osten führt am Steinbruch vorbei, und aus dem Steinbruch steigt Rauch, der so gerade steht wie der im Tal.",
+      "In Lindendorf wartet niemand auf einen Helden. Trotzdem beginnt hier dein Weg, in einem Dorf, das sich längst entschieden hat, keine Wunder mehr zu erwarten.",
+      "Hinter dir schließt sich das Tal wie ein nasser Kragen. Vor dir liegen Türen, hinter denen jeder etwas verloren hat und nicht jeder bereit ist, es beim Namen zu nennen.",
+      "Du spürst die Blicke erst, als sie aufhören. Die Leute hier sehen Fremde nicht lange an. Sie wissen, dass man von Gesichtern allein nicht satt wird.",
+      "Am Brunnen schlägt ein Tropfen auf Stein. Dann noch einer. So beginnt in diesem Dorf vieles: nicht mit einem Ruf, sondern mit etwas, das nicht aufhört."
+    ]
+  }
+}

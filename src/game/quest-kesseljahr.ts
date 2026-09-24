@@ -20,9 +20,9 @@ export async function dorfGasse(rt: Runtime, held: Held) {
       portrait: null,
       held,
       lines: [
-        "Die Kirche von Lindendorf steht einen Schritt tiefer als der Platz davor, als hätte sie sich in all den Jahrhunderten langsam in die Erde gesenkt, müde von allem, was ihr je gebeichtet wurde. An der Schwelle hat der Stein selbst über die Zeit eine flache Mulde geschliffen, in der sich das Regenwasser sammelt; es läuft nicht ab, sondern steht dort wie ein kleiner, geduldiger Spiegel, in dem sich ein grauer Himmel bricht, und keiner hat in zehn Jahren daran gedacht, einen Abfluss zu schlagen. Vielleicht, weil niemand die Schwelle mehr lange genug betrachtet, um den Mangel zu bemerken.",
-        "Im Schatten der Kirchmauer, dort, wohin selbst im Hochsommer nur für eine Handvoll Stunden am Tag die Sonne findet, sitzt Fenn. Seine nackten Füße liegen im kalten Wasser der Dachrinne, ohne dass er es zu spüren scheint — als sei die Kälte längst ein alter Bekannter, mit dem man keine Umstände mehr macht. Er hebt den Blick, noch bevor du an ihm vorbeigehst, und das allein ist mehr als gewöhnlich: Niemand im Dorf erinnert sich, Fenn je zuerst habe aufsehen sehen. Für gewöhnlich ist er Teil der Mauer, ein Schatten unter Schatten, den man grüßt, ohne ihn wirklich anzuschauen — heute nicht.",
-        "In der Tasche seines vielfach geflickten Mantels, dessen ursprüngliche Farbe niemand mehr benennen könnte, hält er ein morsches Stück Lattenzaun. Zehn Winter haben das Holz glattgeschliffen wie einen Kiesel im Flussbett; die alten Nagellöcher sind zu bloßen Dellen verwittert, doch wer genau hinsieht, erkennt noch, wo einst zwei Bretter im rechten Winkel zusammengeschlagen waren.",
+        "Die Kirche von Lindendorf steht einen Schritt tiefer als der Platz davor. Sie wirkt, als hätte sie sich in den Jahrhunderten langsam in die Erde gesenkt. Sie ist müde von allem, was ihr je gebeichtet wurde. An der Schwelle hat der Stein über die Zeit eine flache Mulde geschliffen, in der sich Regenwasser sammelt. Das Wasser läuft nicht ab, sondern steht dort wie ein kleiner, geduldiger Spiegel, in dem sich ein grauer Himmel bricht. Keiner hat in zehn Jahren daran gedacht, einen Abfluss zu schlagen. Vielleicht hat niemand die Schwelle lange genug betrachtet, um den Mangel zu bemerken.",
+        "Im Schatten der Kirchmauer sitzt Fenn, wo selbst im Hochsommer die Sonne nur für wenige Stunden erscheint. Seine nackten Füße liegen im kalten Wasser der Dachrinne, ohne dass er es spürt. Die Kälte ist für ihn ein alter Bekannter, mit dem man keine Umstände macht. Er hebt den Blick, bevor du an ihm vorbeigehst. Niemand im Dorf erinnert sich, dass Fenn je zuerst Aufsehen erregte. Für gewöhnlich ist er Teil der Mauer, ein Schatten unter Schatten, den man grüßt. Heute grüßt man ihn nicht.",
+        "In der Tasche seines vielfach geflickten Mantels liegt ein morsches Stück Lattenzaun. Die ursprüngliche Farbe des Mantels kann niemand mehr benennen. Zehn Winter haben das Holz glattgeschliffen wie einen Kiesel im Flussbett. Die alten Nagellöcher sind zu bloßen Dellen verwittert. Wer genau hinsieht, erkennt noch das Holz. Er sieht, wo einst zwei Bretter im rechten Winkel zusammengeschlagen waren.",
       ],
     });
     await rt.present({
@@ -218,8 +218,8 @@ async function gasseFenn(rt: Runtime, held: Held) {
   }
 
   const lines = [
-    "Fenn hat seinen Platz so gewählt, dass die Kirchentür ihn nicht trifft, wenn sie aufschlägt — eine Berechnung, die nur ein Mensch anstellt, der diesen Platz nicht zum ersten Mal einnimmt. Der Stein unter ihm ist abgewetzt zu einer sanften Mulde, genau von der Form, die ein Körper über viele, viele Winter hinterlässt. Wer hier sitzt, sitzt nicht zum ersten Mal, und er sitzt auch nicht zum zehnten.",
-    "„Weißt du, warum dort niemand mehr geht?“ Er stellt die Frage, ohne eine Antwort zu erwarten, als wäre die Frage selbst schon die halbe Last, die er abzugeben hatte.",
+    "Fenn hat seinen Platz so gewählt, dass die Kirchentür ihn nicht trifft. Die Tür schlägt nicht auf ihn, wenn sie sich schließt. Nur ein Mensch, der diesen Platz nicht zum ersten Mal einnimmt, kann diese Berechnung anstellen. Der Stein unter ihm ist zu einer sanften Mulde abgewetzt, die die Form eines Körpers nach vielen Wintern trägt. Wer hier sitzt, sitzt nicht zum ersten Mal. Er sitzt auch nicht zum zehnten Mal.",
+    "„Weißt du, warum dort niemand mehr geht?“ Er stellt die Frage, ohne eine Antwort zu erwarten. Die Frage selbst wiegt bereits die halbe Last, die er ablegen will.",
   ];
   if (held.fennGedraengt) {
     lines.push(
@@ -260,9 +260,9 @@ async function gasseFenn(rt: Runtime, held: Held) {
   await rt.present({
     held,
     lines: [
-      "„Die Gasse wurde zugenagelt. Bretter vor jede Tür, kreuzweise, wie man es sonst nur mit Häusern der Pest macht. Wache davor, Tag und Nacht, zwei Männer, die man kannte, die aber nicht mehr grüßten, sobald sie den Posten bezogen hatten. Drei Männer aus dem Rat hielten den Schlüssel zu der einen Tür, die man offen ließ, für das Korn, das kommen sollte.“",
+      "Die Gasse wurde zugenagelt. Vor jede Tür wurden Bretter kreuzweise gestellt, wie man es nur bei Pesthäusern tut. Zwei Männer standen dort, doch sie grüßten nicht mehr, nachdem sie den Posten bezogen hatten. Drei Ratsherren hielten den Schlüssel zu der einen Tür, die offen blieb für das erwartete Korn.",
       "Seine Hand schließt sich fester um das Stück Lattenzaun in seiner Tasche, ein Reflex, den er selbst vielleicht nicht bemerkt.",
-      "„Das Korn kam nicht. Nicht genug, nicht rechtzeitig, manche Wochen gar nicht. Das Fieber kam dafür pünktlich, wie es das immer tut, wenn der Hunger ihm die Tür schon aufgehalten hat. Als man die Bretter im Frühjahr wieder abriss, war von denen, die im Herbst dort eingeschlossen wurden, kaum noch jemand übrig, der sein eigenes Haus noch hätte beanspruchen können. Und das Land — das Land wurde aufgeteilt, noch bevor die Toten kalt genug waren, um sie ordentlich zu betrauern. Vahls Großvater hat als Erster gezeichnet. Die anderen beiden folgten, wie man einer Spur folgt, die schon jemand anderes gelegt hat, damit man selbst nicht der Erste sein muss, der sie tritt.“",
+      "Das Korn kam nicht. Nicht genug, und nicht zur rechten Zeit. Manche Wochen kam gar nichts. Das Fieber kam pünktlich, wie immer, wenn der Hunger ihm die Tür aufhält. Im Frühjahr riss man die Bretter wieder ab. Von denen, die im Herbst eingeschlossen worden waren, konnte kaum noch jemand das eigene Haus beanspruchen. Das Land wurde aufgeteilt, bevor die Toten kalt genug waren. Vahls Großvater hat als Erster gezeichnet. Die beiden anderen folgten, damit sie nicht die Ersten sein mussten.",
     ],
   });
 
@@ -270,8 +270,8 @@ async function gasseFenn(rt: Runtime, held: Held) {
   await rt.present({
     held,
     lines: [
-      "Er sieht nicht dich an, sondern hinüber zur Gasse, als läge dort noch immer etwas, das seine Aufmerksamkeit verdient, auch nach zehn Jahren.",
-      "„Grete lebt noch. Am Rand der Gasse, in dem Haus, das keiner haben wollte, weil es zu nah an den anderen steht. Sie sieht fast nichts mehr, ihre Augen sind trüb geworden wie Brunnenwasser im Winter — aber sie hört gut, und sie hört vor allem, ob du mit Zeit zu ihr kommst oder nur mit einer Frage, auf die du die Antwort schon im Kopf trägst und nur noch bestätigt haben willst. Für Letzteres hat sie kein Gehör übrig. Das hat sie sich in zehn Jahren abgewöhnt.“",
+      "Er sieht nicht dich an, sondern blickt zur Gasse. Dort liegt noch immer etwas, das seine Aufmerksamkeit verdient, selbst nach zehn Jahren.",
+      "„Grete lebt noch. Sie wohnt am Rand der Gasse, in dem Haus, das keiner haben wollte. Es steht zu nah an den anderen. Sie sieht fast nichts mehr. Ihre Augen sind trüb wie Brunnenwasser im Winter. Hören kann sie. Sie hört, ob du Zeit mitbringst oder nur eine Frage, deren Antwort du schon kennst. Für so eine Frage hat sie kein Gehör. Das hat sie sich in zehn Jahren abgewöhnt.“",
     ],
   });
 }

@@ -1,4 +1,5 @@
 /** Server only. Schlüssel bleiben in process.env, nie im Client. */
+import "../lib/env.server.ts";
 
 export type AnbieterId = "xai" | "gemini" | "groq" | "openrouter";
 
@@ -32,7 +33,7 @@ const ZIELE: readonly ZielVorlage[] = [
     id: "groq",
     name: "Groq",
     url: "https://api.groq.com/openai/v1/chat/completions",
-    model: "llama-3.3-70b-versatile",
+    model: "openai/gpt-oss-120b",
     schluessel: "GROQ_API_KEY",
     modellEnv: "GROQ_MODEL",
   },
@@ -95,6 +96,7 @@ export async function sprich(
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${ziel.key}`,
+        "User-Agent": "lindendorf/1.0",
       },
       body: JSON.stringify({
         model: ziel.model,
@@ -111,8 +113,11 @@ export async function sprich(
       const roh = await res.text().catch(() => "");
       return { ok: false, error: `${ziel.name} ${res.status}${roh ? `: ${roh.slice(0, 160)}` : ""}` };
     }
-    const body = (await res.json()) as { choices?: { message?: { content?: string } }[] };
-    const text = body.choices?.[0]?.message?.content ?? "";
+    const body = (await res.json()) as {
+      choices?: { message?: { content?: string; reasoning?: string } }[];
+    };
+    const message = body.choices?.[0]?.message;
+    const text = (message?.content || message?.reasoning || "").trim();
     if (!text.trim()) return { ok: false, error: `${ziel.name} hat nichts zurückgegeben.` };
     return { ok: true, text, anbieter: ziel.id };
   } catch (fehler) {

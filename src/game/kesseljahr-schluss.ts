@@ -180,7 +180,7 @@ async function gasseEnde(rt: Runtime, held: Held) {
       held,
       lines: [
         "Der Rat tagt drei Nächte hintereinander. Man hört die Stimmen bis auf den Platz, auch wenn niemand die Fenster öffnet.",
-        "Vahl verliert seinen Sitz, nicht sein Land — das gehört inzwischen niemandem mehr, den man noch belangen könnte. Der Siegelring bleibt an seinem Finger. Das Amt nicht.",
+        "Vahl verliert seinen Sitz, nicht sein Land. Das Land gehört inzwischen niemandem mehr, den man noch belangen könnte. Der Siegelring bleibt an seinem Finger. Das Amt nicht.",
       ],
     });
     await rt.present({

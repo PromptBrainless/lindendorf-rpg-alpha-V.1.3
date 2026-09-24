@@ -172,7 +172,7 @@ export function waldFadenZeilen(held: Held): string[] {
 }
 
 export function nachspielFadenZeile(): string {
-  return "Neben dem Kreuz, das bei einem der Namen steht, liegt eine Locke aus weißem Haar, verknotet mit rotem Garn — derselben Farbe wie der Knoten an der Kapellenglocke. Du hebst den Kinderumhang auf, den bisher niemand berührt hat, und liest den Namen daneben zum ersten Mal laut. Er ist kein Fremder mehr.";
+  return "Neben dem Kreuz bei einem der Namen liegt eine Locke aus weißem Haar. Sie ist mit rotem Garn verknotet, in derselben Farbe wie der Knoten an der Kapellenglocke. Du hebst den Kinderumhang auf. Bisher hat ihn niemand berührt. Du liest den Namen daneben zum ersten Mal laut. Er ist kein Fremder mehr.";
 }
 
 export function schliesseFadenAmLager(held: Held): string[] {

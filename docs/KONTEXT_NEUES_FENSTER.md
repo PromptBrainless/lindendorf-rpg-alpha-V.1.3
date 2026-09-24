@@ -1,8 +1,11 @@
 # Kontext — neues Fenster
 
-**Stand:** 23. September 2026. Pflicht nach `AGENTS.project.md`.
+**Stand:** 24. September 2026. Pflicht nach `AGENTS.project.md`.
 
-Aktives Repo: [PromptBrainless/lindendorf-rpg-alpha-V.1.1](https://github.com/PromptBrainless/lindendorf-rpg-alpha-V.1.1).
+Einzelne Speicher für die letzte Sitzung: [docs/kontext/00-index.md](kontext/00-index.md). Nur die Datei lesen, die der Auftrag braucht.
+
+Aktiver Remote dieses Arbeitsbaums: [PromptBrainless/lindendorf-rpg-alpha-V.1.3](https://github.com/PromptBrainless/lindendorf-rpg-alpha-V.1.3).
+`AGENTS.project.md` nennt noch V.1.1. Widerspruch, nicht still auflösen.
 Inhaltlicher Stand: `wiki/`. Nicht das GitHub-Wiki, der Ordner im Repo.
 
 ## Was das Spiel heute tut
@@ -12,7 +15,7 @@ Fluss, noch unverändert:
 
 > Heldenerstellung → Prolog → Dorf-Schleife → Glockenweg oder Wald → Lager → Ende
 
-Start: Stärke, Geschick, Charisma je 10. W10. Schwellen 8 / 12 / 15.
+Start im älteren Kontext: Stärke, Geschick, Charisma je 10. W10. Schwellen 8 / 12 / 15.
 Zehn Lagen vor dem Tal. Höchstens drei Zustände. Noch keine Klassen und keine Karrierestufen im Code.
 
 ## Was schon spielbar ist
@@ -25,6 +28,7 @@ Zehn Lagen vor dem Tal. Höchstens drei Zustände. Noch keine Klassen und keine 
 | Wissen | 22 Keys, `knowledge.ts` |
 | Lore-Grenze | `src/game/lore.ts`, am Wiki ausgerichtet |
 | Stimme | `werkstatt-vertrag.ts`, nur die offene Seite |
+| Text über Groq | `src/game/modelle.ts`, Schlüssel nur lokal |
 
 ## Was das Wiki jetzt vorgibt und der Code noch nicht erzählt
 
@@ -41,3 +45,4 @@ Eine Szene erst umschreiben, wenn der Auftrag sie nennt. Reihenfolge: `wiki/Ques
 ## Nicht anfassen ohne Auftrag
 
 Engine, Runtime, Auth, neue ArtKeys, Hauptfluss durch eine neue Quest ersetzen.
+Questtexte nicht noch einmal blind über die Schnittstelle jagen. Siehe [docs/kontext/03-questtexte.md](kontext/03-questtexte.md).

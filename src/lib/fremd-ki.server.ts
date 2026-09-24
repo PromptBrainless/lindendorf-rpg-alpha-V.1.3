@@ -11,7 +11,7 @@ export type FremdAnbieter = keyof typeof FREMD_KI;
 
 const MODEL: Record<FremdAnbieter, string> = {
   gemini: "gemini-2.0-flash",
-  groq: "llama-3.3-70b-versatile",
+  groq: "openai/gpt-oss-120b",
   openrouter: "openrouter/auto",
 };
 
@@ -37,9 +37,11 @@ export function fremdBereit(): FremdAnbieter[] {
 }
 
 function textAusOpenAi(body: unknown): string {
-  const choice = (body as { choices?: { message?: { content?: unknown } }[] })?.choices?.[0];
+  const choice = (body as { choices?: { message?: { content?: unknown; reasoning?: unknown } }[] })?.choices?.[0];
   const inhalt = choice?.message?.content;
-  return typeof inhalt === "string" ? inhalt.trim() : "";
+  if (typeof inhalt === "string" && inhalt.trim()) return inhalt.trim();
+  const denken = choice?.message?.reasoning;
+  return typeof denken === "string" ? denken.trim() : "";
 }
 
 function textAusGemini(body: unknown): string {
@@ -85,6 +87,7 @@ export async function frageFremd(
               headers: {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${key}`,
+                "User-Agent": "lindendorf/1.0",
               },
               body: JSON.stringify({
                 model: MODEL[anbieter],
