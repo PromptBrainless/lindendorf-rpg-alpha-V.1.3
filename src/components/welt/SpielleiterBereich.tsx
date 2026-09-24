@@ -9,6 +9,7 @@ import {
   Plus,
   ScrollText,
   ShieldCheck,
+  ShieldQuestion,
   UserRound,
   UsersRound,
 } from "lucide-react";
@@ -30,9 +31,10 @@ import { WeltKampagne } from "./WeltKampagne";
 import { WeltKarte } from "./WeltKarte";
 import { WeltPruefen } from "./WeltPruefen";
 import { WeltQuest } from "./WeltQuest";
+import { WeltSpieler } from "./WeltSpieler";
 import { WeltWissen } from "./WeltWissen";
 
-type Bereich = "uebersicht" | "geschichte" | "szenen" | "figuren" | "wissen" | "orte" | "pruefen";
+type Bereich = "uebersicht" | "geschichte" | "szenen" | "figuren" | "wissen" | "orte" | "quest" | "spieler" | "pruefen";
 
 const SCHNELLZUGRIFF_IDS = [
   "intro-weg",
@@ -50,6 +52,8 @@ const BEREICHE: Array<{ id: Bereich; titel: string; untertitel: string; Symbol: 
   { id: "figuren", titel: "Figuren", untertitel: "Menschen erfinden", Symbol: UsersRound },
   { id: "wissen", titel: "Wissen", untertitel: "Tafeln anlegen", Symbol: BookOpen },
   { id: "orte", titel: "Orte", untertitel: "Das Tal ordnen", Symbol: Compass },
+  { id: "quest", titel: "Questpfade", untertitel: "Wege prüfen", Symbol: ShieldQuestion },
+  { id: "spieler", titel: "Partien", untertitel: "Stände laden", Symbol: UsersRound },
   { id: "pruefen", titel: "Prüfen", untertitel: "Vor dem Spiel", Symbol: ShieldCheck },
 ];
 
@@ -178,6 +182,16 @@ export function SpielleiterBereich() {
               </Arbeitsflaeche>
             ) : null}
             {bereich === "orte" ? <OrteWerkstatt onSzene={oeffneSzene} /> : null}
+            {bereich === "quest" ? (
+              <Arbeitsflaeche titel="Questpfade" beschreibung="Prüfe die vorhandenen Wege durch die Questreihen mit den bestehenden Pfad- und Lagerprüfungen.">
+                <WeltQuest />
+              </Arbeitsflaeche>
+            ) : null}
+            {bereich === "spieler" ? (
+              <Arbeitsflaeche titel="Partien und Spielstände" beschreibung="Lade eine vorhandene Partie, bevor du Zustände, Tageszeit oder eine Probe im laufenden Weltwerkzeug untersuchst.">
+                <WeltSpieler />
+              </Arbeitsflaeche>
+            ) : null}
             {bereich === "pruefen" ? (
               <Arbeitsflaeche titel="Prüfen und ordnen" beschreibung="Hier wird sichtbar, was der aktuelle Szenenkatalog trägt: Wege, Seiten, Bilder, Textlängen und die Grenze zwischen Heldensicht und Spielleiterwissen.">
                 <WeltKampagne aktuell={szeneId} onSeite={(id) => oeffneSzene(id)} />
