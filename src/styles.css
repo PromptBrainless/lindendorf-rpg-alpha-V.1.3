@@ -1,20 +1,20 @@
 @import "tailwindcss";
 
 @theme {
-  --color-bg: #0c0b09;
-  --color-ink: #12110e;
-  --color-surface: #1a1814;
-  --color-surface-2: #221f1a;
-  --color-fg: #efe6d6;
-  --color-muted-fg: #c4bba8;
-  --color-subtle-fg: #9a917f;
-  --color-accent: #d4c4a8;
-  --color-accent-fg: #0c0b09;
-  --color-border: color-mix(in oklab, #efe6d6 14%, transparent);
-  --color-ring: #d4c4a8;
-  --color-hp: #ef8b7a;
-  --color-ok: #9aaa74;
-  --color-warn: #e0a05a;
+  --color-bg: #080705;
+  --color-ink: #120e0b;
+  --color-surface: #1a140f;
+  --color-surface-2: #201a14;
+  --color-fg: #f0e3cf;
+  --color-muted-fg: #c8b899;
+  --color-subtle-fg: #9d8a68;
+  --color-accent: #d6a866;
+  --color-accent-fg: #120d07;
+  --color-border: color-mix(in oklab, #f0e3cf 14%, transparent);
+  --color-ring: #e8c892;
+  --color-hp: #c95d4a;
+  --color-ok: #8aa174;
+  --color-warn: #d9964d;
 
   --font-display: "Cormorant Garamond", "Times New Roman", serif;
   --font-body: "Source Serif 4", "Georgia", serif;
@@ -63,6 +63,9 @@
     line-height: var(--zeilenabstand);
     overflow-x: hidden;
     overscroll-behavior-x: none;
+    background:
+      radial-gradient(circle at top, rgba(214, 168, 102, 0.16), transparent 32%),
+      linear-gradient(180deg, var(--color-bg) 0%, #0f0b08 100%);
     -webkit-tap-highlight-color: color-mix(in srgb, var(--color-accent) 18%, transparent);
   }
 

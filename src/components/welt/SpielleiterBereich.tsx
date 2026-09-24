@@ -46,6 +46,13 @@ const SCHNELLZUGRIFF_IDS = [
   "intro-ankunft",
 ] as const;
 
+const FEATURE_CARDS = [
+  { titel: "Erzählpuls", text: "Schuld, Ort und Erinnerung müssen in derselben Seite zusammenpassen.", aktion: "Geschichte öffnen" },
+  { titel: "Figurenstimmen", text: "Jede Figur trägt ein Ziel, einen Ort und eine persönliche Last mit.", aktion: "Figur prüfen" },
+  { titel: "Wissenlinien", text: "Spuren, Wiederholungen und versteckte Wahrheiten bleiben in sichtbaren Tafeln verankert.", aktion: "Wissen ansehen" },
+  { titel: "Szenenfluss", text: "Die Reise durch Lindendorf bleibt nachvollziehbar und ohne Brüche im Rhythmus.", aktion: "Karte ansehen" },
+] as const;
+
 const BEREICHE: Array<{ id: Bereich; titel: string; untertitel: string; Symbol: typeof Compass }> = [
   { id: "uebersicht", titel: "Übersicht", untertitel: "Das Werk im Blick", Symbol: Compass },
   { id: "geschichte", titel: "Geschichte", untertitel: "Seiten schreiben", Symbol: FilePenLine },
@@ -64,12 +71,28 @@ const BEREICH_GRUPPEN: Array<{ titel: string; ids: Bereich[] }> = [
   { titel: "Kontrolle", ids: ["quest", "pruefen"] },
 ];
 
+const SCHNELLAKTIONEN: Array<{ bereich: Bereich; label: string; hint: string }> = [
+  { bereich: "geschichte", label: "Geschichte", hint: "Text schreiben" },
+  { bereich: "szenen", label: "Szenen", hint: "Karten lesen" },
+  { bereich: "figuren", label: "Figuren", hint: "Stimmen bauen" },
+  { bereich: "wissen", label: "Wissen", hint: "Tafeln prüfen" },
+  { bereich: "pruefen", label: "Prüfen", hint: "Vor dem Spiel" },
+];
+
+const FEATURE_MODULE = [
+  { titel: "Erzählpuls", beschreibung: "Befund, Schuld und Stimmung müssen in derselben Seite zusammenwirken.", farbe: "gold" },
+  { titel: "Figurenstimmen", beschreibung: "Jede Figur trägt Ort, Angst und Ziel mit sich, statt bloßer Namen zu sein.", farbe: "amber" },
+  { titel: "Wissenlinien", beschreibung: "Wissen und Spur bleiben am Ort verankert und nicht im Kopf des GM allein.", farbe: "olive" },
+  { titel: "Questlogik", beschreibung: "Pfad, Text und Prüfung bleiben lesbar, bevor eine Szene in die Partie fällt.", farbe: "copper" },
+] as const;
+
 export function SpielleiterBereich() {
   const graph = useMemo(() => baueWeltGraph(), []);
   const [bereich, setBereich] = useState<Bereich>("uebersicht");
   const startSzene = graph.knoten.find((knoten) => knoten.titel === "Ankunft");
   const [szeneId, setSzeneId] = useState(startSzene?.id ?? "");
   const [suche, setSuche] = useState("");
+  const [overlayOpen, setOverlayOpen] = useState(false);
   const szene = useMemo(() => (szeneId ? viewAusKanon(szeneId) : null), [szeneId]);
   const [auflage, setAuflage] = useState<WeltAuflage>(() => (szene ? auflageFuerSicht(szene).patch : {}));
   const [meldung, setMeldung] = useState<string | null>(null);
@@ -128,6 +151,13 @@ export function SpielleiterBereich() {
             <div className="flex flex-wrap items-center justify-end gap-2 text-xs text-muted-fg">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-ok/30 bg-ok/5 px-2.5 py-1"><CheckCircle2 className="size-4 text-ok" aria-hidden />Kanon geladen</span>
               <span className="rounded-full border border-border px-2.5 py-1">8 Quests · {graph.knoten.length} Seiten</span>
+              <button
+                type="button"
+                onClick={() => setOverlayOpen((open) => !open)}
+                className="inline-flex h-9 items-center gap-1.5 rounded-sm border border-border px-2.5 text-fg transition-colors hover:border-accent hover:text-accent"
+              >
+                Overlay
+              </button>
               <a
                 href={WIKI_LINKS.index}
                 target="_blank"
@@ -139,7 +169,52 @@ export function SpielleiterBereich() {
               </a>
             </div>
           </div>
+
+          <div className="mt-4 flex flex-wrap gap-2">
+            {SCHNELLAKTIONEN.map((aktion) => (
+              <button
+                key={aktion.bereich}
+                type="button"
+                onClick={() => setBereich(aktion.bereich)}
+                className="rounded-sm border border-border bg-surface/40 px-2.5 py-1.5 text-left transition-colors hover:border-accent hover:text-accent"
+              >
+                <span className="block text-[11px] font-semibold uppercase tracking-[0.12em] text-muted-fg">{aktion.hint}</span>
+                <span className="block text-sm text-fg">{aktion.label}</span>
+              </button>
+            ))}
+          </div>
         </header>
+
+        {overlayOpen ? (
+          <div className="pointer-events-none fixed inset-0 z-40 flex items-start justify-end bg-black/45 p-4 pt-24">
+            <div className="pointer-events-auto w-full max-w-sm rounded-md border border-border bg-[#110d09]/95 p-4 shadow-2xl shadow-black/30 backdrop-blur-xl">
+              <div className="flex items-center justify-between gap-3">
+                <div>
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Tool overlay</p>
+                  <h2 className="mt-1 font-display text-2xl font-semibold text-fg">GM-Workbench</h2>
+                </div>
+                <button type="button" onClick={() => setOverlayOpen(false)} className="rounded-sm border border-border px-2 py-1 text-xs text-muted-fg hover:text-fg">Schließen</button>
+              </div>
+
+              <div className="mt-4 grid gap-2">
+                {SCHNELLAKTIONEN.map((aktion) => (
+                  <button
+                    key={aktion.bereich}
+                    type="button"
+                    onClick={() => {
+                      setBereich(aktion.bereich);
+                      setOverlayOpen(false);
+                    }}
+                    className="rounded-sm border border-border bg-surface/40 px-3 py-2 text-left transition-colors hover:border-accent hover:bg-surface-2"
+                  >
+                    <span className="block text-[10px] uppercase tracking-[0.14em] text-muted-fg">{aktion.hint}</span>
+                    <span className="mt-1 block text-sm font-medium text-fg">{aktion.label}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+        ) : null}
 
         <div className="mt-5 grid gap-5 lg:grid-cols-[16rem_minmax(0,1fr)_13rem]">
           <nav className="self-start lg:sticky lg:top-5" aria-label="Spielleiter-Bereiche">
@@ -231,6 +306,7 @@ export function SpielleiterBereich() {
 function Uebersicht({ graph, onBereich, onSzene }: { graph: ReturnType<typeof baueWeltGraph>; onBereich: (bereich: Bereich) => void; onSzene: (id: string, bereich?: Bereich) => void }) {
   const questAnzahl = new Set(graph.knoten.map((knoten) => knoten.quest)).size;
   const offeneSeiten = graph.leer + graph.kurz + graph.stichpunkt;
+
   return (
     <div className="grid gap-6">
       <div className="grid gap-3 md:grid-cols-4">
@@ -239,6 +315,7 @@ function Uebersicht({ graph, onBereich, onSzene }: { graph: ReturnType<typeof ba
         <Zahl wert={offeneSeiten} label="Textstellen prüfen" warnung={offeneSeiten > 0} />
         <Zahl wert={WELTBILD.length} label="Orte im Weltbild" />
       </div>
+
       <div className="grid gap-5 xl:grid-cols-[1.2fr_0.8fr]">
         <div className="rounded-md border border-border bg-surface/50 p-5">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Der aktuelle Stand</p>
@@ -252,6 +329,7 @@ function Uebersicht({ graph, onBereich, onSzene }: { graph: ReturnType<typeof ba
             <Button type="button" variant="secondary" onClick={() => onBereich("wissen")}><BookOpen className="size-4" aria-hidden />Wissenstafel anlegen</Button>
           </div>
         </div>
+
         <div className="rounded-md border border-border p-5">
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Schnellzugriff</p>
           <div className="mt-3 grid gap-1">
@@ -264,6 +342,82 @@ function Uebersicht({ graph, onBereich, onSzene }: { graph: ReturnType<typeof ba
           </div>
         </div>
       </div>
+
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="rounded-md border border-border bg-surface/40 p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Ablauf heute</p>
+          <div className="mt-3 grid gap-2 text-sm text-muted-fg">
+            <div className="rounded-sm border border-border px-3 py-2">1. Befund sichern</div>
+            <div className="rounded-sm border border-border px-3 py-2">2. Schuld und Ort nachverfolgen</div>
+            <div className="rounded-sm border border-border px-3 py-2">3. Questzugriff und Prüfung validieren</div>
+          </div>
+        </div>
+
+        <div className="rounded-md border border-border bg-surface/40 p-4">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Arbeitsstatus</p>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2">
+            <div className="rounded-sm border border-border px-3 py-3">
+              <p className="text-[10px] uppercase tracking-[0.14em] text-muted-fg">Kanon</p>
+              <p className="mt-1 text-lg font-semibold text-fg">Aktiv</p>
+            </div>
+            <div className="rounded-sm border border-border px-3 py-3">
+              <p className="text-[10px] uppercase tracking-[0.14em] text-muted-fg">Lokale Fassung</p>
+              <p className="mt-1 text-lg font-semibold text-fg">Verfügbar</p>
+            </div>
+            <div className="rounded-sm border border-border px-3 py-3">
+              <p className="text-[10px] uppercase tracking-[0.14em] text-muted-fg">Wissen</p>
+              <p className="mt-1 text-lg font-semibold text-fg">Zugriff</p>
+            </div>
+            <div className="rounded-sm border border-border px-3 py-3">
+              <p className="text-[10px] uppercase tracking-[0.14em] text-muted-fg">Prüfung</p>
+              <p className="mt-1 text-lg font-semibold text-fg">Bereit</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="grid gap-4 xl:grid-cols-[1.15fr_0.85fr]">
+        <div className="rounded-md border border-border bg-surface/40 p-5">
+          <div className="flex items-center justify-between gap-2">
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Fokus im Moment</p>
+            <span className="rounded-full border border-border px-2 py-0.5 text-[10px] uppercase tracking-[0.12em] text-muted-fg">V2 aktiv</span>
+          </div>
+          <div className="mt-4 grid gap-3 md:grid-cols-2">
+            {FEATURE_MODULE.map((feature) => (
+              <article key={feature.titel} className="rounded-sm border border-border bg-surface/50 p-3">
+                <div className="flex items-center justify-between gap-2">
+                  <p className="text-sm font-semibold text-fg">{feature.titel}</p>
+                  <span className={`h-2.5 w-2.5 rounded-full ${feature.farbe === "gold" ? "bg-[#d6a866]" : feature.farbe === "amber" ? "bg-[#d9b36d]" : feature.farbe === "olive" ? "bg-[#8aa174]" : "bg-[#ca7d56]"}`} />
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-muted-fg">{feature.beschreibung}</p>
+                <button
+                  type="button"
+                  className="mt-3 text-xs font-medium text-accent hover:text-accent/80"
+                  onClick={() => {
+                    if (feature.titel === "Erzählpuls") onBereich("geschichte");
+                    if (feature.titel === "Figurenstimmen") onBereich("figuren");
+                    if (feature.titel === "Wissenlinien") onBereich("wissen");
+                    if (feature.titel === "Questlogik") onBereich("quest");
+                  }}
+                >
+                  {feature.titel === "Erzählpuls" ? "Geschichte öffnen" : feature.titel === "Figurenstimmen" ? "Figur prüfen" : feature.titel === "Wissenlinien" ? "Wissen ansehen" : "Questpfad prüfen"}
+                </button>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="rounded-md border border-border bg-surface/30 p-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-accent">Arbeitsablauf</p>
+          <ol className="mt-4 space-y-3 text-sm text-muted-fg">
+            <li className="rounded-sm border border-border px-3 py-2"><span className="mr-2 font-semibold text-fg">01</span>Seite auswählen und im Kontext lesen</li>
+            <li className="rounded-sm border border-border px-3 py-2"><span className="mr-2 font-semibold text-fg">02</span>Wissen, Schuld und Ort mit der aktuellen Seite absichern</li>
+            <li className="rounded-sm border border-border px-3 py-2"><span className="mr-2 font-semibold text-fg">03</span>Questpfad und Prüfung gegen die Weltkontrolle prüfen</li>
+            <li className="rounded-sm border border-border px-3 py-2"><span className="mr-2 font-semibold text-fg">04</span>Rückgabe in die erzählerische Form, nicht in reine Stichpunkte</li>
+          </ol>
+        </div>
+      </div>
+
       <div className="rounded-md border border-border px-5 py-4 text-sm leading-relaxed text-muted-fg">
         <p className="font-semibold text-fg">Kanonische Grenze</p>
         <p className="mt-1">Der Pakt unter der Kapelle bleibt verborgen, bis die Reihe Das Kesseljahr ihn über die Gasse, Ilse Brandtners Liste und das Gewölbe öffnet. Die Werkstatt zeigt diese Grenze an jeder Stelle, an der eine Seite bearbeitet wird.</p>
@@ -273,6 +427,9 @@ function Uebersicht({ graph, onBereich, onSzene }: { graph: ReturnType<typeof ba
 }
 
 function KontextPanel({ szene, auflage, bereich }: { szene: SceneView | null; auflage: WeltAuflage; bereich: Bereich }) {
+  const statusText = auflageLeer(auflage) ? "Kanon" : "Lokale Auflage";
+  const statusTone = auflageLeer(auflage) ? "text-ok" : "text-warn";
+
   return (
     <aside className="hidden self-start lg:sticky lg:top-24 lg:block" aria-label="Arbeitskontext">
       <div className="grid gap-3">
@@ -283,11 +440,34 @@ function KontextPanel({ szene, auflage, bereich }: { szene: SceneView | null; au
           <p className="mt-3 text-xs text-subtle-fg">Ausgewählte Seite</p>
           <p className="mt-1 text-sm leading-snug text-fg">{szene?.title ?? "Keine Seite"}</p>
           <p className="mt-3 text-xs text-subtle-fg">Speicherstand</p>
-          <p className={`mt-1 text-sm font-semibold ${auflageLeer(auflage) ? "text-ok" : "text-warn"}`}>
-            {auflageLeer(auflage) ? "Kanon" : "Lokale Auflage"}
-          </p>
+          <p className={`mt-1 text-sm font-semibold ${statusTone}`}>{statusText}</p>
           {szene?.id ? <p className="mt-2 break-all font-mono text-[10px] text-subtle-fg">{szene.id}</p> : null}
         </section>
+
+        <section className="rounded-md border border-border bg-surface/30 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Aktionskette</p>
+          <div className="mt-2 grid gap-1.5 text-xs text-muted-fg">
+            <div className="rounded-sm border border-border bg-surface/50 px-2 py-1.5">1. Befund lesen</div>
+            <div className="rounded-sm border border-border bg-surface/50 px-2 py-1.5">2. Schuld prüfen</div>
+            <div className="rounded-sm border border-border bg-surface/50 px-2 py-1.5">3. Perspektive sichern</div>
+            <div className="rounded-sm border border-border bg-surface/50 px-2 py-1.5">4. Questfluss validieren</div>
+          </div>
+        </section>
+
+        <section className="rounded-md border border-border bg-surface/30 p-3">
+          <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Feature-Lane</p>
+          <div className="mt-2 grid gap-2">
+            {FEATURE_MODULE.map((entry) => (
+              <div key={entry.titel} className="rounded-sm border border-border bg-surface/50 px-2 py-1.5">
+                <div className="flex items-center justify-between gap-2">
+                  <span className="text-[10px] font-medium uppercase tracking-[0.12em] text-muted-fg">{entry.titel}</span>
+                  <span className={`h-1.5 w-1.5 rounded-full ${entry.farbe === "gold" ? "bg-[#d6a866]" : entry.farbe === "amber" ? "bg-[#d9b36d]" : entry.farbe === "olive" ? "bg-[#8aa174]" : "bg-[#ca7d56]"}`} />
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
         <section className="rounded-md border border-border bg-surface/30 p-3">
           <p className="text-[10px] font-semibold uppercase tracking-[0.18em] text-accent">Weltwissen</p>
           <div className="mt-2 grid gap-1">

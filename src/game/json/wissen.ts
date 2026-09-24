@@ -61,3 +61,4 @@ export function loescheWissenDatei(id: string) {
 export function wissenIds(): string[] {
   return Object.keys(WISSEN_DATEIEN).sort((a, b) => a.localeCompare(b, "de"));
 }
+ 
