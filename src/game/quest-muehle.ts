@@ -19,10 +19,10 @@ export async function dorfMuehle(rt: Runtime, held: Held) {
       portrait: null,
       held,
       lines: [
-        "Kein Mehlstaub in der Luft, obwohl das Rad sich dreht.",
-        "Vor der Tür lehnt ein leerer Karren, dessen Deichsel schon Moos angesetzt hat.",
-        "Bertok steht im Eingang, bevor du klopfen kannst. Seine Hände sind mehlweiß, obwohl seit Tagen nichts gemahlen wurde.",
-        "Hinter ihm bewegt sich etwas zwischen den Säcken — zu schnell für eine Ratte.",
+        "Kein Mehlstaub liegt in der Luft, obwohl das Wasserrad noch immer herumdreht.",
+        "Vor der Tür lehnt ein leerer Karren, dessen Deichsel schon Moos angesetzt hat. Ein Wagen, der offenbar schon länger wartet, als die Mühle noch etwas zu liefern hatte.",
+        "Bertok steht im Eingang, bevor du klopfen kannst. Seine Hände sind mehlweiß, obwohl seit Tagen kein Korn mehr durch die Mühle gelaufen ist.",
+        "„Wer hier steht, hat meistens einen Grund“, sagt er, ohne dich anzusehen. Hinter ihm bewegt sich etwas zwischen den Säcken — schnell genug, um keine Ratte zu sein.",
       ],
     });
   }
@@ -51,11 +51,11 @@ export async function dorfMuehle(rt: Runtime, held: Held) {
       portrait: null,
       held,
       lines: [
-        "Das Rad schlägt gegen das Wasser und mahlt nichts.",
-        "Bertok bleibt am Mahlwerk. Aus der Kornkammer kommt das leise Klicken von gezählten Säcken.",
+        "Das Wasserrad schlägt gegen das Wasser und mahlt trotzdem nichts. Es gibt nur den Klang, nicht das Mehl.",
+        "Bertok bleibt am Mahlwerk stehen, als hätte er sich dort festgenagelt. In der Kornkammer klackern Säcke mit der Vorsicht einer Frau, die zählt, obwohl es gar nichts zu zählen gibt.",
         held.spurenGefunden
-          ? "Unten am Ufer sind die nassen Schleifspuren noch immer im Schlamm."
-          : "Hinter dem Haus fällt der Boden zum Fluss ab.",
+          ? "Unten am Ufer liegen die nassen Schleifspuren noch immer im Schlamm, als hätten sie dort Stunden zugebracht und niemand wäre gekommen, sie zu entfernen."
+          : "Hinter dem Haus fällt der Boden zum Fluss ab. Dort liegt die Wahrheit, wenn man sie zu finden weiß.",
         ...echoWasserInDerMuehle(held),
         ...echoGasseInDerMuehle(held),
       ],
@@ -124,15 +124,15 @@ async function muehleNachspiel(rt: Runtime, held: Held) {
 
 async function muehleBertok(rt: Runtime, held: Held) {
   const lines = [
-    "Bertok prüft das Mahlwerk, obwohl es längst justiert ist. Der Stein ist kalt.",
-    "„Kein Mehl heute. Kein Mehl seit zwei Wochen.“ Er sagt es, bevor du fragst.",
+    "Bertok prüft das Mahlwerk, obwohl es längst justiert ist. Der Stein ist kalt und der Klang des Wasserrads klingt noch unnatürlich laut in der Halle.",
+    "„Kein Mehl heute. Kein Mehl seit zwei Wochen“, sagt er, noch bevor du fragst. Die Antwort kommt so schnell, dass er sie wohl schon auf der Zunge hatte.",
   ];
   if (held.muellerVertraut) {
-    lines.push("Seine Stimme bleibt leise. Er sieht zur Kornkammer, dann zum Ufer, als könnte beides ihn hören.");
+    lines.push("Seine Stimme bleibt leise. Er sieht zur Kornkammer, dann zum Ufer, als könnte beides ihn hören und als müsse er den richtigen Satz gerade noch im Hals halten.");
   } else if (held.bertokBedraengt) {
-    lines.push("Seit du Druck gemacht hast, bleiben seine Sätze kurz. Die Hand auf dem Mahlstein zittert trotzdem.");
+    lines.push("Seit du Druck gemacht hast, bleiben seine Sätze kurz. Die Hand auf dem Mahlstein zittert trotzdem, als sei der Stein noch schmutziger als der Rest des Hauses.");
   } else {
-    lines.push("„Das Wasser steht zu niedrig. Das Korn ist schlecht. Ärger mit der Lieferung.“ Namen nennt er nicht.");
+    lines.push("„Das Wasser steht zu niedrig. Das Korn ist schlecht. Und in der Lieferung steckt etwas, das keiner mehr beim Namen nennen will“, sagt er. Namen nennt er nicht. Das ist es, was man von ihm hört.");
   }
   lines.push(...echoDruckBertok(held));
 

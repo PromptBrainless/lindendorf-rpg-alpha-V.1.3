@@ -20,18 +20,18 @@ export async function dorfGasse(rt: Runtime, held: Held) {
       portrait: null,
       held,
       lines: [
-        "Die Kirche von Lindendorf steht einen Schritt tiefer als der Platz davor. Sie wirkt, als hätte sie sich in den Jahrhunderten langsam in die Erde gesenkt. Sie ist müde von allem, was ihr je gebeichtet wurde. An der Schwelle hat der Stein über die Zeit eine flache Mulde geschliffen, in der sich Regenwasser sammelt. Das Wasser läuft nicht ab, sondern steht dort wie ein kleiner, geduldiger Spiegel, in dem sich ein grauer Himmel bricht. Keiner hat in zehn Jahren daran gedacht, einen Abfluss zu schlagen. Vielleicht hat niemand die Schwelle lange genug betrachtet, um den Mangel zu bemerken.",
-        "Im Schatten der Kirchmauer sitzt Fenn, wo selbst im Hochsommer die Sonne nur für wenige Stunden erscheint. Seine nackten Füße liegen im kalten Wasser der Dachrinne, ohne dass er es spürt. Die Kälte ist für ihn ein alter Bekannter, mit dem man keine Umstände macht. Er hebt den Blick, bevor du an ihm vorbeigehst. Niemand im Dorf erinnert sich, dass Fenn je zuerst Aufsehen erregte. Für gewöhnlich ist er Teil der Mauer, ein Schatten unter Schatten, den man grüßt. Heute grüßt man ihn nicht.",
-        "In der Tasche seines vielfach geflickten Mantels liegt ein morsches Stück Lattenzaun. Die ursprüngliche Farbe des Mantels kann niemand mehr benennen. Zehn Winter haben das Holz glattgeschliffen wie einen Kiesel im Flussbett. Die alten Nagellöcher sind zu bloßen Dellen verwittert. Wer genau hinsieht, erkennt noch das Holz. Er sieht, wo einst zwei Bretter im rechten Winkel zusammengeschlagen waren.",
+        "Die Kirche von Lindendorf steht einen Schritt tiefer als der Platz davor. Sie wirkt, als hätte sie sich in den Jahrhunderten langsam in die Erde gesenkt und sei müde von allem, was ihr jemals gebeichtet wurde. An der Schwelle hat der Stein eine flache Mulde geschliffen, in der sich Regenwasser sammelt. Es läuft nicht ab, sondern steht dort wie ein kleiner Spiegel, in dem der graue Himmel gebrochen wird. Keiner hat in Jahren daran gedacht, einen Abfluss vorzusehen. Vielleicht hat auch niemand die Schwelle lange genug angesehen, um den Mangel zu bemerken.",
+        "Im Schatten der Kirchmauer sitzt Fenn, wo selbst im Hochsommer die Sonne kaum durchkommt. Seine nackten Füße liegen im kalten Wasser der Dachrinne, ohne dass er es spürt. Die Kälte ist für ihn ein alter Bekannter, mit dem man keine Umstände macht. Er hebt den Blick, als du an ihm vorbeigehst. Niemand im Dorf erinnert sich, dass Fenn einmal auffiel. Für gewöhnlich ist er Teil der Wand, ein Schatten unter Schatten, den man grüßt. Heute ist das anders.",
+        "„Wenn du irgendetwas sehen willst, sieh nicht nur auf die Gasse“, sagt er. „Sieh auf die Bretter. Die Leute stellen sie nicht aus Versehen hin.“ In der Tasche seines geflickten Mantels liegt ein morsches Stück Lattenzaun. Die Farbe des Stoffes ist kaum noch zu erkennen. Zehn Winter haben das Holz glatt geschliffen wie einen Kiesel im Flussbett. Die alten Nagellöcher sind zu bloßen Dellen verwittert. Wer genau hinsieht, erkennt immer noch, wo einst zwei Bretter im rechten Winkel zusammengeschlagen wurden.",
       ],
     });
     await rt.present({
       held,
       lines: [
         held.loesungswegMuehle === "verraten"
-          ? "„Die Wache holt Leute, wenn jemand redet. Trotzdem muss einer zuhören, bevor sie Bretter über die Gasse legen.“"
-          : "„In einer Woche kommt die Baumannschaft. Vahl hat im Rat verkündet, hinter der Gerberei stehe ein Lagerhaus. Als wäre da nie etwas gewesen.“",
-        "Er wartet nicht auf eine Antwort. Die Hand in der Tasche bleibt in Bewegung.",
+          ? "„Die Wache holt Leute, wenn jemand redet“, sagt Fenn. „Trotzdem muss einer zuhören, bevor sie Bretter über die Gasse legen.“"
+          : "„In einer Woche kommt die Baumannschaft“, sagt Fenn. „Vahl hat im Rat verkündet, hinter der Gerberei stehe ein Lagerhaus. Als hätte dort nie etwas anderes gelegen.“",
+        "Er wartet nicht auf eine Antwort. Die Hand in seiner Tasche bleibt in Bewegung, als wolle sie das Brett noch einmal prüfen, bevor sie es wieder wegsteckt.",
       ],
     });
   }

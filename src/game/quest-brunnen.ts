@@ -25,11 +25,11 @@ export async function dorfTruebesWasser(rt: Runtime, held: Held) {
       portrait: "dennek",
       held,
       lines: [
-        "Der Wassereimer am Dorfbrunnen steht noch halb voll von der Nacht. Niemand hat sich heute Morgen die Mühe gemacht, ihn zu leeren und neu zu füllen — nicht vor dem Brot, nicht vor dem Vieh.",
-        "Das Wasser hat die falsche Farbe: ein trübes Graubraun, wie aufgewühlter Teichgrund statt klarer, kalter Tiefe ohne Geschichte.",
-        "Vor der Apotheke hustet ein Kind, trocken und hart, weil etwas Falsches in seiner Brust sitzt. Die Mutter hält es fester, weil das bloße Husten nicht genügt; ihr Griff dient ihrer eigenen Angst.",
-        "Am Brunnenrand steht Ratsherr Dennek und rührt mit einem Stock im Eimer. Langsam. Im Kreis. Als ließe sich vergiftetes Wasser klären wie ein Brei, dem nur noch Geduld fehlt.",
-        "Er sieht dabei niemanden an — weder das Kind noch die Mutter noch die Vorübergehenden. Als hoffe er, dass die Bewegung seiner Hand auch die Fragen im Kreis hält.",
+        "Der Wassereimer am Dorfbrunnen steht noch halb voll von der Nacht. Niemand hat sich heute Morgen die Mühe gemacht, ihn zu leeren und neu zu füllen. Nicht vor dem Brot. Nicht vor dem Vieh. Nicht vor den Kindern.",
+        "Das Wasser hat die falsche Farbe: ein trübes Graubraun, nicht mehr klar und kalt wie ein Brunnen im Frühjahr, sondern wie aufgewühlter Teichgrund nach einem Regen.",
+        "Vor der Apotheke hustet ein Kind, trocken und hart, als würde etwas Falsches in der Brust sitzen. Die Mutter hält es fester. Das bloße Husten reicht nicht; ihr Griff dient vor allem ihrer eigenen Angst.",
+        "Am Brunnenrand steht Ratsherr Dennek und rührt mit einem Stock im Eimer. Langsam. Im Kreis. Als ließe sich vergiftetes Wasser klären wie ein Brei, dem man nur noch Geduld entgegenhalten muss.",
+        "„Das hat den Winter nicht überlebt“, murmelt er, ohne jemanden anzusehen. Das ist alles, was er zu den Kranken und den Blicken sagt. Damit ist auch die Frage schon wieder hinter ihm verschwunden.",
       ],
     });
   }
@@ -54,10 +54,10 @@ export async function dorfTruebesWasser(rt: Runtime, held: Held) {
       portrait: "dennek",
       held,
       lines: [
-        "Das Wasser im Eimer bleibt trüb bis zum Grund. Es schmeckt nach Eisen, wenn der Wind vom Wald herüberzieht. Der Wind trägt einen Rest der Wahrheit, den man sonst nirgendwo finden kann.",
+        "Das Wasser im Eimer bleibt trüb bis zum Grund. Es schmeckt nach Eisen, wenn der Wind aus dem Wald herüberzieht. Der Wind trägt einen Rest der Wahrheit mit sich, den man sonst nirgendwo finden kann.",
         held.truebungBestaetigt
-          ? "Kern hat die Kranken namentlich benannt, einen nach dem anderen, mit der Genauigkeit einer Frau, die die überfüllten Betten im Dorf kennt. Dennek steht noch immer am Rand, unverändert. Er betrachtet den Brunnen als sein Eigentum. Für ihn ist die Sorge um das Wasser eine private Angelegenheit, nicht die des ganzen Dorfes."
-          : "Kerns Tür steht einen Spalt offen. Sie scheint auf jemanden zu warten, der endlich eintritt. Dennek trommelt mit den Fingern auf die Brunnenmauer. Das Geräusch ist unruhig und klein, und es passt nicht zum Rühren im Eimer. Ein Mann hält etwas in seiner Zunge, das er noch nicht preisgeben will.",
+          ? "„Es gibt keine einfachen Namen mehr für die Krankheit“, hat Kern gesagt. Jetzt steht Dennek wieder am Rand des Brunnens und betrachtet ihn, als gehöre er ihm allein. Für ihn ist das Wasser eine Sache der Ordnung, nicht des Dorfes."
+          : "Kerns Tür steht einen Spalt offen, als warte sie noch auf jemand, der den verlorenen Mut endlich aufbringt. Dennek trommelt mit den Fingern auf die Brunnenmauer. Das Geräusch ist klein und unruhig. Ein Mann hält etwas in seiner Zunge, das er noch nicht zugeben will.",
         ...echoMuehleAmBrunnen(held),
         ...echoGasseAmBrunnen(held),
       ],

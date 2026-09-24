@@ -46,17 +46,17 @@ export async function gasseGrete(rt: Runtime, held: Held) {
   }
 
   const lines = [
-    "Die Kate ist niedriger als die Gerberei. Grete ist fast blind. Die Finger finden das Medaillon, bevor sie deine Schritte findet.",
-    "Es riecht nach kaltem Rauch und altem Leder. An der Wand hängt ein Riemen, der zu einer Gerberei gehört hat.",
-    "Auf dem Tisch liegt ein Teller mit nichts darauf. Der Rand ist abgewetzt, wo eine Hand jahrelang denselben Platz gesucht hat.",
+    "Die Kate ist niedriger als die Gerberei, und Grete ist fast blind. Ihre Finger finden das Medaillon, bevor sie deine Schritte entdeckt.",
+    "Es riecht nach kaltem Rauch und altem Leder. An der Wand hängt ein Riemen, der einmal zu einer Gerberei gehört hat und jetzt wie ein Erinnerungsschaden an der Wand hängt.",
+    "Auf dem Tisch liegt ein Teller mit nichts darauf. Der Rand ist abgewetzt, wo eine Hand über Jahre den gleichen Platz gesucht hat, ohne ihn jemals wirklich gefunden zu haben.",
   ];
   if (held.gasseSpielzeugGefunden) {
-    lines.push("Du hast das Holzspielzeug gesehen. Gretes Mund wird enger. Das Medaillon bleibt in der Hand.");
+    lines.push("Du hast das Holzspielzeug gesehen. Gretes Mund wird enger. Das Medaillon bleibt fest in ihrer Hand, als hätte sie sich daran festgeklammert, bevor du noch ein Wort gesagt hast.");
   }
   if (held.gasseGeschichteGehoert) {
-    lines.push("Fenn hat ihren Namen genannt. Sie wartet, ob du Zeit mitbringst oder nur eine Frage.");
+    lines.push("Fenn hat ihren Namen genannt. Sie wartet jetzt nicht auf eine Frage, sondern auf den Ton, mit dem du sie stellst. Das unterscheidet sie von den anderen.");
   } else if (held.gasseOrtGesehen) {
-    lines.push("Du kommst von der Gasse. Sie hat deine Schritte gehört, bevor du geklopft hast.");
+    lines.push("Du kommst von der Gasse. Sie hat deine Schritte gehört, bevor du gepocht hast. Das Dorf kennt nicht viele Fremde, aber Grete kennt sogar die Schritte derer, die nicht mehr zurückkommen.");
   }
 
   const items: { id: string; label: string }[] = [

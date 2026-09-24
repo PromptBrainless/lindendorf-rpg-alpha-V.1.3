@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   BookOpen,
+  BriefcaseBusiness,
   ExternalLink,
   ChevronDown,
   Coins,
@@ -17,6 +18,7 @@ import { rufListe } from "@/game/reputation";
 import { TAGESZEIT_TEXT } from "@/game/tageszeit";
 import { Button } from "@/components/ui/button";
 import { spieleKlang } from "@/game/klang";
+import { wissenTafeln } from "@/game/wissen-tafeln";
 import { SeitenFuss } from "./SeitenFuss";
 import { ZustandLeiste } from "./ZustandLeiste";
 
@@ -68,6 +70,12 @@ export function Hud({
   const zeit = TAGESZEIT_TEXT[hud.tageszeit];
   const spieltag = hud.spieltag;
   const knapp = hpPct <= 30;
+  const wissen = wissenTafeln(held);
+  const statusBadges = [
+    { label: "Gold", value: hud.gold, icon: Coins },
+    { label: "Trank", value: hud.inventar.includes(HEILTRANK) ? "Ja" : "Nein", icon: FlaskConical },
+    { label: "Schlüssel", value: hud.inventar.includes(SCHLUESSEL) ? "Ja" : "Nein", icon: KeyRound },
+  ];
 
   return (
     <div className="sticky top-0 z-20 border-b border-border bg-ink/94 px-3 py-2 pt-[max(0.5rem,env(safe-area-inset-top))] shadow-sm backdrop-blur-md sm:px-4">
@@ -77,6 +85,8 @@ export function Hud({
             <p className="min-w-0 truncate font-display text-base font-semibold tracking-tight sm:text-lg">
               {hud.name}
             </p>
+            <span className="hidden shrink-0 text-muted-fg sm:inline">{zeit.name}</span>
+            <span className="hidden shrink-0 text-muted-fg tabular-nums sm:inline">Tag {spieltag}</span>
             <span
               className={`inline-flex shrink-0 items-center gap-1 font-mono tabular-nums ${
                 knapp ? "text-hp font-semibold" : "text-muted-fg"
@@ -90,12 +100,18 @@ export function Hud({
               />
               {hud.lp}/{hud.maxLp}
             </span>
-            <span className="hidden shrink-0 text-muted-fg sm:inline">
-              {zeit.name} · Tag {spieltag}
-            </span>
+          </div>
+          <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[10px] text-muted-fg sm:text-[11px]">
+            {statusBadges.map(({ label, value, icon: Icon }) => (
+              <span key={label} className="inline-flex items-center gap-1 rounded-full border border-border bg-surface/60 px-1.5 py-0.5">
+                <Icon className="size-3" aria-hidden />
+                <span className="tabular-nums">{value}</span>
+                <span>{label}</span>
+              </span>
+            ))}
           </div>
           <div
-            className="mt-1 h-1.5 max-w-64 overflow-hidden rounded-full bg-surface-2"
+            className="mt-2 h-1.5 max-w-64 overflow-hidden rounded-full bg-surface-2"
             role="meter"
             aria-valuenow={hud.lp}
             aria-valuemin={0}
@@ -208,15 +224,64 @@ export function Hud({
       </div>
       {offen ? (
         <div className="herein mx-auto mt-2 max-w-5xl border-t border-border pt-2">
+          <div className="grid gap-3 lg:grid-cols-[1.05fr_1.35fr]">
+            <div className="rounded-md border border-border bg-surface/60 p-3">
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-sm font-medium text-fg">
+                  <BriefcaseBusiness className="size-4 text-accent" aria-hidden />
+                  Inventar
+                </div>
+                <span className="text-[11px] uppercase tracking-[0.12em] text-muted-fg tabular-nums">
+                  {held.inventar.length} {held.inventar.length === 1 ? "Gegenstand" : "Gegenstände"}
+                </span>
+              </div>
+              {held.inventar.length ? (
+                <ul className="grid gap-2 sm:grid-cols-2">
+                  {held.inventar.map((item) => (
+                    <li key={item} className="rounded-sm border border-border bg-bg/50 px-2 py-1.5 text-xs text-fg">
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="rounded-sm border border-dashed border-border px-2 py-3 text-sm text-muted-fg">
+                  Der Beutel ist leer. Nur das Gewicht deiner Entscheidung bleibt.
+                </p>
+              )}
+            </div>
+
+            <div className="rounded-md border border-border bg-surface/60 p-3">
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2 text-sm font-medium text-fg">
+                  <BookOpen className="size-4 text-accent" aria-hidden />
+                  Wissen
+                </div>
+                <span className="text-[11px] uppercase tracking-[0.12em] text-muted-fg tabular-nums">
+                  {wissen.length} Einträge
+                </span>
+              </div>
+              {wissen.length ? (
+                <ul className="space-y-2">
+                  {wissen.slice(0, 4).map((tafel) => (
+                    <li key={tafel.id} className="rounded-sm border border-border bg-bg/50 px-2 py-1.5">
+                      <p className="text-xs uppercase tracking-[0.12em] text-muted-fg">{tafel.offen ? "Offen" : "Gesehen"}</p>
+                      <p className="mt-0.5 text-sm text-fg">{tafel.title}</p>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="rounded-sm border border-dashed border-border px-2 py-3 text-sm text-muted-fg">
+                  Noch kein Satz hat sich in dir festgesetzt.
+                </p>
+              )}
+            </div>
+          </div>
+
           <ZustandLeiste held={held} />
           <p className="mt-1.5 text-xs text-muted-fg">
-            {zeit.satz} Tag {spieltag}.
+            {zeit.satz} · Tag {spieltag} · {hud.lp}/{hud.maxLp} LP · {hud.gold} Gold
           </p>
           <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-fg">
-            <span className="inline-flex items-center gap-1 tabular-nums">
-              <Coins className="size-3.5" aria-hidden />
-              {hud.gold}
-            </span>
             {hud.inventar.includes(HEILTRANK) ? (
               <span className="inline-flex items-center gap-1">
                 <FlaskConical className="size-3.5" aria-hidden />

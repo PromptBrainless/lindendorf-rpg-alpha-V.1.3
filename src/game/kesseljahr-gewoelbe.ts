@@ -50,16 +50,16 @@ export async function gasseGewoelbe(rt: Runtime, held: Held) {
     portrait: null,
     held,
     lines: [
-      "Die Kirche steht kälter als der Platz. Kerzenwachs ist an den Bänken heruntergelaufen und wieder hart geworden.",
-      "Die Treppe zum Gewölbe liegt hinter einem Vorhang, den niemand zur Seite schiebt. Der Stoff ist dunkel genug, dass man ihn für eine Wand halten kann.",
+      "Die Kirche steht kälter als der Platz. Kerzenwachs ist an den Bänken heruntergelaufen und wieder hart geworden, als hätte es lange genug zu denken gebraucht, um zu erstarren.",
+      "Die Treppe zum Gewölbe liegt hinter einem Vorhang, den niemand zur Seite schiebt. Der Stoff ist so dunkel, dass man ihn leicht für eine Wand halten könnte, wenn man nicht wüsste, was unter der Kirche verborgen liegt.",
       held.greteBedraengt
-        ? "Unten am Platz hat jemand Gretes Stimme gehört. Oben steht der Pfarrer steifer als sonst."
+        ? "Unten am Platz hat jemand Gretes Stimme gehört. Oben steht der Pfarrer steifer als sonst, als hätte sich ein Satz von unten in seinen Rücken gebohrt."
         : held.kuesterGewarnt
-          ? "Der Küster hat dich einmal gesehen. Die Tür quietscht, und der Riegel sitzt einen Fingerbreit fester."
-          : "Unten liegen die, die man ohne Namen begräbt. Oben redet niemand davon.",
+          ? "Der Küster hat dich einmal gesehen. Die Tür quietscht, und der Riegel sitzt einen Fingerbreit fester als gestern."
+          : "Unten liegen die, die man ohne Namen begräbt. Oben redet niemand davon. Das ist kein Zufall, sondern die Form des Dorfes.",
       held.artefaktErhalten
-        ? "Der Pfarrer hat das Silber gesehen, das du trägst. Er sieht dich anders an als die, die nur fragen."
-        : "Der Pfarrer steht am Altar und tut, als gehörte die Treppe nicht zu seiner Kirche.",
+        ? "Der Pfarrer hat das Silber gesehen, das du trägst. Er schaut dich an, als seist du jemand, der zu viel erkannt hat, ohne das Recht zu haben, es zu fragen."
+        : "Der Pfarrer steht am Altar und tut, als gehöre die Treppe nicht zu seiner Kirche. Das hat er schon lange geübt.",
     ],
     choices: items.map((item) => item.label),
   });

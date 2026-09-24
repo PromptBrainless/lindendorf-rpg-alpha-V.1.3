@@ -9,17 +9,17 @@ export async function gasseKonflikt(rt: Runtime, held: Held) {
     portrait: null,
     held,
     lines: [
-      "Vahl sitzt allein. Die Karte an der Wand wirft einen schmalen Schatten über die Umrandung der Gasse.",
-      "Der Siegelring dreht sich, bevor du sprichst. Auf dem Tisch die Baufreigabe. Wachs, noch weich. Die Feder daneben unbenutzt.",
+      "Vahl sitzt allein. Die Karte an der Wand wirft einen schmalen Schatten über die Umrandung der Gasse, als habe die Karte selbst ein Recht auf die Stube und nicht nur das Dorf.",
+      "Der Siegelring dreht sich, noch bevor du sprichst. Auf dem Tisch liegt die Baufreigabe, das Wachs noch weich, die Feder daneben unbenutzt. Es wirkt, als wäre alles nur eine Bewegung von ihm entfernt.",
     ],
   });
   await rt.present({
     held,
     lines: [
-      "Draußen im Flur geht eine Magd vorbei und bleibt nicht stehen.",
+      "Draußen im Flur geht eine Magd vorbei und bleibt nicht stehen. Sie hört alles, und sie hört auch, dass man nicht überall zugehört, wo man steht.",
       held.vahlGrossvater
-        ? "Er hat den Großvater schon einmal genannt. Heute liegt Papier auf dem Tisch, das mehr wiegt als der Ring."
-        : "Er sieht dich an wie eine Lieferung, die zu spät kommt.",
+        ? "Er hat den Großvater schon einmal genannt. Heute liegt Papier auf dem Tisch, das mehr wiegt als der Ring und nicht weniger als ein Leben, das man versprochen hat."
+        : "Er sieht dich an wie eine Lieferung, die zu spät gekommen ist und deshalb noch mehr Angst macht als eine, die rechtzeitig ankommt.",
     ],
   });
 
@@ -37,8 +37,8 @@ export async function gasseKonflikt(rt: Runtime, held: Held) {
     portrait: null,
     held,
     lines: [
-      "Ilse Brandtners Wachstuch liegt zwischen euch, auch wenn es noch unter dem Hemd ist. Das Wachs hat deine Haut angenommen.",
-      "Vahl wartet. Der Ring auch.",
+      "Ilse Brandtners Wachstuch liegt zwischen euch, auch wenn es noch unter deinem Hemd ist. Das Wachs hat deine Haut angenommen und lässt sie nicht mehr ganz wie vorher aussehen.",
+      "Vahl wartet. Der Ring auf seiner Hand wartet auch. Das ist eine andere Art von Geduld, und sie ist gefährlicher.",
     ],
     choices: items.map((item) => item.label),
   });
