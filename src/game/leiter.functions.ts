@@ -15,7 +15,7 @@ export const oeffneLeiterSitzung = createServerFn({ method: "POST" })
     return { passwort: String(inner.passwort ?? "").slice(0, 80) };
   })
   .handler(async ({ data }) => {
-    const erwartet = String(process.env.LEITER_PASSWORT ?? "1234");
+    const erwartet = String(process.env.LEITER_PASSWORT ?? (process.env.NODE_ENV === "production" ? "" : "1234"));
     if (!data.passwort || data.passwort !== erwartet) return { ok: false as const };
     merkeLeiterCookie();
     return { ok: true as const };
