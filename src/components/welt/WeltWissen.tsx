@@ -13,11 +13,12 @@ import { StimmeFeld } from "./StimmeFeld";
 export function WeltWissen({ aktuell }: { aktuell?: string }) {
   const ablegen = useServerFn(legeWissenAb);
   const streichen = useServerFn(loescheWissenAb);
+  const [revision, setRevision] = useState(0);
   const ids = useMemo(() => {
     const liste = wissenIds();
     if (aktuell && !liste.includes(aktuell)) return [aktuell, ...liste];
     return liste;
-  }, [aktuell]);
+  }, [aktuell, revision]);
   const start = aktuell && ids.includes(aktuell) ? aktuell : (ids[0] ?? "");
   const [wahl, setWahl] = useState(start);
   const [suche, setSuche] = useState("");
@@ -61,6 +62,7 @@ export function WeltWissen({ aktuell }: { aktuell?: string }) {
       stimmen: zuege.length ? zuege : undefined,
     };
     merkeWissenDatei(tafel);
+    setRevision((wert) => wert + 1);
     setBusy(true);
     setMeldung("legt ab…");
     try {
@@ -141,11 +143,12 @@ export function WeltWissen({ aktuell }: { aktuell?: string }) {
               setBusy(true);
               void streichen({ data: { id } })
                 .then((fund) => {
-                  loescheWissenDatei(id);
+                  if (fund.ok) loescheWissenDatei(id);
                   const rest = wissenIds().filter((item) => item !== id);
                   const naechste = rest[0] ?? aktuell ?? "";
                   setWahl(naechste);
                   setEntwurf(lade(naechste, aktuell));
+                  setRevision((wert) => wert + 1);
                   setMeldung(fund.ok ? `${id}.json gestrichen` : fund.error);
                 })
                 .finally(() => setBusy(false));
