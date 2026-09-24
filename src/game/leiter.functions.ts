@@ -1,4 +1,5 @@
 import { createServerFn } from "@tanstack/react-start";
+import { merkeLeiterCookie, verlasseLeiterCookie } from "./leiter-auth.server";
 
 function innerOf(input: unknown): Record<string, unknown> {
   const rec = input && typeof input === "object" ? (input as Record<string, unknown>) : {};
@@ -16,5 +17,11 @@ export const oeffneLeiterSitzung = createServerFn({ method: "POST" })
   .handler(async ({ data }) => {
     const erwartet = String(process.env.LEITER_PASSWORT ?? "1234");
     if (!data.passwort || data.passwort !== erwartet) return { ok: false as const };
+    merkeLeiterCookie();
     return { ok: true as const };
   });
+
+export const schliesseLeiterSitzungServer = createServerFn({ method: "POST" }).handler(() => {
+  verlasseLeiterCookie();
+  return { ok: true as const };
+});

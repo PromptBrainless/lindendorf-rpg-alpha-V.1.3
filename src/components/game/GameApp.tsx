@@ -1,4 +1,5 @@
 import { lazy, Suspense, useCallback, useEffect, useRef, useState } from "react";
+import { useServerFn } from "@tanstack/react-start";
 import { Runtime } from "@/game/runtime";
 import { spielen } from "@/game/script";
 import { ART, LAGEN_ART, PORTRAITS, artSrcFor } from "@/game/art";
@@ -40,6 +41,7 @@ import { RulesScreen } from "./RulesScreen";
 import { SceneStage } from "./SceneStage";
 import { TitleScreen } from "./TitleScreen";
 import { leiterFrei, schliesseLeiterSitzung } from "@/game/leiter-login";
+import { schliesseLeiterSitzungServer } from "@/game/leiter.functions";
 import { LeiterLogin } from "./LeiterLogin";
 import { Systemsteuerung } from "./Systemsteuerung";
 import { leseEinstellungen, setzeEinstellung, wendeEinstellungenAn } from "@/game/einstellungen";
@@ -75,6 +77,7 @@ export function GameApp() {
   const [leiterLogin, setLeiterLogin] = useState(false);
   const [systemOffen, setSystemOffen] = useState(false);
   const einstellungen = useEinstellungen();
+  const schliesseLeiterServer = useServerFn(schliesseLeiterSitzungServer);
   const [patch, setPatch] = useState<KartePatch>({});
   const [schluessel, setSchluessel] = useState("");
   const [lageIndex, setLageIndex] = useState<number | null>(null);
@@ -464,6 +467,7 @@ export function GameApp() {
   }
 
   function schalteSlAus() {
+    void schliesseLeiterServer({ data: undefined });
     schliesseLeiterSitzung();
     setzeWeltAktiv(false);
     setLeiterAn(false);

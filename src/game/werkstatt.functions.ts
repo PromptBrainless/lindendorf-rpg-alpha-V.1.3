@@ -10,6 +10,7 @@ import { KANON_NAMEN } from "./werkstatt-rag";
 import { loreZeilen } from "./lore";
 import { sprich } from "./modelle";
 import { weltbildZeile } from "./weltbild";
+import { verlangeLeiter } from "./leiter-auth.server";
 
 const ART = new Set([
   "title",
@@ -90,6 +91,7 @@ export const formuliereText = createServerFn({ method: "POST" })
     };
   })
   .handler(async ({ data }) => {
+    verlangeLeiter();
     if (!data.text.trim()) return { ok: false as const, error: "Kein Text." };
     const sicht = ART_SICHT[data.art] ?? "";
     const erlaubt = KANON_NAMEN.filter((name) => data.text.includes(name) || data.title.includes(name.split(" ")[0]));
@@ -141,6 +143,7 @@ export { grokFassung };
 export const entwerfeSzene = createServerFn({ method: "POST" })
   .validator(alsEingabe)
   .handler(async ({ data }) => {
+    verlangeLeiter();
     const antwort = await sprich(GROK_SZENE, grokFassung(data));
     if (!antwort.ok) return antwort;
     try {
@@ -218,6 +221,7 @@ export const legeKiSzeneAb = createServerFn({ method: "POST" })
     };
   })
   .handler(async ({ data }) => {
+    verlangeLeiter();
     let roh: unknown;
     try {
       roh = JSON.parse(data.inhalt);
@@ -258,6 +262,7 @@ export const legeWissenAb = createServerFn({ method: "POST" })
     };
   })
   .handler(async ({ data }) => {
+    verlangeLeiter();
     let roh: unknown;
     try {
       roh = JSON.parse(data.inhalt);
@@ -284,6 +289,7 @@ export const loescheWissenAb = createServerFn({ method: "POST" })
     return { id: String(inner.id ?? "").replace(/[^a-zA-Z0-9._-]+/g, "-").slice(0, 80) };
   })
   .handler(async ({ data }) => {
+    verlangeLeiter();
     if (!data.id) return { ok: false as const, error: "Keine Tafel." };
     const { unlink } = await import("node:fs/promises");
     const { join } = await import("node:path");
@@ -319,6 +325,7 @@ export const legeTonAb = createServerFn({ method: "POST" })
     };
   })
   .handler(async ({ data }) => {
+    verlangeLeiter();
     if (!data.id || !data.data) return { ok: false as const, error: "Kein Ton zum Ablegen." };
     const { mkdir, writeFile } = await import("node:fs/promises");
     const { join } = await import("node:path");
@@ -339,6 +346,7 @@ export const legeStimmeAb = createServerFn({ method: "POST" })
     };
   })
   .handler(async ({ data }) => {
+    verlangeLeiter();
     let roh: unknown;
     try {
       roh = JSON.parse(data.inhalt);
@@ -381,6 +389,7 @@ export const legeKanonAufGithub = createServerFn({ method: "POST" })
     };
   })
   .handler(async ({ data }) => {
+    verlangeLeiter();
     let roh: unknown;
     try {
       roh = JSON.parse(data.inhalt);
@@ -394,7 +403,7 @@ export const legeKanonAufGithub = createServerFn({ method: "POST" })
     const { ConnectorType } = await import("@/lib/app-data/types");
     const options = { connectorType: ConnectorType.Mcp, connectorCatalogId: "github" };
     const owner = "PromptBrainless";
-    const repo = "lindendorf-rpg-alpha-V.1.1";
+    const repo = "lindendorf-rpg-alpha-V.1.3";
     const path = `docs/kanon-auflagen/${data.schluessel}.json`;
     const bestehend = await callTool("github___get_file_contents", { owner, repo, path }, options);
     if (bestehend.pending) {
