@@ -1,5 +1,7 @@
 node_modules/
 dist/
+worldforge-studio/node_modules/
+worldforge-studio/dist/
 .vercel/
 .vite/
 coverage/
