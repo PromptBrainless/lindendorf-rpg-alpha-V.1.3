@@ -97,10 +97,24 @@ export function CreateHero({
           {schritt < 0 ? (
             <>
               <p className="mt-3 text-sm leading-relaxed text-fg/90">
-                Du stehst noch nicht in Lindendorf. Drei von zehn Lagen liegen vor dem Tal. Der Zug
-                ist zufällig. Jede Wahl lässt etwas zurück: Blut, Gold, einen Zustand. Höchstens drei
-                Zustände bleiben. Am Ende spricht die Welt ein Urteil über dich — den Spiegeltext.
+                In Lindendorf ist Klasse kein Volk und kein Rassenmerkmal, sondern das gesellschaftliche
+                Milieu, aus dem du kommst: Akademiker, Bürger, Flussvolk, Freisassen, Gesetzlose,
+                Höflinge, Krieger oder Landvolk. Die Karriere ist dein aktueller Beruf — der rollt in
+                der Welt auf, bestimmt deinen Status und erklärt, warum du heute an diesem Ort stehst.
               </p>
+              <p className="mt-2 text-sm leading-relaxed text-fg/80">
+                Drei von zehn Lagen liegen vor dem Tal. Jede Wahl lässt etwas zurück: Blut, Gold, einen
+                Zustand, eine Schuld. Wenigstens drei Lebensentscheidungen bleiben an dir hängen, und am
+                Ende spricht die Welt ein Urteil über dich — den Spiegeltext deines Standpunkts.
+              </p>
+              <div className="mt-3 rounded-md border border-border bg-surface/70 p-3 text-xs leading-relaxed text-fg/80">
+                <p className="font-medium text-fg">Charaktergrundsatz</p>
+                <p className="mt-1">
+                  Warum ist dein Platz heute hier — und wer möchte, dass du dort bleibst? In Lindendorf
+                  ist das die verbindliche Frage zwischen Klasse, Karriere, Herkunft und persönlicher
+                  Entscheidung.
+                </p>
+              </div>
               <label className="mt-5 block text-sm text-muted-fg" htmlFor="hero-name">
                 Name
               </label>
@@ -273,6 +287,14 @@ function Blatt({
         Ausrichtung: {lesung.name}
       </p>
       <p className="mt-2 text-sm leading-relaxed text-fg/90">Spiegeltext: „{lesung.satz}“</p>
+
+      <div className="mt-4 grid gap-2 sm:grid-cols-2">
+        <InfoCard label="Klasse" value="Milieu nach Lebensweg" hint="Akademiker, Bürger, Flussvolk, Freisassen, Gesetzlose, Höflinge, Krieger oder Landvolk" />
+        <InfoCard label="Karriere" value="Aktueller Beruf" hint="Gehilfe, Händler, Bote, Jäger, Wachmann, Schmuggler, Kräuterkundiger, Schreiber, Büttel, Bettler oder andere" />
+        <InfoCard label="Status" value="Sozialer Rang" hint="Eingeschränkt, anerkannt, gefährdet, fest verwurzelt oder verborgen" />
+        <InfoCard label="Leitfrage" value="Warum bist du hier?" hint="Wer will, dass du bleibst, und wer hat dich schon verloren?" />
+      </div>
+
       <div className="mt-4 grid grid-cols-3 gap-2 text-center">
         <Stat label="Stärke" value={werte.staerke} basis={held.staerke} />
         <Stat label="Geschick" value={werte.geschick} basis={held.geschick} />
@@ -309,7 +331,11 @@ function Blatt({
           </li>
         ))}
       </ol>
-      <p className="mt-3 text-sm text-fg">Der Charakter ist spielbereit.</p>
+      <p className="mt-3 text-sm leading-relaxed text-fg/90">
+        Der Charakter ist spielbereit. Er trägt ein Milieu, eine Berufsgeschichte, einen sozialen Rang
+        und eine Schuld im Körper. So beginnt der Weg in Lindendorf: nicht als Rasse, sondern als
+        gesellschaftliche Vergangenheit, die später im Tal wieder aufsteht.
+      </p>
       <div className="mt-6 grid gap-2 sm:grid-cols-2">
         <Button size="lg" onClick={onReady}>
           Nach Lindendorf
@@ -335,6 +361,16 @@ function Stat({ label, value, basis }: { label: string; value: number; basis: nu
           {delta > 0 ? `+${delta}` : delta} vom Grund {basis}
         </p>
       ) : null}
+    </div>
+  );
+}
+
+function InfoCard({ label, value, hint }: { label: string; value: string; hint: string }) {
+  return (
+    <div className="rounded-md border border-border bg-surface/70 p-3">
+      <p className="text-[10px] uppercase tracking-[0.2em] text-muted-fg">{label}</p>
+      <p className="mt-1 font-medium text-fg">{value}</p>
+      <p className="mt-1 text-[11px] leading-relaxed text-fg/70">{hint}</p>
     </div>
   );
 }
