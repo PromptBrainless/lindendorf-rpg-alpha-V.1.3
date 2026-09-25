@@ -1,5 +1,6 @@
 import type { Entscheidung } from "./heldSchema";
 import type { StimmeZug } from "./stimme";
+import type { KlasseId } from "./charakter";
 
 export const LEICHT = 8;
 export const MITTEL = 12;
@@ -126,6 +127,15 @@ export type Tageszeit = "daemmerung" | "tag" | "nacht";
 
 export type Held = {
   name: string;
+  klasse: KlasseId | null;
+  karriere: string | null;
+  karriereStufe: number;
+  statusRang: "Messing" | "Silber" | "Gold";
+  statusAnsehen: number;
+  glueck: number;
+  schicksal: number;
+  ep: number;
+  sozialeAnker: string[];
   staerke: number;
   geschick: number;
   charisma: number;
@@ -259,6 +269,15 @@ export type SceneView = {
 export function createHeld(name: string, staerke: number, geschick: number, charisma: number): Held {
   return {
     name: name.trim() || "Namenlos",
+    klasse: null,
+    karriere: null,
+    karriereStufe: 1,
+    statusRang: "Messing",
+    statusAnsehen: 1,
+    glueck: 0,
+    schicksal: 0,
+    ep: 0,
+    sozialeAnker: [],
     staerke,
     geschick,
     charisma,
@@ -357,6 +376,7 @@ export function cloneHeld(held: Held): Held {
     inventar: [...held.inventar],
     effekte: [...(held.effekte ?? [])],
     entscheidungen: [...(held.entscheidungen ?? [])],
+    sozialeAnker: [...(held.sozialeAnker ?? [])],
     karten: [...(held.karten ?? [])],
     lagenZug: [...(held.lagenZug ?? [])],
     lagenSaat: held.lagenSaat ?? 0,

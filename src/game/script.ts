@@ -16,6 +16,7 @@ import { LAGER_CONTENT, LAGER_WEGE, mitPreis } from "./lager-content";
 import { schliesseLager } from "./taten";
 import { rueckeZeitVor, leseTageszeit, wendeNaechstePhaseAn } from "./tageszeit";
 import { rufAus } from "./reputation";
+import { hatSozialenZugang } from "./charakter";
 import { dorfMuehle } from "./quest-muehle";
 import { dorfTruebesWasser, kernWasser } from "./quest-brunnen";
 import { dorfGasse } from "./quest-kesseljahr";
@@ -407,6 +408,7 @@ async function dorfBuergermeister(rt: Runtime, held: Held) {
 
   let vertrauenGesagt = held.buergermeisterVertraut;
   let druckGesagt = false;
+  let standesrangGesagt = false;
 
   while (!tot(held)) {
     const holmRuf = rufAus(held, "holm");
@@ -431,11 +433,16 @@ async function dorfBuergermeister(rt: Runtime, held: Held) {
           ? "Vertrauen — schon gesagt"
           : "Vertrauen gewinnen (Charisma, mittel)",
         druckGesagt ? "Gold — schon gefordert" : "Druck machen und Gold fordern (Charisma, schwer)",
+        ...(hatSozialenZugang(held.statusRang, "Silber")
+          ? [standesrangGesagt ? "Mit Rang auftreten — schon gesagt" : "Mit Rang auftreten (Silberstatus)"]
+          : []),
         "Wieder gehen",
       ],
     });
 
-    if (wahl === 3) {
+    const standesrangIndex = hatSozialenZugang(held.statusRang, "Silber") ? 3 : -1;
+    const gehenIndex = standesrangIndex >= 0 ? 4 : 3;
+    if (wahl === gehenIndex) {
       await rt.present({
         held,
         lines: [
@@ -445,6 +452,23 @@ async function dorfBuergermeister(rt: Runtime, held: Held) {
         ],
       });
       return;
+    }
+
+    if (wahl === standesrangIndex) {
+      standesrangGesagt = true;
+      held.buergermeisterVertraut = true;
+      held.auftragErhalten = true;
+      held.sozialeAnker ??= [];
+      if (!held.sozialeAnker.includes("rathaus-silberstatus")) held.sozialeAnker.push("rathaus-silberstatus");
+      await rt.present({
+        held,
+        lines: [
+          "Holm sieht auf dein Zeichen, dann auf die Tür. Der Rang öffnet sie nicht. Er verhindert nur, dass sie sofort wieder zufällt.",
+          "„Du kennst die Form. Dann kennst du auch den Preis, wenn die Form nicht mehr reicht.“",
+          "Er legt den Auftrag vor dich. Kein Vorschuss, kein Dank. Aber du wirst angehört, bevor das Amt dich fortschickt.",
+        ],
+      });
+      continue;
     }
 
     if (wahl === 0) {

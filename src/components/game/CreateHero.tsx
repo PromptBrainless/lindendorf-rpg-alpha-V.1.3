@@ -15,6 +15,7 @@ import {
 } from "@/game/herkunft";
 import { peekSaveForName } from "@/game/save";
 import { sichtbareHerkunft } from "@/game/welt";
+import { charakterAusLagen, klasseMitId, karriereMitId, type Charakterwahlmodus } from "@/game/charakter";
 import type { Held } from "@/game/types";
 
 export function CreateHero({
@@ -36,6 +37,7 @@ export function CreateHero({
   const [rueck, setRueck] = useState(false);
   const [saat, setSaat] = useState(0);
   const [zug, setZug] = useState<string[]>([]);
+  const [wahlmodus, setWahlmodus] = useState<Charakterwahlmodus>("lagen");
 
   const alle = sichtbareHerkunft();
   const fragen = useMemo(() => {
@@ -45,8 +47,15 @@ export function CreateHero({
   }, [alle, zug]);
   const frage = schritt >= 0 && schritt < fragen.length && !rueck ? fragen[schritt] : undefined;
   const fertig = fragen.length === LAGE_ZUG_ANZAHL && antworten.length >= fragen.length && !rueck;
-  const standHeld = antworten.length ? baueHeldAusHerkunft(name, antworten, fragen, saat) : null;
-  const grundHeld = schritt >= 0 ? baueHeldAusHerkunft(name, [], fragen, saat) : null;
+  const charakter = fertig
+    ? charakterAusLagen(
+        antworten.map((wahl, i) => ({ id: fragen[i]!.id, art: fragen[i]!.antworten[wahl]!.art })),
+        saat,
+        wahlmodus,
+      )
+    : undefined;
+  const standHeld = antworten.length ? baueHeldAusHerkunft(name, antworten, fragen, saat, charakter) : null;
+  const grundHeld = schritt >= 0 ? baueHeldAusHerkunft(name, [], fragen, saat, charakter) : null;
   const held = fertig ? standHeld : null;
   const vorhandenerStand = useMemo(() => peekSaveForName(name), [name]);
   const hintergrund = fertig ? ART.village : frage ? lageBild(frage.id) || ART.road : ART.road;
@@ -115,6 +124,20 @@ export function CreateHero({
                   Entscheidung.
                 </p>
               </div>
+              <label className="mt-4 block text-sm text-muted-fg">
+                Herkunft bestimmt deinen sozialen Weg
+                <select
+                  className="mt-1.5 h-10 w-full rounded-md border border-border bg-surface px-3 text-sm text-fg"
+                  value={wahlmodus}
+                  onChange={(event) => setWahlmodus(event.target.value as Charakterwahlmodus)}
+                >
+                  <option value="lagen">An den drei Lagen orientieren</option>
+                  <option value="zufall">Klasse und Beruf zufällig bestimmen</option>
+                </select>
+              </label>
+              <p className="mt-2 text-xs text-muted-fg">
+                Die Klasse und genau ein Beruf werden erst nach den drei Lagen festgelegt. Jede Karriere beginnt auf Stufe 1.
+              </p>
               <label className="mt-5 block text-sm text-muted-fg" htmlFor="hero-name">
                 Name
               </label>
@@ -289,9 +312,9 @@ function Blatt({
       <p className="mt-2 text-sm leading-relaxed text-fg/90">Spiegeltext: „{lesung.satz}“</p>
 
       <div className="mt-4 grid gap-2 sm:grid-cols-2">
-        <InfoCard label="Klasse" value="Milieu nach Lebensweg" hint="Akademiker, Bürger, Flussvolk, Freisassen, Gesetzlose, Höflinge, Krieger oder Landvolk" />
-        <InfoCard label="Karriere" value="Aktueller Beruf" hint="Gehilfe, Händler, Bote, Jäger, Wachmann, Schmuggler, Kräuterkundiger, Schreiber, Büttel, Bettler oder andere" />
-        <InfoCard label="Status" value="Sozialer Rang" hint="Eingeschränkt, anerkannt, gefährdet, fest verwurzelt oder verborgen" />
+        <InfoCard label="Klasse" value={held.klasse ? klasseMitId(held.klasse).name : "Nicht gewählt"} hint="Aus den drei Lagen oder zufällig bestimmt" />
+        <InfoCard label="Karriere" value={karriereMitId(held.karriere ?? "")?.name ?? "Nicht gewählt"} hint={`Beruf jetzt · Stufe ${held.karriereStufe}`} />
+        <InfoCard label="Status" value={`${held.statusRang} ${held.statusAnsehen}`} hint="Rang und Ansehen der ersten Karrierestufe" />
         <InfoCard label="Leitfrage" value="Warum bist du hier?" hint="Wer will, dass du bleibst, und wer hat dich schon verloren?" />
       </div>
 
@@ -302,7 +325,7 @@ function Blatt({
       </div>
       <p className="mt-3 text-xs text-muted-fg">Grundwerte sind 2W6−2. Die Zahl oben ist die Probe, Zustände liegen darauf.</p>
       <p className="mt-3 text-sm">
-        LP {held.lp}/10 · Gold {held.gold} · Beutel {held.inventar.length ? held.inventar.join(", ") : "leer"}
+        LP {held.lp}/10 · Gold {held.gold} · EP {held.ep} · Glück {held.glueck} · Schicksal {held.schicksal} · Beutel {held.inventar.length ? held.inventar.join(", ") : "leer"}
       </p>
       {held.effekte.length ? (
         <div className="mt-2 flex flex-wrap gap-1">

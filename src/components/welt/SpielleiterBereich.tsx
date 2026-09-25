@@ -6,6 +6,7 @@ import {
   ExternalLink,
   FilePenLine,
   MapPinned,
+  Link2,
   Plus,
   ScrollText,
   ShieldCheck,
@@ -27,6 +28,7 @@ import {
 import { WELTBILD } from "@/game/weltbild";
 import { WIKI_LINKS } from "@/game/wiki";
 import { ladeWerkstattFiguren, leereWerkstattFigur, istKanonfigur, speichereWerkstattFigur, type WerkstattFigur } from "@/game/gm/werkstatt";
+import { istKanonanker, ladeSozialanker, leererSozialanker, SozialankerSchema, speichereSozialanker, type Sozialanker } from "@/game/gm/sozialanker";
 import { WeltEntwurf } from "./WeltEntwurf";
 import { WeltKampagne } from "./WeltKampagne";
 import { WeltKarte } from "./WeltKarte";
@@ -35,7 +37,7 @@ import { WeltQuest } from "./WeltQuest";
 import { WeltSpieler } from "./WeltSpieler";
 import { WeltWissen } from "./WeltWissen";
 
-type Bereich = "uebersicht" | "geschichte" | "szenen" | "figuren" | "wissen" | "orte" | "quest" | "spieler" | "pruefen";
+type Bereich = "uebersicht" | "geschichte" | "szenen" | "figuren" | "wissen" | "orte" | "quest" | "anker" | "spieler" | "pruefen";
 
 const SCHNELLZUGRIFF_IDS = [
   "intro-weg",
@@ -61,6 +63,7 @@ const BEREICHE: Array<{ id: Bereich; titel: string; untertitel: string; Symbol: 
   { id: "wissen", titel: "Wissen", untertitel: "Tafeln anlegen", Symbol: BookOpen },
   { id: "orte", titel: "Orte", untertitel: "Das Tal ordnen", Symbol: Compass },
   { id: "quest", titel: "Questpfade", untertitel: "Wege prüfen", Symbol: ShieldQuestion },
+  { id: "anker", titel: "Soziale Anker", untertitel: "Rang an Wahl binden", Symbol: Link2 },
   { id: "spieler", titel: "Partien", untertitel: "Stände laden", Symbol: UsersRound },
   { id: "pruefen", titel: "Prüfen", untertitel: "Vor dem Spiel", Symbol: ShieldCheck },
 ];
@@ -68,7 +71,7 @@ const BEREICHE: Array<{ id: Bereich; titel: string; untertitel: string; Symbol: 
 const BEREICH_GRUPPEN: Array<{ titel: string; ids: Bereich[] }> = [
   { titel: "Orientierung", ids: ["uebersicht", "orte", "spieler"] },
   { titel: "Erzählung", ids: ["geschichte", "szenen", "figuren", "wissen"] },
-  { titel: "Kontrolle", ids: ["quest", "pruefen"] },
+  { titel: "Kontrolle", ids: ["quest", "anker", "pruefen"] },
 ];
 
 const SCHNELLAKTIONEN: Array<{ bereich: Bereich; label: string; hint: string }> = [
@@ -283,6 +286,7 @@ export function SpielleiterBereich() {
                 <WeltQuest />
               </Arbeitsflaeche>
             ) : null}
+            {bereich === "anker" ? <SozialeAnkerWerkstatt /> : null}
             {bereich === "spieler" ? (
               <Arbeitsflaeche titel="Partien und Spielstände" beschreibung="Lade eine vorhandene Partie, bevor du Zustände, Tageszeit oder eine Probe im laufenden Weltwerkzeug untersuchst.">
                 <WeltSpieler />
@@ -485,6 +489,56 @@ function KontextPanel({ szene, auflage, bereich }: { szene: SceneView | null; au
         </section>
       </div>
     </aside>
+  );
+}
+
+function SozialeAnkerWerkstatt() {
+  const [anker, setAnker] = useState(() => ladeSozialanker());
+  const [wahl, setWahl] = useState(anker[0]?.id ?? "");
+  const [entwurf, setEntwurf] = useState<Sozialanker>(() => anker[0] ?? leererSozialanker());
+  const [meldung, setMeldung] = useState<string | null>(null);
+  const ausgewaehlt = anker.find((eintrag) => eintrag.id === wahl);
+
+  function waehle(id: string) {
+    const next = anker.find((eintrag) => eintrag.id === id);
+    if (!next) return;
+    setWahl(id);
+    setEntwurf(next);
+    setMeldung(null);
+  }
+
+  function speichern() {
+    const id = entwurf.id.trim() || entwurf.name.trim().toLocaleLowerCase("de-DE").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+    const parsed = { ...entwurf, id, name: entwurf.name.trim(), szeneId: entwurf.szeneId.trim() };
+    if (!SozialankerSchema.safeParse(parsed).success || istKanonanker(id)) {
+      setMeldung("Ein Anker braucht Kennung, Name, Szenenkennung und eine gültige Rangschwelle.");
+      return;
+    }
+    speichereSozialanker(parsed);
+    setAnker(ladeSozialanker());
+    setWahl(id);
+    setEntwurf(parsed);
+    setMeldung("Der soziale Anker ist lokal gespeichert und kann an einer Dialog- oder Probeentscheidung verwendet werden.");
+  }
+
+  return (
+    <Arbeitsflaeche titel="Soziale Anker" beschreibung="Binde Rang und Milieu an eine konkrete Dialog- oder Würfeloption. Kanonische Anker bleiben sichtbar; eigene Anker werden lokal für die Spielleitung gespeichert.">
+      <div className="grid gap-5 xl:grid-cols-[minmax(14rem,20rem)_minmax(0,1fr)]">
+        <div className="grid content-start gap-2">
+          <div className="flex items-center justify-between"><p className="text-xs uppercase tracking-[0.16em] text-muted-fg">Anker im Bestand</p><Button type="button" variant="secondary" className="h-9 px-2 text-xs" onClick={() => { setWahl(""); setEntwurf(leererSozialanker()); }}>Neu</Button></div>
+          <div className="grid gap-1 rounded-sm border border-border p-1">
+            {anker.map((eintrag) => <button key={eintrag.id} type="button" onClick={() => waehle(eintrag.id)} className={`rounded-sm px-3 py-2 text-left text-sm ${wahl === eintrag.id ? "bg-surface-2 text-fg" : "text-muted-fg hover:bg-surface"}`}><span className="block">{eintrag.name}</span><span className="block text-xs text-subtle-fg">{eintrag.erforderlicherRang} · {eintrag.ausloeser}</span></button>)}
+          </div>
+        </div>
+        <div className="grid gap-3">
+          <div className="border-b border-border pb-3"><p className="font-display text-2xl font-semibold">{ausgewaehlt?.name ?? "Neuer sozialer Anker"}</p><p className="text-xs text-muted-fg">{ausgewaehlt && istKanonanker(ausgewaehlt.id) ? "Kanonischer Anker · nur als Bezugspunkt" : "Autorenmaterial · lokal gespeichert"}</p></div>
+          <div className="grid gap-3 sm:grid-cols-2"><Feld label="Name" value={entwurf.name} onChange={(name) => setEntwurf({ ...entwurf, name })} /><Feld label="Kennung" value={entwurf.id} onChange={(id) => setEntwurf({ ...entwurf, id })} /><Feld label="Szenenkennung" value={entwurf.szeneId} onChange={(szeneId) => setEntwurf({ ...entwurf, szeneId })} /><label className="block text-xs text-muted-fg">Auslöser<select className="mt-1 h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-fg" value={entwurf.ausloeser} onChange={(event) => setEntwurf({ ...entwurf, ausloeser: event.target.value as Sozialanker["ausloeser"] })}><option value="dialog">Dialogoption</option><option value="probe">Würfelprobe</option></select></label><label className="block text-xs text-muted-fg">Erforderlicher Rang<select className="mt-1 h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-fg" value={entwurf.erforderlicherRang} onChange={(event) => setEntwurf({ ...entwurf, erforderlicherRang: event.target.value as Sozialanker["erforderlicherRang"] })}><option>Messing</option><option>Silber</option><option>Gold</option></select></label><label className="block text-xs text-muted-fg">Belohnung<select className="mt-1 h-11 w-full rounded-sm border border-border bg-surface px-3 text-sm text-fg" value={entwurf.belohnung} onChange={(event) => setEntwurf({ ...entwurf, belohnung: event.target.value as Sozialanker["belohnung"] })}><option value="zugang">Zusätzlicher Zugang</option><option value="wissen">Wissen</option><option value="weg">Neuer Weg</option><option value="ansehen">Ansehen</option></select></label></div>
+          <Feld label="Was bekommt der Spieler an dieser Wahl?" value={entwurf.beschreibung} onChange={(beschreibung) => setEntwurf({ ...entwurf, beschreibung })} mehrzeilig />
+          <div className="flex flex-wrap items-center gap-3"><Button type="button" onClick={speichern} disabled={Boolean(ausgewaehlt && istKanonanker(ausgewaehlt.id))}>Anker speichern</Button><span className="text-xs text-muted-fg">Die Spielleitung bindet ihn anschließend an die genannte Szene.</span></div>
+          {meldung ? <Meldung text={meldung} /> : null}
+        </div>
+      </div>
+    </Arbeitsflaeche>
   );
 }
 

@@ -21,6 +21,7 @@ import { neueIntroSaat, zieheMitSaat } from "./intro-zug";
 import { grundwerteAusSaat } from "./herkunft-wurf";
 import { leereBeutel } from "./gegenstaende";
 import lagenStimme from "./json/lagen-stimme.json";
+import { charakterRang, sichereCharakterauswahl, type Charakterauswahl } from "./charakter";
 
 export type HerkunftAntwort = {
   label: string;
@@ -515,9 +516,17 @@ export function baueHeldAusHerkunft(
   gewaehlt: number[],
   fragen: HerkunftFrage[] = HERKUNFT_FRAGEN,
   saat = 0,
+  charakter?: Charakterauswahl,
 ): Held {
   const grund = grundwerteAusSaat(saat);
   const held = createHeld(name, grund.staerke, grund.geschick, grund.charisma);
+  if (charakter) {
+    const sichereWahl = sichereCharakterauswahl(charakter);
+    held.klasse = sichereWahl.klasse;
+    held.karriere = sichereWahl.karriere;
+    held.statusRang = charakterRang(sichereWahl.klasse);
+    held.ep = sichereWahl.ep;
+  }
   held.lagenZug = fragen.map((frage) => frage.id);
   held.lagenSaat = saat;
   const male: string[] = [];
