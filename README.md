@@ -2,7 +2,7 @@
 
 **Lindendorf** ist ein illustriertes, browserbasiertes Dark-Fantasy-Textabenteuer. Ein gewöhnlicher Mensch erreicht ein armes Tal, dessen Vorräte verschwinden, dessen Glocke für die falschen Leute läutet und dessen Alltag aus Arbeit, Schuld, Hunger und Ausweglosigkeit besteht.
 
-Aktueller Ausbau: [`docs/ERNEUERUNGSPLAN.md`](docs/ERNEUERUNGSPLAN.md). Register: [`docs/QUESTREGISTER.md`](docs/QUESTREGISTER.md). Hauptprojekt: [`PromptBrainless/lindendorf-rpg-alpha-V.1.1`](https://github.com/PromptBrainless/lindendorf-rpg-alpha-V.1.1). Vergleichsarchiv: [`export/spielversion1-7170673/`](export/spielversion1-7170673/).
+Aktueller Ausbau: [`docs/ERNEUERUNGSPLAN.md`](docs/ERNEUERUNGSPLAN.md). Register: [`docs/QUESTREGISTER.md`](docs/QUESTREGISTER.md). Hauptprojekt: [`PromptBrainless/lindendorf-rpg-alpha-V.1.1`](https://github.com/PromptBrainless/lindendorf-rpg-alpha-V.1.1). Vergleichsarchiv: [`export/spielversion1-7170673/`](export/spielversion1-7170673/). WorldForge Studio ist getrennt: [`PromptBrainless/worldforge-studio`](https://github.com/PromptBrainless/worldforge-studio).
 
 Das Spiel verbindet ausführliche deutsche Erzähltexte mit drei Attributen, W10-Proben, wissensbasierten Freischaltungen, Nebenquests, mehreren Lösungswegen und unterschiedlichen Enden. Entschlüsse und Spurensuche bestimmen, wer im Dorf noch eine Zukunft hat und wer am Ende nur noch ein Rest aus Schuld und Arbeit bleibt.
 
