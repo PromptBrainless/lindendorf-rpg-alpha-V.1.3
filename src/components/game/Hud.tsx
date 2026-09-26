@@ -199,13 +199,18 @@ export function Hud({
               : "Spielleiter einschalten"
           }
           aria-pressed={leiterAn}
-          aria-label={leiterAn ? "Spielleiter an" : "Spielleiter aus"}
+          aria-label={`${leiterAn ? "Spielleiter an" : "Spielleiter aus"}${weltPunkt ? ", Auflage für diese Szene" : ""}${weltAnzahl ? `, ${weltAnzahl} Auflagen` : ""}`}
         >
           <ScrollText className="size-3.5" aria-hidden />
-          <span className="sm:hidden">{leiterAn ? "an" : "SL"}</span>
+          <span className="sm:hidden">
+            {leiterAn ? "an" : "SL"}
+            {weltPunkt ? " ●" : ""}
+            {weltAnzahl ? ` ${weltAnzahl}` : ""}
+          </span>
           <span className="hidden sm:inline">
             {leiterAn ? "SL an" : "SL aus"}
             {weltPunkt ? " ●" : ""}
+            {weltAnzahl ? ` ${weltAnzahl}` : ""}
           </span>
         </Button>
         {leiterAn && onWiki ? (
