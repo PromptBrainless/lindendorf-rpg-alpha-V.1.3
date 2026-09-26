@@ -93,7 +93,7 @@ Jede Änderung sagt, **wohin** sie geht. Heute passiert das still.
 
 **Lebensdauer:** im Repo, sobald jemand committet. Bis dahin nur auf der Maschine, die den Dev-Server hat.
 
-Bilder, die du hochlädst, liegen unter `public/art/sl/`. Die Auflage speichert den Pfad. In den Kanon kommen sie erst, wenn du sie einer `ArtKey`/`PortraitKey` zuweist — das bleibt Auftrag, keine Automatik.
+Der Bild-Upload versucht `/__lindendorf/upload`; eine Route dafür ist derzeit nicht vorhanden. Daher landet das Bild aktuell als Base64-Data-URL in der lokalen Auflage, nicht unter `public/art/sl/`. Diese Daten teilen sich das begrenzte Browserspeicher-Kontingent; bei Data-URLs ab 300 KB erscheint eine Warnung. Die Auflage wird dadurch nicht dauerhaft auf dem Server oder über Geräte hinweg gespeichert. In den Kanon kommen Bilder erst, wenn du sie einer `ArtKey`/`PortraitKey` zuweist — das bleibt Auftrag, keine Automatik.
 
 **Kanon-Diff vor dem Schreiben:** „In den Kanon“ zeigt vorher eine zeilengenaue Gegenüberstellung Kanon gegen Auflage (nicht nur „n Karten weichen ab“). Ohne das committet man leicht eine Testzeile mit. Der Diff ist reine Anzeige, kein eigener Speicher.
 

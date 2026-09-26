@@ -26,6 +26,10 @@ export async function blobAlsBase64(blob: Blob): Promise<string> {
   });
 }
 
+export function istGrosseLokaleBildDataUrl(src: string): boolean {
+  return src.startsWith("data:") && src.length >= 300_000;
+}
+
 export async function ladeSpielleiterBild(file: File): Promise<string> {
   const jpeg = await bildAlsJpeg(file);
   const data = await blobAlsBase64(jpeg);

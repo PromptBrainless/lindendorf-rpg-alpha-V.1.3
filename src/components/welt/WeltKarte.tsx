@@ -3,7 +3,7 @@ import { ImagePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ART, PORTRAITS } from "@/game/art";
 import { ORT_EFFEKT_IDS, effekteDerGruppe, type EffektId } from "@/game/effekte";
-import { ladeSpielleiterBild } from "@/game/sl-upload";
+import { istGrosseLokaleBildDataUrl, ladeSpielleiterBild } from "@/game/sl-upload";
 import { kanonDiff, auflageLeer, type WeltAuflage } from "@/game/welt";
 import type { ArtKey, PortraitKey, SceneView } from "@/game/types";
 import { FIGUR_NAME } from "@/game/stimme";
@@ -14,15 +14,20 @@ const ART_KEYS = Object.keys(ART) as ArtKey[];
 const PORTRAIT_KEYS = Object.keys(PORTRAITS) as PortraitKey[];
 
 function BildFeld({ label, src, onSrc }: { label: string; src: string; onSrc: (src: string) => void }) {
-  const [status, setStatus] = useState<string | null>(null);
+  const [status, setStatus] = useState<{ text: string; warnung: boolean } | null>(null);
   async function onFile(file: File | undefined) {
     if (!file) return;
     setStatus(null);
     try {
-      onSrc(await ladeSpielleiterBild(file));
-      setStatus("liegt auf der Karte");
+      const bild = await ladeSpielleiterBild(file);
+      onSrc(bild);
+      const warnung = istGrosseLokaleBildDataUrl(bild);
+      setStatus({
+        text: warnung ? "Großes Bild liegt lokal und kann den Browserspeicher füllen." : bild.startsWith("data:") ? "Bild liegt als lokale Data-URL vor." : "liegt auf der Karte",
+        warnung,
+      });
     } catch (err) {
-      setStatus(err instanceof Error ? err.message : "Bild unlesbar");
+      setStatus({ text: err instanceof Error ? err.message : "Bild unlesbar", warnung: true });
     }
   }
   return (
@@ -50,7 +55,7 @@ function BildFeld({ label, src, onSrc }: { label: string; src: string; onSrc: (s
           />
         </span>
         {src ? <img src={src} alt="" className="h-9 w-7 rounded-xs border border-border object-cover" /> : null}
-        {status ? <span className="text-ok">{status}</span> : null}
+        {status ? <span className={status.warnung ? "text-warn" : "text-ok"}>{status.text}</span> : null}
       </span>
     </label>
   );

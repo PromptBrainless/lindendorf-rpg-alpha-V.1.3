@@ -5,7 +5,7 @@ import { ART, PORTRAITS } from "@/game/art";
 import { probe } from "@/game/engine";
 import { ORT_EFFEKT_IDS, effekteDerGruppe, type EffektId } from "@/game/effekte";
 import { probeZeile } from "@/game/gm/probeZeile";
-import { ladeSpielleiterBild } from "@/game/sl-upload";
+import { istGrosseLokaleBildDataUrl, ladeSpielleiterBild } from "@/game/sl-upload";
 import { LEICHT, MITTEL, SCHWER, type ArtKey, type Held, type PortraitKey, type ProbeResult } from "@/game/types";
 import type { ProbenAktion } from "@/game/tageszeit";
 import { TAGESZEITEN, TAGESZEIT_TEXT, type Tageszeit } from "@/game/tageszeit";
@@ -96,7 +96,7 @@ export function AnfassRahmen({
 }
 
 function DateiFeld({ src, onSrc }: { src: string; onSrc: (src: string) => void }) {
-  const [status, setStatus] = useState<string | null>(null);
+  const [status, setStatus] = useState<{ text: string; warnung: boolean } | null>(null);
   return (
     <label className="mt-2 block text-xs text-muted-fg">
       Datei oder Pfad
@@ -120,13 +120,17 @@ function DateiFeld({ src, onSrc }: { src: string; onSrc: (src: string) => void }
             void ladeSpielleiterBild(datei)
               .then((n) => {
                 onSrc(n);
-                setStatus("liegt auf der Karte");
+                const warnung = istGrosseLokaleBildDataUrl(n);
+                setStatus({
+                  text: warnung ? "Großes Bild liegt lokal und kann den Browserspeicher füllen." : n.startsWith("data:") ? "Bild liegt als lokale Data-URL vor." : "liegt auf der Karte",
+                  warnung,
+                });
               })
-              .catch((err) => setStatus(err instanceof Error ? err.message : "unlesbar"));
+              .catch((err) => setStatus({ text: err instanceof Error ? err.message : "unlesbar", warnung: true }));
           }}
         />
       </span>
-      {status ? <span className="ml-2 text-ok">{status}</span> : null}
+      {status ? <span className={`ml-2 ${status.warnung ? "text-warn" : "text-ok"}`}>{status.text}</span> : null}
     </label>
   );
 }

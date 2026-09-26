@@ -4,7 +4,7 @@ import { ImagePlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { merkeWissenDatei, loescheWissenDatei, wissenDatei, wissenIds } from "@/game/json/wissen";
 import type { WissenTafelJson } from "@/game/json/wissen-schema";
-import { ladeSpielleiterBild } from "@/game/sl-upload";
+import { istGrosseLokaleBildDataUrl, ladeSpielleiterBild } from "@/game/sl-upload";
 import { alsZuege } from "@/game/stimme";
 import { legeWissenAb, loescheWissenAb } from "@/game/werkstatt.functions";
 import { wissenBildFuer } from "@/game/wissen-tafeln";
@@ -202,7 +202,7 @@ function lade(id: string, aktuell?: string): WissenTafelJson {
 }
 
 function BildFeld({ bild, onBild }: { bild: string; onBild: (bild: string) => void }) {
-  const [status, setStatus] = useState<string | null>(null);
+  const [status, setStatus] = useState<{ text: string; warnung: boolean } | null>(null);
   return (
     <label className="block text-xs text-muted-fg">
       Bild
@@ -225,13 +225,17 @@ function BildFeld({ bild, onBild }: { bild: string; onBild: (bild: string) => vo
             void ladeSpielleiterBild(datei)
               .then((n) => {
                 onBild(n);
-                setStatus("liegt auf der Tafel");
+                const warnung = istGrosseLokaleBildDataUrl(n);
+                setStatus({
+                  text: warnung ? "Großes Bild liegt lokal und kann den Browserspeicher füllen." : n.startsWith("data:") ? "Bild liegt als lokale Data-URL vor." : "liegt auf der Tafel",
+                  warnung,
+                });
               })
-              .catch((err) => setStatus(err instanceof Error ? err.message : "unlesbar"));
+              .catch((err) => setStatus({ text: err instanceof Error ? err.message : "unlesbar", warnung: true }));
           }}
         />
       </span>
-      {status ? <span className="ml-2 text-ok">{status}</span> : null}
+      {status ? <span className={`ml-2 ${status.warnung ? "text-warn" : "text-ok"}`}>{status.text}</span> : null}
     </label>
   );
 }
