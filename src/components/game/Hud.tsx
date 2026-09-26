@@ -180,10 +180,11 @@ export function Hud({
               spieleKlang("oeffnen");
               onSystem();
             }}
-            title="Einstellungen (E)"
+            title="Einstellungen öffnen"
             aria-label="Einstellungen"
           >
             <Settings2 className="size-3.5" aria-hidden />
+            <span className="hidden sm:inline">Einstellungen</span>
           </Button>
         ) : null}
         <Button
@@ -203,7 +204,7 @@ export function Hud({
         >
           <ScrollText className="size-3.5" aria-hidden />
           <span className="sm:hidden">
-            {leiterAn ? "an" : "SL"}
+            {leiterAn ? "SL an" : "SL aus"}
             {weltPunkt ? " ●" : ""}
             {weltAnzahl ? ` ${weltAnzahl}` : ""}
           </span>
@@ -212,6 +213,9 @@ export function Hud({
             {weltPunkt ? " ●" : ""}
             {weltAnzahl ? ` ${weltAnzahl}` : ""}
           </span>
+          {leiterAn ? (
+            <ChevronDown className={`size-3 transition-transform ${leiterOpen ? "rotate-180" : ""}`} aria-hidden />
+          ) : null}
         </Button>
         {leiterAn && onWiki ? (
           <Button
