@@ -3,6 +3,7 @@ import {
   BookOpen,
   CheckCircle2,
   Compass,
+  Download,
   ExternalLink,
   FilePenLine,
   Layers3,
@@ -21,6 +22,7 @@ import { baueWeltGraph, viewAusKanon } from "@/game/welt-graph";
 import {
   auflageFuerSicht,
   auflageLeer,
+  ladeWelt,
   loescheAuflage,
   merkeAuflage,
   rueckgaengigAuflage,
@@ -38,6 +40,7 @@ import { WeltQuest } from "./WeltQuest";
 import { WeltSpieler } from "./WeltSpieler";
 import { WeltStudio } from "./WeltStudio";
 import { WeltWissen } from "./WeltWissen";
+import { LocalWorkspaceStore } from "@/game/studio/store";
 
 type Bereich = "uebersicht" | "geschichte" | "szenen" | "figuren" | "wissen" | "orte" | "quest" | "anker" | "spieler" | "studio" | "pruefen";
 
@@ -177,6 +180,10 @@ export function SpielleiterBereich() {
                 <ExternalLink className="size-3.5" aria-hidden />
                 Wiki
               </a>
+              <Button type="button" variant="secondary" className="h-9 px-2.5 text-xs" onClick={exportiereAlles} title="Alle lokalen Spielleiterdaten sichern">
+                <Download className="size-3.5" aria-hidden />
+                Alles sichern
+              </Button>
             </div>
           </div>
 
@@ -646,6 +653,26 @@ function Zahl({ wert, label, warnung = false }: { wert: number; label: string; w
 
 function Meldung({ text }: { text: string }) {
   return <p className="rounded-sm border border-border bg-surface/50 px-3 py-2 text-xs text-muted-fg">{text}</p>;
+}
+
+function exportiereAlles() {
+  const datum = new Date().toISOString();
+  const sicherung = {
+    format: "lindendorf-spielleiter-sicherung",
+    version: 1,
+    erstelltAm: datum,
+    auflagen: ladeWelt(),
+    figuren: ladeWerkstattFiguren().filter((figur) => !istKanonfigur(figur.id)),
+    sozialeAnker: ladeSozialanker().filter((anker) => !istKanonanker(anker.id)),
+    studio: new LocalWorkspaceStore().load(),
+  };
+  const blob = new Blob([JSON.stringify(sicherung, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `lindendorf-spielleiter-sicherung-${datum.slice(0, 10)}.json`;
+  link.click();
+  URL.revokeObjectURL(url);
 }
 
 function LeereAuswahl() {
