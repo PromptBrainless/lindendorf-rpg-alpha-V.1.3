@@ -25,9 +25,13 @@
     "check:system": "node scripts/check-systemsteuerung.mjs",
     "test": "node --test 'scripts/**/*.test.mjs' && node --experimental-strip-types --test src/lib/app-data/app-data.test.ts src/lib/app-data/readiness-schedule.test.ts src/lib/auth/gate-identity.test.ts src/lib/auth/sign-in-gate.test.ts src/game/einstellungen.test.ts src/game/pruefung-text.test.ts src/game/textvergleich.test.ts src/game/lore.test.ts src/game/portrait.test.ts src/game/sprecher.test.ts src/game/faden.test.ts src/game/engine.test.ts src/game/save.test.ts src/game/herkunft.test.ts src/game/intro-zug.test.ts src/game/gegenstaende.test.ts",
     "lint": "eslint .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "android:sync": "npx cap sync android",
+    "android:apk": "npx cap sync android && cd android && ./gradlew assembleDebug"
   },
   "dependencies": {
+    "@capacitor/android": "^8.5.2",
+    "@capacitor/core": "^8.5.2",
     "@electric-sql/pglite": "^0.5.4",
     "@hookform/resolvers": "^5.7.0",
     "@monaco-editor/react": "^4.7.0",
@@ -82,6 +86,7 @@
     "zod": "^4.4.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "^8.5.2",
     "@eslint/js": "^9.20.0",
     "@types/node": "^22.16.5",
     "@types/pg": "^8.11.10",

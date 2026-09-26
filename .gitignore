@@ -8,3 +8,9 @@ coverage/
 .env
 .env.*
 !.env.example
+android/build/
+android/app/build/
+android/.gradle/
+android/local.properties
+android/capacitor-cordova-android-plugins/build/
+*.apk

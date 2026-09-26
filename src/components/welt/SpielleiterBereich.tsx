@@ -5,6 +5,7 @@ import {
   Compass,
   ExternalLink,
   FilePenLine,
+  Layers3,
   MapPinned,
   Link2,
   Plus,
@@ -35,9 +36,10 @@ import { WeltKarte } from "./WeltKarte";
 import { WeltPruefen } from "./WeltPruefen";
 import { WeltQuest } from "./WeltQuest";
 import { WeltSpieler } from "./WeltSpieler";
+import { WeltStudio } from "./WeltStudio";
 import { WeltWissen } from "./WeltWissen";
 
-type Bereich = "uebersicht" | "geschichte" | "szenen" | "figuren" | "wissen" | "orte" | "quest" | "anker" | "spieler" | "pruefen";
+type Bereich = "uebersicht" | "geschichte" | "szenen" | "figuren" | "wissen" | "orte" | "quest" | "anker" | "spieler" | "studio" | "pruefen";
 
 const SCHNELLZUGRIFF_IDS = [
   "intro-weg",
@@ -65,13 +67,14 @@ const BEREICHE: Array<{ id: Bereich; titel: string; untertitel: string; Symbol: 
   { id: "quest", titel: "Questpfade", untertitel: "Wege prüfen", Symbol: ShieldQuestion },
   { id: "anker", titel: "Soziale Anker", untertitel: "Rang an Wahl binden", Symbol: Link2 },
   { id: "spieler", titel: "Partien", untertitel: "Stände laden", Symbol: UsersRound },
+  { id: "studio", titel: "Studio", untertitel: "Autorenmaterial ordnen", Symbol: Layers3 },
   { id: "pruefen", titel: "Prüfen", untertitel: "Vor dem Spiel", Symbol: ShieldCheck },
 ];
 
 const BEREICH_GRUPPEN: Array<{ titel: string; ids: Bereich[] }> = [
   { titel: "Orientierung", ids: ["uebersicht", "orte", "spieler"] },
   { titel: "Erzählung", ids: ["geschichte", "szenen", "figuren", "wissen"] },
-  { titel: "Kontrolle", ids: ["quest", "anker", "pruefen"] },
+  { titel: "Kontrolle", ids: ["quest", "anker", "studio", "pruefen"] },
 ];
 
 const SCHNELLAKTIONEN: Array<{ bereich: Bereich; label: string; hint: string }> = [
@@ -290,6 +293,11 @@ export function SpielleiterBereich() {
             {bereich === "spieler" ? (
               <Arbeitsflaeche titel="Partien und Spielstände" beschreibung="Lade eine vorhandene Partie, bevor du Zustände, Tageszeit oder eine Probe im laufenden Weltwerkzeug untersuchst.">
                 <WeltSpieler />
+              </Arbeitsflaeche>
+            ) : null}
+            {bereich === "studio" ? (
+              <Arbeitsflaeche titel="Studio" beschreibung="Freies Autorenmaterial mit Entities und Relationen, offline und getrennt vom Kanon. Übernimm Szenen, Figuren und Wissen zur Vorbereitung neuer Aufträge.">
+                <WeltStudio knoten={graph.knoten} />
               </Arbeitsflaeche>
             ) : null}
             {bereich === "pruefen" ? (
