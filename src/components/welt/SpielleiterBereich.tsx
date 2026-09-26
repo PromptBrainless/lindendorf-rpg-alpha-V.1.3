@@ -41,8 +41,10 @@ import { WeltSpieler } from "./WeltSpieler";
 import { WeltStudio } from "./WeltStudio";
 import { WeltWissen } from "./WeltWissen";
 import { LocalWorkspaceStore } from "@/game/studio/store";
+import { WikiBuch } from "./WikiBuch";
+import { SpielleiterAnleitung } from "./SpielleiterAnleitung";
 
-type Bereich = "uebersicht" | "geschichte" | "szenen" | "figuren" | "wissen" | "orte" | "quest" | "anker" | "spieler" | "studio" | "pruefen";
+type Bereich = "uebersicht" | "geschichte" | "szenen" | "figuren" | "wissen" | "orte" | "quest" | "anker" | "spieler" | "studio" | "wiki" | "pruefen";
 
 const SCHNELLZUGRIFF_IDS = [
   "intro-weg",
@@ -70,12 +72,13 @@ const BEREICHE: Array<{ id: Bereich; titel: string; untertitel: string; Symbol: 
   { id: "quest", titel: "Questpfade", untertitel: "Wege prüfen", Symbol: ShieldQuestion },
   { id: "anker", titel: "Soziale Anker", untertitel: "Rang an Wahl binden", Symbol: Link2 },
   { id: "spieler", titel: "Partien", untertitel: "Stände laden", Symbol: UsersRound },
+  { id: "wiki", titel: "Wiki", untertitel: "Einträge ändern", Symbol: BookOpen },
   { id: "studio", titel: "Studio", untertitel: "Autorenmaterial ordnen", Symbol: Layers3 },
   { id: "pruefen", titel: "Prüfen", untertitel: "Vor dem Spiel", Symbol: ShieldCheck },
 ];
 
 const BEREICH_GRUPPEN: Array<{ titel: string; ids: Bereich[] }> = [
-  { titel: "Orientierung", ids: ["uebersicht", "orte", "spieler"] },
+  { titel: "Orientierung", ids: ["uebersicht", "orte", "spieler", "wiki"] },
   { titel: "Erzählung", ids: ["geschichte", "szenen", "figuren", "wissen"] },
   { titel: "Kontrolle", ids: ["quest", "anker", "studio", "pruefen"] },
 ];
@@ -203,15 +206,15 @@ export function SpielleiterBereich() {
               >
                 Overlay
               </button>
-              <a
-                href={WIKI_LINKS.index}
-                target="_blank"
-                rel="noreferrer"
+              <SpielleiterAnleitung onBereich={setBereich} />
+              <button
+                type="button"
+                onClick={() => setBereich("wiki")}
                 className="inline-flex h-9 items-center gap-1.5 rounded-sm border border-border px-2.5 text-fg transition-colors hover:border-accent hover:text-accent"
               >
-                <ExternalLink className="size-3.5" aria-hidden />
+                <BookOpen className="size-3.5" aria-hidden />
                 Wiki
-              </a>
+              </button>
               <Button type="button" variant="secondary" className="h-9 px-2.5 text-xs" onClick={exportiereAlles} title="Alle lokalen Spielleiterdaten sichern">
                 <Download className="size-3.5" aria-hidden />
                 Alles sichern
@@ -336,6 +339,11 @@ export function SpielleiterBereich() {
             {bereich === "spieler" ? (
               <Arbeitsflaeche titel="Partien und Spielstände" beschreibung="Lade eine vorhandene Partie, bevor du Zustände, Tageszeit oder eine Probe im laufenden Weltwerkzeug untersuchst.">
                 <WeltSpieler />
+              </Arbeitsflaeche>
+            ) : null}
+            {bereich === "wiki" ? (
+              <Arbeitsflaeche titel="Wiki" beschreibung="Einträge lesen und auf diesem Gerät ändern. Die Fassung im Projekt bleibt, bis du sie selbst übernimmst.">
+                <WikiBuch />
               </Arbeitsflaeche>
             ) : null}
             {bereich === "studio" ? (

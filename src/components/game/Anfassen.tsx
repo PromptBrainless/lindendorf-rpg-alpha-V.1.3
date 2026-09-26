@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from "react";
-import { ImagePlus, PenLine, X } from "lucide-react";
+import { PenLine, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { GalerieWahl } from "@/components/game/GalerieWahl";
 import { ART, PORTRAITS } from "@/game/art";
 import { probe } from "@/game/engine";
 import { ORT_EFFEKT_IDS, effekteDerGruppe, type EffektId } from "@/game/effekte";
@@ -106,17 +107,9 @@ function DateiFeld({ src, onSrc }: { src: string; onSrc: (src: string) => void }
         placeholder="/art/… oder https://…"
         onChange={(event) => onSrc(event.target.value)}
       />
-      <span className="mt-1 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-sm border border-border px-2 text-xs text-fg">
-        <ImagePlus className="size-3.5" aria-hidden />
-        Hochladen
-        <input
-          type="file"
-          accept="image/*"
-          className="sr-only"
-          onChange={(event) => {
-            const datei = event.target.files?.[0];
-            event.target.value = "";
-            if (!datei) return;
+      <span className="mt-1 inline-flex items-center gap-2">
+        <GalerieWahl
+          onDatei={(datei) => {
             void ladeSpielleiterBild(datei)
               .then((n) => {
                 onSrc(n);
@@ -129,8 +122,8 @@ function DateiFeld({ src, onSrc }: { src: string; onSrc: (src: string) => void }
               .catch((err) => setStatus({ text: err instanceof Error ? err.message : "unlesbar", warnung: true }));
           }}
         />
+          {status ? <span className={status.warnung ? "text-warn" : "text-ok"}>{status.text}</span> : null}
       </span>
-      {status ? <span className={`ml-2 ${status.warnung ? "text-warn" : "text-ok"}`}>{status.text}</span> : null}
     </label>
   );
 }
