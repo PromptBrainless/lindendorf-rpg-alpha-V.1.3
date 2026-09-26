@@ -1,5 +1,6 @@
 import {
   BookOpen,
+  Download,
   FolderOpen,
   Globe,
   Play,
@@ -169,6 +170,12 @@ export function TitleScreen({
               </label>
             ) : null}
           </div>
+          <Button asChild variant="ghost" size="default" className="w-full">
+            <a href="/download/lindendorf.apk" download>
+              <Download className="size-4" aria-hidden />
+              Android-App herunterladen
+            </a>
+          </Button>
         </div>
         <p className="mt-6 inline-flex items-center gap-2 text-xs text-muted-fg">
           <BookOpen className="size-3.5" aria-hidden />

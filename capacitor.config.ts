@@ -7,7 +7,7 @@ const config: CapacitorConfig = {
   appName: "Lindendorf",
   webDir: "www",
   server: {
-    url: process.env.LINDENDORF_APP_URL ?? "https://legendary-space-goldfish-69vw46gvq7rrf45q9-8080.app.github.dev",
+    url: process.env.LINDENDORF_APP_URL ?? "https://lindendorf.vercel.app",
     cleartext: false,
   },
 };

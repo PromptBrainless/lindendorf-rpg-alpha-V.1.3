@@ -14,3 +14,4 @@ android/.gradle/
 android/local.properties
 android/capacitor-cordova-android-plugins/build/
 *.apk
+!public/download/lindendorf.apk
