@@ -115,8 +115,12 @@ export function SpielleiterBereich() {
   function aendereAuflage(next: WeltAuflage) {
     setAuflage(next);
     if (!szene) return;
-    merkeAuflage(szene.id ?? szene.title, next, szene.original ?? szene);
-    setMeldung("Die Auflage liegt lokal auf dieser Seite. Der Kanon bleibt unangetastet.");
+    const gespeichert = merkeAuflage(szene.id ?? szene.title, next, szene.original ?? szene);
+    setMeldung(
+      gespeichert
+        ? "Die Auflage liegt lokal auf dieser Seite. Der Kanon bleibt unangetastet."
+        : "Die Auflage konnte nicht gespeichert werden. Prüfe den verfügbaren Browserspeicher.",
+    );
   }
 
   function setzeKanon() {
@@ -522,7 +526,10 @@ function SozialeAnkerWerkstatt() {
       setMeldung("Ein Anker braucht Kennung, Name, Szenenkennung und eine gültige Rangschwelle.");
       return;
     }
-    speichereSozialanker(parsed);
+    if (!speichereSozialanker(parsed)) {
+      setMeldung("Der soziale Anker konnte nicht gespeichert werden. Prüfe den verfügbaren Browserspeicher.");
+      return;
+    }
     setAnker(ladeSozialanker());
     setWahl(id);
     setEntwurf(parsed);
@@ -578,7 +585,10 @@ function FigurenWerkstatt() {
       return;
     }
     const next = { ...entwurf, id, name: entwurf.name.trim() };
-    speichereWerkstattFigur(next);
+    if (!speichereWerkstattFigur(next)) {
+      setMeldung("Die Figur konnte nicht gespeichert werden. Prüfe den verfügbaren Browserspeicher.");
+      return;
+    }
     const alle = ladeWerkstattFiguren();
     setFiguren(alle);
     setWahl(id);

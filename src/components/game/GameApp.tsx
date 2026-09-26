@@ -505,6 +505,9 @@ export function GameApp() {
             loadAdventureByName(name);
           }}
           onSpielerGeaendert={refreshSaves}
+          onSpeichernFehlgeschlagen={() =>
+            setSaveMessage("Die Auflage konnte nicht gespeichert werden. Prüfe den verfügbaren Browserspeicher.")
+          }
         />
       </Suspense>
     ) : null;

@@ -50,8 +50,9 @@ export function speichereSozialanker(anker: Sozialanker) {
   const next = [...eigene.filter((eintrag) => eintrag.id !== anker.id), anker];
   try {
     window.localStorage.setItem(SPEICHER, JSON.stringify(next));
+    return true;
   } catch {
-    /* Privater Modus oder voller Speicher. */
+    return false;
   }
 }
 

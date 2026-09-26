@@ -42,6 +42,7 @@ export function WeltEditor({
   startFach = "karte",
   onLadeSpieler,
   onSpielerGeaendert,
+  onSpeichernFehlgeschlagen,
 }: {
   szene: SceneView | null;
   auflage: WeltAuflage;
@@ -58,6 +59,7 @@ export function WeltEditor({
   startFach?: Fach;
   onLadeSpieler?: (name: string) => void;
   onSpielerGeaendert?: () => void;
+  onSpeichernFehlgeschlagen?: () => void;
 }) {
   const [fach, setFach] = useState<Fach>(szene ? startFach : "pruefen");
   const fang = useFokusFang(true);
@@ -88,8 +90,9 @@ export function WeltEditor({
 
   function speichere(next: WeltAuflage) {
     if (fremd) {
-      merkeAuflage(sichtKey, next, fremd.original ?? fremd);
+      const gespeichert = merkeAuflage(sichtKey, next, fremd.original ?? fremd);
       setFremdPatch(next);
+      if (!gespeichert) onSpeichernFehlgeschlagen?.();
       if (szene?.id === fremd.id) onChange(next);
       return;
     }

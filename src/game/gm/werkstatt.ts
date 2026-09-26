@@ -182,8 +182,9 @@ export function speichereWerkstattFigur(figur: WerkstattFigur) {
   const next = [...eigene.filter((eintrag) => eintrag.id !== figur.id), figur];
   try {
     window.localStorage.setItem(SPEICHER, JSON.stringify(next));
+    return true;
   } catch {
-    /* Privater Modus oder voller Speicher. */
+    return false;
   }
 }
 
