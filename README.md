@@ -35,7 +35,9 @@ Die Entwicklungsseite läuft standardmäßig auf `http://localhost:8080`.
 
 ## Android-App
 
-Die Android-App lädt das Spiel von `https://lindendorf.vercel.app`; sie benötigt keinen laufenden Codespace. Die APK wird unter [`/download/lindendorf.apk`](https://lindendorf.vercel.app/download/lindendorf.apk) ausgeliefert. `npm run android:apk` baut lokal die Debug-APK und aktualisiert `public/download/`. Auf `main` baut GitHub Actions die APK automatisch und committet sie zurück; dieser Commit löst den Vercel-Deploy aus. Der Workflow benötigt die GitHub-Actions-Berechtigung `contents: write`.
+Die Android-App lädt das Spiel von `https://lindendorf.vercel.app`; sie benötigt keinen laufenden Codespace. Die APK wird unter [`/download/lindendorf.apk`](https://lindendorf.vercel.app/download/lindendorf.apk) ausgeliefert.
+
+`npm run android:apk` baut lokal die Debug-APK und aktualisiert `public/download/`. `npm run android:release` erzeugt zusätzlich lokal eine Release-APK und ein AAB. GitHub Actions baut derzeit weiterhin nur die Debug-APK für Vercel. Für einen signierten Release-Build sowie den automatischen Upload der Release-Artefakte müssen Workflow und Keystore-Secret noch eingerichtet werden.
 
 ## Prüfen
 
@@ -52,20 +54,20 @@ Zusätzlich prüft das projektweite QA-Skript außerhalb dieses Repository-Unter
 
 ## Wichtige Dateien
 
-| Pfad | Zweck |
-|---|---|
-| `src/game/script.ts` | Gesamter Szenenfluss, Proben, Quests und Enden |
-| `src/game/content.ts` | Zod-validierter Pilot für datengetriebene Szeneninhalte |
-| `src/game/knowledge.ts` | Ableitung des Spielerwissens aus Held-Zuständen |
-| `src/game/types.ts` | Held-, Bild- und Szenentypen |
-| `src/game/art.ts` | Zuordnung aller Hintergründe und Porträts |
-| `src/game/save.ts` | lokaler Speicherstand |
-| `src/game/einstellungen.ts` | Systemsteuerung: Ton, Darstellung, Spielverhalten |
-| `src/game/klang.ts` | prozedurales Klangwerk (Orte und Rückmeldungen) |
-| `src/components/game/Systemsteuerung.tsx` | Bedienfeld der Einstellungen |
-| `public/art/` | Spielhintergründe und Figurenporträts |
-| `docs/PROJEKTKONTEXT.md` | aktueller Projektstand und nächste sichere Schritte |
-| `UEBERGABE_AN_STERKE_AI.md` | kompakte Übergabe für eine weitere KI |
+| Pfad                                      | Zweck                                                   |
+| ----------------------------------------- | ------------------------------------------------------- |
+| `src/game/script.ts`                      | Gesamter Szenenfluss, Proben, Quests und Enden          |
+| `src/game/content.ts`                     | Zod-validierter Pilot für datengetriebene Szeneninhalte |
+| `src/game/knowledge.ts`                   | Ableitung des Spielerwissens aus Held-Zuständen         |
+| `src/game/types.ts`                       | Held-, Bild- und Szenentypen                            |
+| `src/game/art.ts`                         | Zuordnung aller Hintergründe und Porträts               |
+| `src/game/save.ts`                        | lokaler Speicherstand                                   |
+| `src/game/einstellungen.ts`               | Systemsteuerung: Ton, Darstellung, Spielverhalten       |
+| `src/game/klang.ts`                       | prozedurales Klangwerk (Orte und Rückmeldungen)         |
+| `src/components/game/Systemsteuerung.tsx` | Bedienfeld der Einstellungen                            |
+| `public/art/`                             | Spielhintergründe und Figurenporträts                   |
+| `docs/PROJEKTKONTEXT.md`                  | aktueller Projektstand und nächste sichere Schritte     |
+| `UEBERGABE_AN_STERKE_AI.md`               | kompakte Übergabe für eine weitere KI                   |
 
 ## Erzählprinzipien
 
