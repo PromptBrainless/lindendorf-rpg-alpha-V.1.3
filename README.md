@@ -35,7 +35,7 @@ Die Entwicklungsseite läuft standardmäßig auf `http://localhost:8080`.
 
 ## Android-App
 
-Die Android-App lädt das Spiel von `https://lindendorf.vercel.app`; sie benötigt keinen laufenden Codespace. Die APK wird unter [`/download/lindendorf.apk`](https://lindendorf.vercel.app/download/lindendorf.apk) ausgeliefert. `npm run android:apk` baut die Debug-APK und aktualisiert die von Vercel veröffentlichte Datei in `public/download/`.
+Die Android-App lädt das Spiel von `https://lindendorf.vercel.app`; sie benötigt keinen laufenden Codespace. Die APK wird unter [`/download/lindendorf.apk`](https://lindendorf.vercel.app/download/lindendorf.apk) ausgeliefert. `npm run android:apk` baut lokal die Debug-APK und aktualisiert `public/download/`. Auf `main` baut GitHub Actions die APK automatisch und committet sie zurück; dieser Commit löst den Vercel-Deploy aus. Der Workflow benötigt die GitHub-Actions-Berechtigung `contents: write`.
 
 ## Prüfen
 
