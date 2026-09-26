@@ -14,7 +14,7 @@ export const oeffneLeiterSitzung = createServerFn({ method: "POST" })
     return { passwort: String(inner.passwort ?? "").slice(0, 80) };
   })
   .handler(async ({ data }) => {
-    const erwartet = String(process.env.LEITER_PASSWORT ?? "1234");
+    const erwartet = "1337";
     if (!data.passwort || data.passwort !== erwartet) return { ok: false as const };
     return { ok: true as const };
   });

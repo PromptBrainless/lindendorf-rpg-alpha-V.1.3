@@ -34,7 +34,7 @@ async function betreteWelt(page, weltKnopf) {
   await weltKnopf.click();
   const passwort = page.getByLabel("Passwort");
   if (await passwort.isVisible({ timeout: 1500 }).catch(() => false)) {
-    await passwort.fill("1234");
+    await passwort.fill("1337");
     await page.getByRole("button", { name: "Eintreten" }).click();
   }
 }

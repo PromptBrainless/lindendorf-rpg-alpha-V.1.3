@@ -3,10 +3,14 @@ import { getCookie, setCookie } from "@tanstack/react-start/server";
 
 const COOKIE = "lindendorf_leiter";
 const SALZ = "lindendorf-spielleiter-v1";
+const PASSWORT = "1337";
 
 function erwarteterWert() {
-  const passwort = String(process.env.LEITER_PASSWORT ?? (process.env.NODE_ENV === "production" ? "" : "1234"));
-  return createHmac("sha256", passwort).update(SALZ).digest("hex");
+  return createHmac("sha256", PASSWORT).update(SALZ).digest("hex");
+}
+
+export function leiterPasswortGueltig(passwort: string) {
+  return passwort === PASSWORT;
 }
 
 export function leiterCookieGueltig() {

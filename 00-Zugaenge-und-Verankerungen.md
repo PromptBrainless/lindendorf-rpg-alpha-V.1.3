@@ -32,7 +32,7 @@ Beide hängen die Zeile aus `weltbild.ts` und die Lore der offenen Seite an. Nic
 
 | Name | Wo | Wofür |
 |---|---|---|
-| `LEITER_PASSWORT` | `.env` | Wenn leer, gilt der Fallback in `src/game/leiter.functions.ts` |
+| Spielleiter-Passwort | Servercode | Fest auf `1337` gesetzt; gilt in Entwicklung und Produktion |
 | `lindendorf.leiter.frei` | sessionStorage | Sitzung nur in diesem Tab, nach dem Passwort |
 | `lindendorf.leiter.wunsch` | sessionStorage | `/editor` setzt ihn, das Spiel öffnet dann das Menü |
 | `lindendorf.welt.an` | localStorage | SL an |
