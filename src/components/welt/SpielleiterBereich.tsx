@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import {
   BookOpen,
   CheckCircle2,
@@ -97,6 +97,7 @@ const FEATURE_MODULE = [
 
 export function SpielleiterBereich() {
   const graph = useMemo(() => baueWeltGraph(), []);
+  const [speicherAnteil, setSpeicherAnteil] = useState<number | null>(null);
   const [bereich, setBereich] = useState<Bereich>("uebersicht");
   const startSzene = graph.knoten.find((knoten) => knoten.titel === "Ankunft");
   const [szeneId, setSzeneId] = useState(startSzene?.id ?? "");
@@ -105,6 +106,27 @@ export function SpielleiterBereich() {
   const szene = useMemo(() => (szeneId ? viewAusKanon(szeneId) : null), [szeneId]);
   const [auflage, setAuflage] = useState<WeltAuflage>(() => (szene ? auflageFuerSicht(szene).patch : {}));
   const [meldung, setMeldung] = useState<string | null>(null);
+  const speicherWarnung = speicherAnteil !== null && speicherAnteil >= 80;
+
+  useEffect(() => {
+    const speicher = navigator.storage;
+    if (!speicher?.estimate) return;
+    let aktiv = true;
+    const aktualisiereSpeicherAnteil = () => {
+      void speicher.estimate().then(({ usage, quota }) => {
+        if (!aktiv || usage === undefined || !quota) return;
+        setSpeicherAnteil(Math.min(100, Math.round((usage / quota) * 100)));
+      }).catch(() => {
+        if (aktiv) setSpeicherAnteil(null);
+      });
+    };
+    aktualisiereSpeicherAnteil();
+    const intervall = window.setInterval(aktualisiereSpeicherAnteil, 30_000);
+    return () => {
+      aktiv = false;
+      window.clearInterval(intervall);
+    };
+  }, []);
 
   function oeffneSzene(id: string, ziel: Bereich = "szenen") {
     const next = viewAusKanon(id);
@@ -164,6 +186,16 @@ export function SpielleiterBereich() {
             <div className="flex flex-wrap items-center justify-end gap-2 text-xs text-muted-fg">
               <span className="inline-flex items-center gap-1.5 rounded-full border border-ok/30 bg-ok/5 px-2.5 py-1"><CheckCircle2 className="size-4 text-ok" aria-hidden />Kanon geladen</span>
               <span className="rounded-full border border-border px-2.5 py-1">8 Quests · {graph.knoten.length} Seiten</span>
+              {speicherAnteil !== null ? (
+                <span className={`rounded-full border px-2.5 py-1 ${speicherWarnung ? "border-warn/40 text-warn" : "border-border"}`}>
+                  Browser-Speicher {speicherAnteil}%
+                </span>
+              ) : null}
+              {speicherWarnung ? (
+                <Button type="button" variant="secondary" className="h-9 px-2.5 text-xs" onClick={() => setBereich("studio")}>
+                  Studio-Export
+                </Button>
+              ) : null}
               <button
                 type="button"
                 onClick={() => setOverlayOpen((open) => !open)}
