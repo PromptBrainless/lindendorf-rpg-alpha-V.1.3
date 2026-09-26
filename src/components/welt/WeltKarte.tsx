@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ImagePlus } from "lucide-react";
+import { GalerieWahl } from "@/components/game/GalerieWahl";
 import { Button } from "@/components/ui/button";
 import { ART, PORTRAITS } from "@/game/art";
 import { ORT_EFFEKT_IDS, effekteDerGruppe, type EffektId } from "@/game/effekte";
@@ -35,20 +35,7 @@ function BildFeld({ label, src, onSrc }: { label: string; src: string; onSrc: (s
         onChange={(event) => onSrc(event.target.value)}
       />
       <span className="mt-1 flex items-center gap-2">
-        <span className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-sm border border-border px-2 text-xs text-fg">
-          <ImagePlus className="size-3.5" aria-hidden />
-          Hochladen
-          <input
-            type="file"
-            accept="image/*"
-            className="sr-only"
-            onChange={(event) => {
-              const datei = event.target.files?.[0];
-              event.target.value = "";
-              void onFile(datei);
-            }}
-          />
-        </span>
+        <GalerieWahl onDatei={(datei) => void onFile(datei)} />
         {src ? <img src={src} alt="" className="h-9 w-7 rounded-xs border border-border object-cover" /> : null}
         {status ? <span className="text-ok">{status}</span> : null}
       </span>

@@ -55,7 +55,7 @@ import {
   spieleKlang,
 } from "@/game/klang";
 import { leseTageszeit } from "@/game/tageszeit";
-import { WIKI_LINKS } from "@/game/wiki";
+
 
 const WeltEditor = lazy(() => import("@/components/welt/WeltEditor").then((m) => ({ default: m.WeltEditor })));
 
@@ -74,6 +74,7 @@ export function GameApp() {
   );
   const [leiterAn, setLeiterAn] = useState(false);
   const [leiterOpen, setLeiterOpen] = useState(false);
+  const [wikiSprung, setWikiSprung] = useState(0);
   const [leiterLogin, setLeiterLogin] = useState(false);
   const [systemOffen, setSystemOffen] = useState(false);
   const einstellungen = useEinstellungen();
@@ -495,6 +496,7 @@ export function GameApp() {
           onRueckgaengig={onRueckgaengig}
           onTageszeit={onTageszeit}
           startFach={mode === "create" ? "held" : "karte"}
+          wikiSprung={wikiSprung}
           onLadeSpieler={(name) => {
             loadAdventureByName(name);
           }}
@@ -509,7 +511,8 @@ export function GameApp() {
     setSystemOffen(true);
   };
   const oeffneWiki = () => {
-    window.open(WIKI_LINKS.index, "_blank", "noopener,noreferrer");
+    setLeiterOpen(true);
+    setWikiSprung((n) => n + 1);
   };
   const login = leiterLogin ? (
     <LeiterLogin

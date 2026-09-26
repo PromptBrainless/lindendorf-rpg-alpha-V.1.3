@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { BookMarked, ExternalLink, FlaskConical, LayoutGrid, MapPinned, PanelLeft, ShieldCheck, ShieldQuestion, UserRound, Users2 } from "lucide-react";
+import { useEffect, useState } from "react";
+import { BookMarked, BookOpen, FlaskConical, LayoutGrid, MapPinned, PanelLeft, ShieldCheck, ShieldQuestion, UserRound, Users2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import type { EffektId, Held, SceneView } from "@/game/types";
 import type { Tageszeit } from "@/game/tageszeit";
@@ -14,7 +14,6 @@ import {
 } from "@/game/welt";
 import { viewAusKanon } from "@/game/welt-graph";
 import { mapGmToolState } from "@/game/gm/mapGmToolState";
-import { WIKI_LINKS } from "@/game/wiki";
 import { WeltEntwurf } from "./WeltEntwurf";
 import { WeltHeld } from "./WeltHeld";
 import { WeltKarte } from "./WeltKarte";
@@ -23,8 +22,9 @@ import { WeltKampagne } from "./WeltKampagne";
 import { WeltQuest } from "./WeltQuest";
 import { WeltSpieler } from "./WeltSpieler";
 import { WeltWissen } from "./WeltWissen";
+import { WikiBuch } from "./WikiBuch";
 
-type Fach = "karte" | "held" | "stimme" | "wissen" | "kampagne" | "quest" | "spieler" | "pruefen";
+type Fach = "karte" | "held" | "stimme" | "wissen" | "kampagne" | "quest" | "spieler" | "pruefen" | "wiki";
 
 export function WeltEditor({
   szene,
@@ -40,6 +40,7 @@ export function WeltEditor({
   onRueckgaengig,
   onTageszeit,
   startFach = "karte",
+  wikiSprung = 0,
   onLadeSpieler,
   onSpielerGeaendert,
 }: {
@@ -56,10 +57,14 @@ export function WeltEditor({
   onRueckgaengig: () => void;
   onTageszeit?: (zeit: Tageszeit) => void;
   startFach?: Fach;
+  wikiSprung?: number;
   onLadeSpieler?: (name: string) => void;
   onSpielerGeaendert?: () => void;
 }) {
-  const [fach, setFach] = useState<Fach>(szene ? startFach : "pruefen");
+  const [fach, setFach] = useState<Fach>(wikiSprung ? "wiki" : szene ? startFach : "pruefen");
+  useEffect(() => {
+    if (wikiSprung) setFach("wiki");
+  }, [wikiSprung]);
   const fang = useFokusFang(true);
   const [fremd, setFremd] = useState<SceneView | null>(null);
   const [fremdPatch, setFremdPatch] = useState<WeltAuflage>({});
@@ -159,10 +164,10 @@ export function WeltEditor({
               type="button"
               variant="secondary"
               className="h-11 px-3 text-sm"
-              onClick={() => window.open(WIKI_LINKS.index, "_blank", "noopener,noreferrer")}
-              title="Lindendorf-Wiki öffnen"
+              onClick={() => setFach("wiki")}
+              title="Wiki in der App bearbeiten"
             >
-              <ExternalLink className="size-3.5" aria-hidden />
+              <BookOpen className="size-3.5" aria-hidden />
               <span className="hidden sm:inline">Wiki</span>
             </Button>
             {onAus ? (
@@ -204,6 +209,7 @@ export function WeltEditor({
               ["kampagne", "Kampagne", LayoutGrid],
               ["quest", "Quest", ShieldQuestion],
               ["spieler", "Partien", Users2],
+              ["wiki", "Wiki", BookOpen],
               ["pruefen", "Prüfen", ShieldCheck],
             ] as const
           ).map(([id, titel, Symbol]) => (
@@ -260,6 +266,7 @@ export function WeltEditor({
         {fach === "spieler" ? (
           <WeltSpieler aktuelleName={held?.name} onLade={onLadeSpieler} onGeaendert={onSpielerGeaendert} />
         ) : null}
+        {fach === "wiki" ? <WikiBuch /> : null}
         {fach === "pruefen" ? (
           <WeltPruefen
             szene={sicht}

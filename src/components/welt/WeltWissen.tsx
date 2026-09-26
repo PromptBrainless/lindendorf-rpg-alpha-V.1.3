@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { ImagePlus } from "lucide-react";
+import { GalerieWahl } from "@/components/game/GalerieWahl";
 import { Button } from "@/components/ui/button";
 import { merkeWissenDatei, loescheWissenDatei, wissenDatei, wissenIds } from "@/game/json/wissen";
 import type { WissenTafelJson } from "@/game/json/wissen-schema";
@@ -211,17 +211,9 @@ function BildFeld({ bild, onBild }: { bild: string; onBild: (bild: string) => vo
         value={bild}
         onChange={(event) => onBild(event.target.value)}
       />
-      <span className="mt-1 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-sm border border-border px-2 text-xs text-fg">
-        <ImagePlus className="size-3.5" aria-hidden />
-        Hochladen
-        <input
-          type="file"
-          accept="image/*"
-          className="sr-only"
-          onChange={(event) => {
-            const datei = event.target.files?.[0];
-            event.target.value = "";
-            if (!datei) return;
+      <span className="mt-1 inline-flex items-center gap-2">
+        <GalerieWahl
+          onDatei={(datei) => {
             void ladeSpielleiterBild(datei)
               .then((n) => {
                 onBild(n);
@@ -230,8 +222,8 @@ function BildFeld({ bild, onBild }: { bild: string; onBild: (bild: string) => vo
               .catch((err) => setStatus(err instanceof Error ? err.message : "unlesbar"));
           }}
         />
+        {status ? <span className="text-ok">{status}</span> : null}
       </span>
-      {status ? <span className="ml-2 text-ok">{status}</span> : null}
     </label>
   );
 }
