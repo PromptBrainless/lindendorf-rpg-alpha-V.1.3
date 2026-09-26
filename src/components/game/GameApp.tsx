@@ -117,6 +117,12 @@ export function GameApp() {
     }
   }, []);
 
+  useEffect(() => {
+    if (!saveMessage) return;
+    const timeout = window.setTimeout(() => setSaveMessage(null), 3500);
+    return () => window.clearTimeout(timeout);
+  }, [saveMessage]);
+
   // Einstellungen ins DOM schreiben und den Ton ans Fenster hängen.
   useEffect(() => {
     wendeEinstellungenAn();

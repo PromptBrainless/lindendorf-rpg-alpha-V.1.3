@@ -222,6 +222,15 @@ export function Hud({
           </Button>
         ) : null}
       </div>
+      {saveMessage ? (
+        <div
+          className="pointer-events-none fixed bottom-4 left-1/2 z-50 w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-sm border border-border bg-ink/95 px-4 py-3 text-sm text-fg shadow-lg backdrop-blur-sm"
+          role="status"
+          aria-live="polite"
+        >
+          {saveMessage}
+        </div>
+      ) : null}
       {offen ? (
         <div className="herein mx-auto mt-2 max-w-5xl border-t border-border pt-2">
           <div className="grid gap-3 lg:grid-cols-[1.05fr_1.35fr]">
@@ -294,7 +303,6 @@ export function Hud({
                 Schlüssel
               </span>
             ) : null}
-            {saveMessage ? <span className="text-ok">{saveMessage}</span> : null}
           </div>
           {rufe.length ? (
             <p className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-fg">
