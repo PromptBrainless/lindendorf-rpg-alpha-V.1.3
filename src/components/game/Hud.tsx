@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   BookOpen,
   BriefcaseBusiness,
@@ -11,6 +11,7 @@ import {
   Save,
   ScrollText,
   Settings2,
+  X,
 } from "lucide-react";
 import { HEILTRANK, SCHLUESSEL, type EffektId, type Held } from "@/game/types";
 import { mapHeldToPlayerHud } from "@/game/gm/mapHeldToPlayerHud";
@@ -70,11 +71,23 @@ export function Hud({
   const zeit = TAGESZEIT_TEXT[hud.tageszeit];
   const spieltag = hud.spieltag;
   const knapp = hpPct <= 30;
+  const vorherigerHpPct = useRef(hpPct);
   const wissen = wissenTafeln(held);
+  useEffect(() => {
+    if (vorherigerHpPct.current > 30 && hpPct <= 30 && typeof navigator.vibrate === "function") {
+      navigator.vibrate(100);
+    }
+    vorherigerHpPct.current = hpPct;
+  }, [hpPct]);
+
   const statusBadges = [
     { label: "Gold", value: hud.gold, icon: Coins },
     { label: "Trank", value: hud.inventar.includes(HEILTRANK) ? "Ja" : "Nein", icon: FlaskConical },
-    { label: "Schlüssel", value: hud.inventar.includes(SCHLUESSEL) ? "Ja" : "Nein", icon: KeyRound },
+    {
+      label: "Schlüssel",
+      value: hud.inventar.includes(SCHLUESSEL) ? "Ja" : "Nein",
+      icon: KeyRound,
+    },
   ];
 
   return (
@@ -86,7 +99,9 @@ export function Hud({
               {hud.name}
             </p>
             <span className="hidden shrink-0 text-muted-fg sm:inline">{zeit.name}</span>
-            <span className="hidden shrink-0 text-muted-fg tabular-nums sm:inline">Tag {spieltag}</span>
+            <span className="hidden shrink-0 text-muted-fg tabular-nums sm:inline">
+              Tag {spieltag}
+            </span>
             <span
               className={`inline-flex shrink-0 items-center gap-1 font-mono tabular-nums ${
                 knapp ? "text-hp font-semibold" : "text-muted-fg"
@@ -103,7 +118,10 @@ export function Hud({
           </div>
           <div className="mt-1.5 flex flex-wrap items-center gap-2 text-[10px] text-muted-fg sm:text-[11px]">
             {statusBadges.map(({ label, value, icon: Icon }) => (
-              <span key={label} className="inline-flex items-center gap-1 rounded-full border border-border bg-surface/60 px-1.5 py-0.5">
+              <span
+                key={label}
+                className="inline-flex items-center gap-1 rounded-full border border-border bg-surface/60 px-1.5 py-0.5"
+              >
                 <Icon className="size-3" aria-hidden />
                 <span className="tabular-nums">{value}</span>
                 <span>{label}</span>
@@ -214,7 +232,10 @@ export function Hud({
             {weltAnzahl ? ` ${weltAnzahl}` : ""}
           </span>
           {leiterAn ? (
-            <ChevronDown className={`size-3 transition-transform ${leiterOpen ? "rotate-180" : ""}`} aria-hidden />
+            <ChevronDown
+              className={`size-3 transition-transform ${leiterOpen ? "rotate-180" : ""}`}
+              aria-hidden
+            />
           ) : null}
         </Button>
         {leiterAn && onWiki ? (
@@ -233,7 +254,7 @@ export function Hud({
       </div>
       {saveMessage ? (
         <div
-          className="pointer-events-none fixed bottom-4 left-1/2 z-50 w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-sm border border-border bg-ink/95 px-4 py-3 text-sm text-fg shadow-lg backdrop-blur-sm"
+          className={`pointer-events-none fixed ${offen ? "bottom-[calc(80dvh+1rem)]" : "bottom-4"} left-1/2 z-50 w-max max-w-[calc(100vw-2rem)] -translate-x-1/2 rounded-sm border border-border bg-ink/95 px-4 py-3 text-sm text-fg shadow-lg backdrop-blur-sm`}
           role="status"
           aria-live="polite"
         >
@@ -241,90 +262,122 @@ export function Hud({
         </div>
       ) : null}
       {offen ? (
-        <div className="herein mx-auto mt-2 max-w-5xl border-t border-border pt-2">
-          <div className="grid gap-3 lg:grid-cols-[1.05fr_1.35fr]">
-            <div className="rounded-md border border-border bg-surface/60 p-3">
-              <div className="mb-2 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-sm font-medium text-fg">
-                  <BriefcaseBusiness className="size-4 text-accent" aria-hidden />
-                  Inventar
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-40 bg-black/55 sm:hidden"
+            onClick={() => setOffen(false)}
+            aria-label="Status schließen"
+          />
+          <div
+            className="herein fixed inset-x-0 bottom-0 z-50 max-h-[80dvh] overflow-y-auto rounded-t-md border border-border bg-ink px-3 pt-3 pb-[max(1rem,env(safe-area-inset-bottom))] shadow-2xl sm:static sm:mx-auto sm:mt-2 sm:max-h-none sm:max-w-5xl sm:overflow-visible sm:rounded-none sm:border-x-0 sm:border-b-0 sm:bg-transparent sm:px-0 sm:pt-2 sm:pb-0 sm:shadow-none"
+            role="region"
+            aria-label="Spielstatus"
+          >
+            <div className="mb-3 flex items-center justify-between sm:hidden">
+              <h2 className="text-sm font-semibold text-fg">Status</h2>
+              <button
+                type="button"
+                className="inline-flex size-9 items-center justify-center rounded-sm text-muted-fg"
+                onClick={() => setOffen(false)}
+                aria-label="Status schließen"
+              >
+                <X className="size-4" aria-hidden />
+              </button>
+            </div>
+            <div className="grid gap-3 lg:grid-cols-[1.05fr_1.35fr]">
+              <div className="rounded-md border border-border bg-surface/60 p-3">
+                <div className="mb-2 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 text-sm font-medium text-fg">
+                    <BriefcaseBusiness className="size-4 text-accent" aria-hidden />
+                    Inventar
+                  </div>
+                  <span className="text-[11px] uppercase tracking-[0.12em] text-muted-fg tabular-nums">
+                    {held.inventar.length}{" "}
+                    {held.inventar.length === 1 ? "Gegenstand" : "Gegenstände"}
+                  </span>
                 </div>
-                <span className="text-[11px] uppercase tracking-[0.12em] text-muted-fg tabular-nums">
-                  {held.inventar.length} {held.inventar.length === 1 ? "Gegenstand" : "Gegenstände"}
-                </span>
+                {held.inventar.length ? (
+                  <ul className="grid gap-2 sm:grid-cols-2">
+                    {held.inventar.map((item) => (
+                      <li
+                        key={item}
+                        className="rounded-sm border border-border bg-bg/50 px-2 py-1.5 text-xs text-fg"
+                      >
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="rounded-sm border border-dashed border-border px-2 py-3 text-sm text-muted-fg">
+                    Der Beutel ist leer. Nur das Gewicht deiner Entscheidung bleibt.
+                  </p>
+                )}
               </div>
-              {held.inventar.length ? (
-                <ul className="grid gap-2 sm:grid-cols-2">
-                  {held.inventar.map((item) => (
-                    <li key={item} className="rounded-sm border border-border bg-bg/50 px-2 py-1.5 text-xs text-fg">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="rounded-sm border border-dashed border-border px-2 py-3 text-sm text-muted-fg">
-                  Der Beutel ist leer. Nur das Gewicht deiner Entscheidung bleibt.
-                </p>
-              )}
+
+              <div className="rounded-md border border-border bg-surface/60 p-3">
+                <div className="mb-2 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 text-sm font-medium text-fg">
+                    <BookOpen className="size-4 text-accent" aria-hidden />
+                    Wissen
+                  </div>
+                  <span className="text-[11px] uppercase tracking-[0.12em] text-muted-fg tabular-nums">
+                    {wissen.length} Einträge
+                  </span>
+                </div>
+                {wissen.length ? (
+                  <ul className="space-y-2">
+                    {wissen.slice(0, 4).map((tafel) => (
+                      <li
+                        key={tafel.id}
+                        className="rounded-sm border border-border bg-bg/50 px-2 py-1.5"
+                      >
+                        <p className="text-xs uppercase tracking-[0.12em] text-muted-fg">
+                          {tafel.offen ? "Offen" : "Gesehen"}
+                        </p>
+                        <p className="mt-0.5 text-sm text-fg">{tafel.title}</p>
+                      </li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="rounded-sm border border-dashed border-border px-2 py-3 text-sm text-muted-fg">
+                    Noch kein Satz hat sich in dir festgesetzt.
+                  </p>
+                )}
+              </div>
             </div>
 
-            <div className="rounded-md border border-border bg-surface/60 p-3">
-              <div className="mb-2 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-2 text-sm font-medium text-fg">
-                  <BookOpen className="size-4 text-accent" aria-hidden />
-                  Wissen
-                </div>
-                <span className="text-[11px] uppercase tracking-[0.12em] text-muted-fg tabular-nums">
-                  {wissen.length} Einträge
-                </span>
-              </div>
-              {wissen.length ? (
-                <ul className="space-y-2">
-                  {wissen.slice(0, 4).map((tafel) => (
-                    <li key={tafel.id} className="rounded-sm border border-border bg-bg/50 px-2 py-1.5">
-                      <p className="text-xs uppercase tracking-[0.12em] text-muted-fg">{tafel.offen ? "Offen" : "Gesehen"}</p>
-                      <p className="mt-0.5 text-sm text-fg">{tafel.title}</p>
-                    </li>
-                  ))}
-                </ul>
-              ) : (
-                <p className="rounded-sm border border-dashed border-border px-2 py-3 text-sm text-muted-fg">
-                  Noch kein Satz hat sich in dir festgesetzt.
-                </p>
-              )}
-            </div>
-          </div>
-
-          <ZustandLeiste held={held} />
-          <p className="mt-1.5 text-xs text-muted-fg">
-            {zeit.satz} · Tag {spieltag} · {hud.lp}/{hud.maxLp} LP · {hud.gold} Gold
-          </p>
-          <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-fg">
-            {hud.inventar.includes(HEILTRANK) ? (
-              <span className="inline-flex items-center gap-1">
-                <FlaskConical className="size-3.5" aria-hidden />
-                Trank
-              </span>
-            ) : null}
-            {hud.inventar.includes(SCHLUESSEL) ? (
-              <span className="inline-flex items-center gap-1">
-                <KeyRound className="size-3.5" aria-hidden />
-                Schlüssel
-              </span>
-            ) : null}
-          </div>
-          {rufe.length ? (
-            <p className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-fg">
-              {rufe.map((item) => (
-                <span key={item.ziel} className={item.wert > 0 ? "text-ok" : "text-hp"}>
-                  {item.ziel} {item.wert > 0 ? "+" : ""}
-                  {item.wert}
-                </span>
-              ))}
+            <ZustandLeiste held={held} />
+            <p className="mt-1.5 text-xs text-muted-fg">
+              {zeit.satz} · Tag {spieltag} · {hud.lp}/{hud.maxLp} LP · {hud.gold} Gold
             </p>
-          ) : null}
-          <SeitenFuss held={held} hinzu={hinzu} nimmt={nimmt} fort={fort} kompakt />
-        </div>
+            <div className="mt-1.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-fg">
+              {hud.inventar.includes(HEILTRANK) ? (
+                <span className="inline-flex items-center gap-1">
+                  <FlaskConical className="size-3.5" aria-hidden />
+                  Trank
+                </span>
+              ) : null}
+              {hud.inventar.includes(SCHLUESSEL) ? (
+                <span className="inline-flex items-center gap-1">
+                  <KeyRound className="size-3.5" aria-hidden />
+                  Schlüssel
+                </span>
+              ) : null}
+            </div>
+            {rufe.length ? (
+              <p className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1 text-xs text-muted-fg">
+                {rufe.map((item) => (
+                  <span key={item.ziel} className={item.wert > 0 ? "text-ok" : "text-hp"}>
+                    {item.ziel} {item.wert > 0 ? "+" : ""}
+                    {item.wert}
+                  </span>
+                ))}
+              </p>
+            ) : null}
+            <SeitenFuss held={held} hinzu={hinzu} nimmt={nimmt} fort={fort} kompakt />
+          </div>
+        </>
       ) : null}
     </div>
   );
