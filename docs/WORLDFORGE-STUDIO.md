@@ -1,7 +1,7 @@
-# WorldForge Studio
+# WorldForge und der integrierte RPG-Maker
 
-Das Studio liegt nicht mehr in diesem Spiel-Repository.
+Der eigenständige WorldForge-Quellstand bleibt im Repository [PromptBrainless/worldforge-studio](https://github.com/PromptBrainless/worldforge-studio). Dieses Lindendorf-Repository enthält daneben eine integrierte Maker-Arbeitsfläche unter `/editor`; sie baut auf dem lokalen Workspace-Modell auf und verwendet die vorhandene Spielbühne als Vorschau.
 
-Neues Repository: [PromptBrainless/worldforge-studio](https://github.com/PromptBrainless/worldforge-studio)
+Die Grenzen bleiben bewusst klar: Ein neues Maker-Projekt startet leer und wird lokal als eigenes Projekt gespeichert. Lindendorf liefert eine durchsuchbare Bibliothek aus Medien und einzelnen Spielbausteinen. Es wird keine Kampagne, kein verbundener Lindendorf-Graph und kein Spielstand automatisch als Demo geladen. Einträge werden einzeln als Projektkopien übernommen.
 
-Herausgelöst aus Commit `76e89b8` („Add isolated WorldForge Studio foundation“): der Ordner `worldforge-studio/` und `docs/WORLDFORGE-TRANSFORMATIONS-AUDIT.md`. Lindendorf bleibt das Spiel. Es ist kein Kern des Werkzeugs und kein mitgeliefertes Dataset.
+Die lokale Integration ist kein zweiter Lindendorf-Spielstand und ersetzt nicht die bestehende Partie. Projekt-Szenen, Wahlrelationen, Proben und Enden gehören zum Maker-Workspace; die laufende Lindendorf-Runtime bleibt unverändert. Die aktuelle Bedienung und Datenbegrenzung stehen in [docs/EDITOR.md](EDITOR.md).

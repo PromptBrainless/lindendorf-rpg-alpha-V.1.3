@@ -347,8 +347,8 @@ export function SpielleiterBereich() {
               </Arbeitsflaeche>
             ) : null}
             {bereich === "studio" ? (
-              <Arbeitsflaeche titel="Studio" beschreibung="Freies Autorenmaterial mit Entities und Relationen, offline und getrennt vom Kanon. Übernimm Szenen, Figuren und Wissen zur Vorbereitung neuer Aufträge.">
-                <WeltStudio knoten={graph.knoten} />
+              <Arbeitsflaeche titel="Studio" beschreibung="Erstelle eigene Szenen, Wahlwege und Proben. Lindendorfs Medien und Spielbausteine bleiben einzeln auswählbar.">
+                <WeltStudio />
               </Arbeitsflaeche>
             ) : null}
             {bereich === "pruefen" ? (

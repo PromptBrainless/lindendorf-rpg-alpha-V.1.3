@@ -88,6 +88,10 @@ Die Route `src/routes/editor.tsx` schützt und öffnet den eigenständigen Spiel
 
 Die Komponente `src/components/welt/SpielleiterBereich.tsx` bildet die Oberfläche. Sie lädt den bestehenden Weltgraphen, zeigt die acht Questreihen und 71 Seiten, führt durch Geschichte, Szenen, Figuren, Wissen, Orte und Prüfung und reicht Änderungen an die bereits vorhandenen Welt- und Werkstattfunktionen weiter.
 
+Das Studio verwaltet mehrere lokale RPG-Projekte. Neue Projekte beginnen leer; vorhandene Einzel-Workspaces werden beim Lesen in die Projektliste übernommen, ohne sie zu löschen. Lindendorf erscheint als schreibgeschützte Bibliothek mit Mediengalerie sowie einzeln auswählbaren Questabschnitten, Szenen, Figuren, Wissenstafeln und Gegenstandsvorlagen. Eine Auswahl wird als Projektkopie mit Herkunftskennung übernommen; die gesamte Kampagne, Verknüpfungen und Spielstände werden nicht automatisch importiert.
+
+Szenen besitzen einen Startstatus, Erzähltext, Bild-/Porträt-/Audioauswahl, Wahlen, Wahlziele, Proben und ausdrücklich gesetzte Endwahlen. Proben können unterschiedliche Erfolgs- und Misserfolgstexte sowie LP- und Goldfolgen auslösen. Die Folgen verwenden die vorhandenen Enginefunktionen und verändern ausschließlich den temporären Vorschauhelden. Der Validator prüft Inhaltsschemata, Startszene, Wahlpositionen und Szenenziele. Die Spielvorschau führt Workspace-Szenen über dieselbe `SceneStage`-Bühne wie die Partie aus und verwendet `engine.probe()` für W10-Würfe. Vorschau-Spielstände werden nicht in die echten Lindendorf-Saves geschrieben. Maker-Inhalte ersetzen weder den Lindendorf-Hauptfluss noch dessen Kanon.
+
 Die Datei `src/game/gm/werkstatt.ts` hält das Autorenmaterial für neue Figuren. Sie validiert die Daten mit Zod, speichert sie lokal und schützt die kanonischen Figuren vor dem Überschreiben. Diese Datei verändert weder den Hauptfluss noch den Spielerzustand.
 
 Die Dokumentation in `docs/EDITOR.md`, `wiki/Lore-Index.md` und `wiki/Projekt-Weltwerkzeug-und-Spielleitung.md` beschreibt die Arbeitsschichten, die Sprache und die Grenzen des neuen Bereichs. Sie ist keine zusätzliche Engine und kein Ersatz für die Szenen im Code.
