@@ -1,0 +1,101 @@
+id,datei,bx,by,rolle,pivot_px,pivot_py,stand_b,stand_s,tuer_dx,tuer_dy,notiz
+L001,gebaeude_dorf_huette_stroh_2x2_01,2,2,objekt,64,128,2,1,0,0,Hütte Stroh
+L002,gebaeude_dorf_huette_schindel_2x2_01,2,2,objekt,64,128,2,1,0,0,Hütte Schindel
+L003,gebaeude_dorf_fachwerk_klein_2x2_01,2,2,objekt,64,128,2,1,0,0,Fachwerk klein
+L004,gebaeude_dorf_fachwerk_breit_3x2_01,3,2,objekt,96,128,3,1,1,0,Fachwerk breit
+L005,gebaeude_dorf_bauernhaus_3x2_01,3,2,objekt,96,128,3,1,1,0,Bauernhaus
+L006,gebaeude_dorf_scheune_3x2_01,3,2,objekt,96,128,3,1,1,0,Scheune
+L007,gebaeude_dorf_schmiede_2x2_01,2,2,objekt,64,128,2,1,0,0,Schmiede
+L008,gebaeude_dorf_taverne_3x2_01,3,2,objekt,96,128,3,1,1,0,Taverne
+L009,gebaeude_dorf_laden_2x2_01,2,2,objekt,64,128,2,1,0,0,Laden
+L010,gebaeude_dorf_muehle_3x3_01,3,3,objekt,96,192,3,2,1,1,Mühle
+L011,gebaeude_dorf_kirche_klein_3x3_01,3,3,objekt,96,192,3,2,1,1,Kirche klein
+L012,gebaeude_dorf_rathaus_3x2_01,3,2,objekt,96,128,3,1,1,0,Rathaus
+L013,gebaeude_dorf_brunnenhaus_2x2_01,2,2,objekt,64,128,2,2,,,"volle Sperre, keine Tür"
+L014,gebaeude_dorf_stall_2x2_01,2,2,objekt,64,128,2,1,0,0,Stall
+L015,gebaeude_dorf_speicher_2x2_01,2,2,objekt,64,128,2,1,0,0,Speicher
+L016,bauteile_daecher_giebel_stroh_2x1_01,2,1,overlay,64,64,0,0,,,Dach Giebel
+L017,bauteile_daecher_walm_schindel_2x1_01,2,1,overlay,64,64,0,0,,,Dach Walm
+L018,bauteile_waende_fachwerk_hell_1x1_01,1,1,kachel,32,64,0,0,,,Fassade
+L019,bauteile_tueren_holztuer_1x2_01,1,2,objekt,32,128,1,1,0,0,Tür = eigene Zelle
+L020,bauteile_fenster_bleiglas_klein_1x1_01,1,1,overlay,32,64,0,0,,,Fenster
+L021,boden_wege_erde_mitte_1x1_01,1,1,kachel,32,64,1,1,,,Erdweg Mitte
+L022,boden_wege_erde_kante_n_1x1_01,1,1,kachel,32,64,1,1,,,Erdweg Kante N
+L023,boden_wege_erde_kante_o_1x1_01,1,1,kachel,32,64,1,1,,,Erdweg Kante O
+L024,boden_wege_erde_knick_no_1x1_01,1,1,kachel,32,64,1,1,,,Erdweg Knick NO
+L025,boden_wege_erde_kreuz_1x1_01,1,1,kachel,32,64,1,1,,,Erdweg Kreuz
+L026,boden_wege_erde_t_sued_1x1_01,1,1,kachel,32,64,1,1,,,Erdweg T
+L027,boden_wege_kies_mitte_1x1_01,1,1,kachel,32,64,1,1,,,Kies Mitte
+L028,boden_wege_kies_kante_1x1_01,1,1,kachel,32,64,1,1,,,Kies Kante
+L029,boden_wege_holzsteg_laengs_1x1_01,1,1,kachel,32,64,1,1,,,Steg längs
+L030,boden_wege_holzsteg_quer_1x1_01,1,1,kachel,32,64,1,1,,,Steg quer
+L031,boden_wege_holzsteg_ende_1x1_01,1,1,kachel,32,64,1,1,,,Steg Ende
+L032,boden_wege_radspur_1x1_01,1,1,kachel,32,64,1,1,,,Radspur
+L033,boden_wege_pfuetze_1x1_01,1,1,kachel,32,64,1,1,,,Pfütze
+L034,boden_wege_trittstein_1x1_01,1,1,kachel,32,64,1,1,,,Trittstein
+L035,boden_wege_hang_stufe_1x1_01,1,1,kachel,32,64,1,1,,,Hangstufe
+L036,props_wege_meilenstein_1x1_01,1,1,objekt,32,64,1,1,,,Meilenstein
+L037,props_wege_wegweiser_holz_1x2_01,1,2,objekt,32,128,1,1,,,Wegweiser
+L038,bauteile_zaeune_latten_gerade_1x1_01,1,1,objekt,32,64,1,1,,,Lattenzaun
+L039,boden_stadt_pflaster_mitte_1x1_01,1,1,kachel,32,64,1,1,,,Pflaster 1
+L040,boden_stadt_pflaster_mitte_1x1_02,1,1,kachel,32,64,1,1,,,Pflaster 2
+L041,boden_stadt_pflaster_mitte_1x1_03,1,1,kachel,32,64,1,1,,,Pflaster 3
+L042,boden_stadt_pflaster_kante_n_1x1_01,1,1,kachel,32,64,1,1,,,Pflaster Kante
+L043,boden_stadt_pflaster_ecke_no_1x1_01,1,1,kachel,32,64,1,1,,,Pflaster Ecke
+L044,boden_stadt_pflaster_innenecke_1x1_01,1,1,kachel,32,64,1,1,,,Pflaster Innenecke
+L045,boden_stadt_rinne_gerade_1x1_01,1,1,kachel,32,64,1,1,,,Rinne
+L046,boden_stadt_rinne_kreuz_1x1_01,1,1,kachel,32,64,1,1,,,Rinne Kreuz
+L047,boden_stadt_bordstein_1x1_01,1,1,kachel,32,64,1,1,,,Bordstein
+L048,boden_stadt_platz_ornament_1x1_01,1,1,kachel,32,64,1,1,,,Platzornament
+L049,boden_stadt_bruchstein_1x1_01,1,1,kachel,32,64,1,1,,,Bruchstein
+L050,boden_stadt_ziegel_1x1_01,1,1,kachel,32,64,1,1,,,Ziegel
+L051,boden_stadt_luke_1x1_01,1,1,kachel,32,64,1,1,,,Luke
+L052,boden_stadt_gully_1x1_01,1,1,kachel,32,64,1,1,,,Gully
+L053,props_stadt_laterne_1x2_01,1,2,objekt,32,128,1,1,,,Laterne
+L054,props_stadt_brunnen_2x2_01,2,2,objekt,64,128,2,2,,,Marktbrunnen volle Sperre
+L055,props_stadt_bank_stein_1x1_01,1,1,objekt,32,64,1,1,,,Steinbank
+L056,bauteile_mauern_stadtmauer_1x1_01,1,1,objekt,32,64,1,1,,,Stadtmauer
+L057,boden_wald_nadelstreu_1x1_01,1,1,kachel,32,64,1,1,,,Nadelstreu
+L058,boden_wald_nadelstreu_1x1_02,1,1,kachel,32,64,1,1,,,Nadelstreu Wurzeln
+L059,boden_wald_moos_1x1_01,1,1,kachel,32,64,1,1,,,Moos
+L060,boden_wald_kante_gras_1x1_01,1,1,kachel,32,64,1,1,,,Waldkante
+L061,natur_baeume_nadel_jung_1x2_01,1,2,objekt,32,128,1,1,,,junge Fichte
+L062,natur_baeume_nadel_alt_2x3_01,2,3,objekt,64,192,2,1,,,alte Fichte
+L063,natur_baeume_eiche_2x3_01,2,3,objekt,64,192,2,1,,,Eiche
+L064,natur_baeume_birke_1x3_01,1,3,objekt,32,192,1,1,,,Birke
+L065,natur_baeume_stumpf_1x1_01,1,1,objekt,32,64,1,1,,,Stubben
+L066,natur_baeume_stamm_liegend_2x1_01,2,1,objekt,64,64,2,1,,,liegender Stamm
+L067,natur_baeume_krone_sommer_2x2_01,2,2,overlay,64,128,0,0,,,Krone Overlay
+L068,natur_wald_unterholz_dicht_1x1_01,1,1,objekt,32,64,1,1,,,Unterholz dicht
+L069,natur_wald_unterholz_licht_1x1_01,1,1,objekt,32,64,1,1,,,Unterholz licht
+L070,natur_felsen_waldstein_1x1_01,1,1,objekt,32,64,1,1,,,Waldstein
+L071,natur_felsen_waldstein_2x1_01,2,1,objekt,64,64,2,1,,,Steinriegel
+L072,boden_wald_wurzel_1x1_01,1,1,kachel,32,64,1,1,,,Wurzel
+L073,boden_wald_pilzring_1x1_01,1,1,kachel,32,64,1,1,,,Pilzring
+L074,natur_wald_totholz_1x1_01,1,1,objekt,32,64,1,1,,,Totholz
+L075,boden_wald_hohlweg_kante_1x1_01,1,1,kachel,32,64,1,1,,,Hohlweg
+L076,props_wald_wildwechsel_1x1_01,1,1,overlay,32,64,0,0,,,Wildwechsel
+L077,boden_wald_lichtung_1x1_01,1,1,kachel,32,64,1,1,,,Lichtung
+L078,bauteile_zaeune_holzstoss_1x1_01,1,1,objekt,32,64,1,1,,,Holzstoß
+L079,natur_pflanzen_gras_hoch_1x1_01,1,1,overlay,32,64,0,0,,,Hochgras
+L080,natur_pflanzen_gras_tritt_1x1_01,1,1,overlay,32,64,0,0,,,Trittgras
+L081,natur_pflanzen_bluete_weiss_1x1_01,1,1,overlay,32,64,0,0,,,Blüte weiß
+L082,natur_pflanzen_bluete_gelb_1x1_01,1,1,overlay,32,64,0,0,,,Blüte gelb
+L083,natur_pflanzen_klee_1x1_01,1,1,overlay,32,64,0,0,,,Klee
+L084,natur_pflanzen_distel_1x1_01,1,1,objekt,32,64,1,1,,,Distel
+L085,natur_pflanzen_farn_1x1_01,1,1,overlay,32,64,0,0,,,Farn
+L086,natur_pflanzen_nessel_1x1_01,1,1,objekt,32,64,1,1,,,Nessel
+L087,natur_pflanzen_schilf_1x2_01,1,2,objekt,32,128,1,1,,,Schilf
+L088,natur_pflanzen_seerose_1x1_01,1,1,overlay,32,64,0,0,,,Seerose
+L089,natur_hecken_buchs_gerade_1x1_01,1,1,objekt,32,64,1,1,,,Hecke gerade
+L090,natur_hecken_buchs_ecke_1x1_01,1,1,objekt,32,64,1,1,,,Hecke Ecke
+L091,natur_hecken_wild_1x1_01,1,1,objekt,32,64,1,1,,,Wildhecke
+L092,natur_straeucher_holunder_1x2_01,1,2,objekt,32,128,1,1,,,Holunder
+L093,natur_straeucher_beeren_1x1_01,1,1,objekt,32,64,1,1,,,Beerenstrauch
+L094,natur_pflanzen_kohl_1x1_01,1,1,objekt,32,64,1,1,,,Kohl
+L095,natur_pflanzen_weizen_1x1_01,1,1,kachel,32,64,1,1,,,Weizen
+L096,natur_pflanzen_kraeuter_1x1_01,1,1,objekt,32,64,1,1,,,Kräuter
+L097,natur_pflanzen_efeu_wand_1x1_01,1,1,overlay,32,64,0,0,,,Efeu
+L098,natur_pflanzen_moos_stein_1x1_01,1,1,overlay,32,64,0,0,,,Moospolster
+L099,natur_pflanzen_pilz_einzel_1x1_01,1,1,objekt,32,64,1,1,,,Hutpilz
+L100,natur_pflanzen_blumentopf_1x1_01,1,1,objekt,32,64,1,1,,,Blumentopf
